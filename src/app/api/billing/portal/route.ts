@@ -1,15 +1,31 @@
 import { NextResponse } from "next/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { getStripe } from "@/lib/stripe";
 
 export async function POST() {
   try {
-    // In production, get the Stripe customer ID from the authenticated user's
-    // Clerk organization metadata:
-    // const { orgId } = auth();
-    // const org = await clerkClient.organizations.getOrganization({ organizationId: orgId });
-    // const stripeCustomerId = org.publicMetadata.stripeCustomerId;
+    const { orgId } = await auth();
+    if (!orgId) {
+      return NextResponse.json(
+        { error: "Not authenticated or no organization selected" },
+        { status: 401 }
+      );
+    }
 
-    const stripeCustomerId = "cus_placeholder";
+    const clerk = await clerkClient();
+    const org = await clerk.organizations.getOrganization({
+      organizationId: orgId,
+    });
+
+    const stripeCustomerId = org.publicMetadata?.stripeCustomerId as
+      | string
+      | undefined;
+    if (!stripeCustomerId) {
+      return NextResponse.json(
+        { error: "No billing account found for this organization" },
+        { status: 400 }
+      );
+    }
 
     const session = await getStripe().billingPortal.sessions.create({
       customer: stripeCustomerId,

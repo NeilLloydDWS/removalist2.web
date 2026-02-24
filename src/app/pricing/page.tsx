@@ -3,6 +3,7 @@ import { Section } from "@/components/section";
 import { SectionHeader } from "@/components/section-header";
 import { PricingCard } from "@/components/pricing-card";
 import { PricingFaq } from "@/components/pricing-faq";
+import { getRegionalPricing } from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const pricing = await getRegionalPricing();
+
   return (
     <>
       <Section>
@@ -24,7 +27,7 @@ export default function PricingPage() {
           heading="One plan. Everything included."
           subheading="No tiers, no hidden fees, no per-user charges. Every feature in VanMan is included from day one."
         />
-        <PricingCard />
+        <PricingCard pricing={pricing} />
       </Section>
 
       <Section variant="alternate-bg">

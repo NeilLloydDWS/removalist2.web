@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
+import { clerkClient } from "@clerk/nextjs/server";
 import type Stripe from "stripe";
 import { getStripe } from "@/lib/stripe";
+
+async function findOrgByStripeCustomerId(customerId: string) {
+  const clerk = await clerkClient();
+  const { data: orgs } = await clerk.organizations.getOrganizationList({
+    limit: 100,
+  });
+  return orgs.find(
+    (org) => org.publicMetadata?.stripeCustomerId === customerId
+  );
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -26,18 +37,31 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const clerk = await clerkClient();
+
   try {
     switch (event.type) {
       case "customer.subscription.updated": {
         const subscription = event.data.object as Stripe.Subscription;
-        // Update subscription status in Clerk org metadata
-        // const clerkOrgId = subscription.metadata.clerkOrgId;
-        // await clerkClient.organizations.updateOrganization(clerkOrgId, {
-        //   publicMetadata: {
-        //     subscriptionStatus: subscription.status,
-        //     currentPeriodEnd: new Date(subscription.current_period_end * 1000).toISOString(),
-        //   },
-        // });
+        const clerkOrgId = subscription.metadata.clerkOrgId;
+        if (clerkOrgId) {
+          const org = await clerk.organizations.getOrganization({
+            organizationId: clerkOrgId,
+          });
+          const periodEnd =
+            subscription.items.data[0]?.current_period_end;
+          await clerk.organizations.updateOrganization(clerkOrgId, {
+            publicMetadata: {
+              ...org.publicMetadata,
+              subscriptionStatus: subscription.status,
+              ...(periodEnd && {
+                currentPeriodEnd: new Date(
+                  periodEnd * 1000
+                ).toISOString(),
+              }),
+            },
+          });
+        }
         console.log(
           `Subscription updated: ${subscription.id} — status: ${subscription.status}`
         );
@@ -46,24 +70,41 @@ export async function POST(request: NextRequest) {
 
       case "customer.subscription.deleted": {
         const subscription = event.data.object as Stripe.Subscription;
-        // Update account state to cancelled in Clerk org metadata
-        // const clerkOrgId = subscription.metadata.clerkOrgId;
-        // await clerkClient.organizations.updateOrganization(clerkOrgId, {
-        //   publicMetadata: {
-        //     subscriptionStatus: "cancelled",
-        //   },
-        // });
+        const clerkOrgId = subscription.metadata.clerkOrgId;
+        if (clerkOrgId) {
+          const org = await clerk.organizations.getOrganization({
+            organizationId: clerkOrgId,
+          });
+          await clerk.organizations.updateOrganization(clerkOrgId, {
+            publicMetadata: {
+              ...org.publicMetadata,
+              subscriptionStatus: "cancelled",
+            },
+          });
+        }
         console.log(`Subscription cancelled: ${subscription.id}`);
         break;
       }
 
       case "invoice.payment_failed": {
         const invoice = event.data.object as Stripe.Invoice;
-        // Set payment_failed flag in Clerk org metadata
-        // const customerId = invoice.customer as string;
-        // Look up org by Stripe customer ID and update metadata
+        const customerId =
+          typeof invoice.customer === "string"
+            ? invoice.customer
+            : invoice.customer?.id;
+        if (customerId) {
+          const org = await findOrgByStripeCustomerId(customerId);
+          if (org) {
+            await clerk.organizations.updateOrganization(org.id, {
+              publicMetadata: {
+                ...org.publicMetadata,
+                paymentFailed: true,
+              },
+            });
+          }
+        }
         console.log(
-          `Payment failed for invoice: ${invoice.id}, customer: ${typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id}`
+          `Payment failed for invoice: ${invoice.id}, customer: ${customerId}`
         );
         break;
       }

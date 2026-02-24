@@ -1,15 +1,23 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 import { countryCodeToRegion } from "@/lib/localization";
 
-export function middleware(request: NextRequest) {
+const isProtectedRoute = createRouteMatcher([
+  "/onboarding(.*)",
+  "/api/billing(.*)",
+]);
+
+export default clerkMiddleware(async (auth, request) => {
+  if (isProtectedRoute(request)) {
+    await auth.protect();
+  }
+
   const response = NextResponse.next();
 
   // ---- Region detection ----
   const existingRegion = request.cookies.get("vanman_region")?.value;
   if (!existingRegion) {
-    // x-vercel-ip-country is set by Vercel Edge Network
-    const countryCode =
-      request.headers.get("x-vercel-ip-country") ?? "";
+    const countryCode = request.headers.get("x-vercel-ip-country") ?? "";
     const region = countryCodeToRegion(countryCode);
 
     response.cookies.set("vanman_region", region, {
@@ -32,11 +40,11 @@ export function middleware(request: NextRequest) {
   }
 
   return response;
-}
+});
 
 export const config = {
   matcher: [
-    // Run on all pages except static files and API routes
+    // Run on all pages except static files and Next.js internals
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };

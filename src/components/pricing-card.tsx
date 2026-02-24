@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   type RegionCode,
-  regionalPricing,
+  type RegionalPrice,
   formatPrice,
   planFeatures,
 } from "@/lib/pricing";
@@ -19,11 +19,15 @@ const regions: { code: RegionCode; label: string }[] = [
   { code: "US", label: "USD" },
 ];
 
-export function PricingCard() {
+export function PricingCard({
+  pricing: allPricing,
+}: {
+  pricing: Record<RegionCode, RegionalPrice>;
+}) {
   const [region, setRegion] = useState<RegionCode>("NZ");
   const [annual, setAnnual] = useState(false);
 
-  const pricing = regionalPricing[region];
+  const pricing = allPricing[region];
   const price = annual ? pricing.annualPrice : pricing.monthlyPrice;
   const formattedPrice = formatPrice(price, region);
 

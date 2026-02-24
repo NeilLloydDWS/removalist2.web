@@ -1,78 +1,73 @@
 "use server";
 
-import { type SignupFormData } from "@/lib/schemas";
+import { clerkClient } from "@clerk/nextjs/server";
+import { signupSchema, type SignupFormData } from "@/lib/schemas";
+import { getStripe } from "@/lib/stripe";
 
 interface SignupResult {
   error?: string;
 }
 
 export async function signup(data: SignupFormData): Promise<SignupResult> {
-  // In production, this would:
-  // 1. Create a Clerk user with name, email, password
-  // 2. Create a Clerk organization with company name
-  // 3. Add user as admin of the new organization
-  // 4. Store region in Clerk user metadata
-  // 5. Create Stripe customer and subscription in trialing state
-  // 6. Store Stripe IDs in Clerk org metadata
-
   try {
-    // Validate server-side (double-check)
-    if (!data.fullName || !data.email || !data.password || !data.companyName) {
-      return { error: "All required fields must be filled in." };
+    // Validate server-side
+    const parsed = signupSchema.safeParse(data);
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message };
     }
 
-    if (!data.agreedToTerms) {
-      return {
-        error: "You must agree to the Terms of Service and Privacy Policy.",
-      };
-    }
+    const clerk = await clerkClient();
 
-    // --- Clerk User Creation ---
-    // const clerkUser = await clerkClient.users.createUser({
-    //   firstName: data.fullName.split(" ")[0],
-    //   lastName: data.fullName.split(" ").slice(1).join(" "),
-    //   emailAddress: [data.email],
-    //   password: data.password,
-    //   publicMetadata: { region: data.region },
-    // });
+    // 1. Create Clerk user
+    const clerkUser = await clerk.users.createUser({
+      firstName: data.fullName.split(" ")[0],
+      lastName: data.fullName.split(" ").slice(1).join(" ") || undefined,
+      emailAddress: [data.email],
+      password: data.password,
+      publicMetadata: { region: data.region },
+    });
 
-    // --- Clerk Organization Creation ---
-    // const org = await clerkClient.organizations.createOrganization({
-    //   name: data.companyName,
-    //   createdBy: clerkUser.id,
-    // });
+    // 2. Create Clerk organization with user as admin
+    const org = await clerk.organizations.createOrganization({
+      name: data.companyName,
+      createdBy: clerkUser.id,
+    });
 
-    // --- Stripe Customer & Subscription ---
-    // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-    // const customer = await stripe.customers.create({
-    //   email: data.email,
-    //   name: data.companyName,
-    //   metadata: { clerkUserId: clerkUser.id, clerkOrgId: org.id },
-    // });
-    // const subscription = await stripe.subscriptions.create({
-    //   customer: customer.id,
-    //   items: [{ price: process.env.STRIPE_PRICE_ID! }],
-    //   trial_period_days: 14,
-    //   payment_settings: {
-    //     save_default_payment_method: "on_subscription",
-    //   },
-    //   trial_settings: {
-    //     end_behavior: { missing_payment_method: "pause" },
-    //   },
-    // });
+    // 3. Create Stripe customer linked to Clerk IDs
+    const stripe = getStripe();
+    const customer = await stripe.customers.create({
+      email: data.email,
+      name: data.companyName,
+      metadata: { clerkUserId: clerkUser.id, clerkOrgId: org.id },
+    });
 
-    // --- Store Stripe IDs in Clerk org metadata ---
-    // await clerkClient.organizations.updateOrganization(org.id, {
-    //   publicMetadata: {
-    //     stripeCustomerId: customer.id,
-    //     stripeSubscriptionId: subscription.id,
-    //     trialEndsAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-    //   },
-    // });
+    // 4. Create Stripe subscription with 14-day trial (no card required)
+    const subscription = await stripe.subscriptions.create({
+      customer: customer.id,
+      items: [{ price: process.env.STRIPE_PRICE_ID! }],
+      trial_period_days: 14,
+      payment_settings: {
+        save_default_payment_method: "on_subscription",
+      },
+      trial_settings: {
+        end_behavior: { missing_payment_method: "pause" },
+      },
+      metadata: { clerkOrgId: org.id },
+    });
+
+    // 5. Store Stripe IDs in Clerk org metadata
+    await clerk.organizations.updateOrganization(org.id, {
+      publicMetadata: {
+        stripeCustomerId: customer.id,
+        stripeSubscriptionId: subscription.id,
+        trialEndsAt: new Date(
+          Date.now() + 14 * 24 * 60 * 60 * 1000
+        ).toISOString(),
+      },
+    });
 
     return {};
   } catch (error: unknown) {
-    // Handle known Clerk errors
     if (
       error instanceof Error &&
       error.message.includes("email_address_taken")

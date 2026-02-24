@@ -7,7 +7,7 @@ export interface RegionalPrice {
   locale: string;
 }
 
-export const regionalPricing: Record<RegionCode, RegionalPrice> = {
+export const defaultRegionalPricing: Record<RegionCode, RegionalPrice> = {
   NZ: {
     currency: "NZD",
     monthlyPrice: 99,
@@ -38,7 +38,7 @@ export function formatPrice(
   amount: number,
   region: RegionCode
 ): string {
-  const { currency, locale } = regionalPricing[region];
+  const { currency, locale } = defaultRegionalPricing[region];
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
