@@ -1,0 +1,235 @@
+{
+  "project": "VanMan Public Website",
+  "branchName": "ralph/pw-03-feature-showcase",
+  "description": "Feature Showcase Pages - Build 9 individual SEO-optimized feature detail pages using a reusable template, covering calendar, jobs, fleet, bookings, comms, invoicing, dashboard, mobile app, and team chat",
+  "dependencies": [
+    "ralph/pw-01-foundation-design-system",
+    "ralph/pw-02-homepage-marketing"
+  ],
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Feature page template component",
+      "description": "As a developer, I need a reusable FeaturePage template so that all feature pages have consistent structure and can be built quickly from data.",
+      "acceptanceCriteria": [
+        "Reusable FeaturePage component accepting typed FeaturePageData props",
+        "FeaturePageData type includes: title, tagline, description, heroImage, benefits array (icon + title + description), detailSections array (alternating image/text), relatedFeatures array (2-3 slugs), seo metadata (title, description, ogImage)",
+        "Template renders sections: 1. Hero (title+tagline+description+screenshot), 2. Key benefits (3-4 cards with Lucide icons), 3. Feature details (alternating left/right image+text sections), 4. Integration callout (how this feature connects to other VanMan features), 5. CTA section ('Start Free Trial' + 'See all features' link)",
+        "Breadcrumb component: Home > Features > [Feature Name]",
+        "Next feature / Previous feature navigation links at bottom (derived from features list order)",
+        "Related features section: 2-3 cards linking to other feature pages rendered from relatedFeatures array",
+        "All screenshots use Next.js Image component with responsive sizing and lightbox on click (view full-size)",
+        "All pages statically generated at build time",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "This template is reused by all 9 feature pages below. Design: alternating text-left/image-right then text-right/image-left for visual variety."
+    },
+    {
+      "id": "US-002",
+      "title": "Feature page dynamic route and data architecture",
+      "description": "As a developer, I need a /features/[slug] route that generates static pages from feature data configs.",
+      "acceptanceCriteria": [
+        "Dynamic route at app/features/[slug]/page.tsx",
+        "generateStaticParams exports all 9 feature slugs for static generation at build time",
+        "generateMetadata returns unique SEO title, meta description (compelling, under 160 chars, includes target keyword), and Open Graph image per feature",
+        "Page reads feature data from a config file (lib/feature-pages/[slug].ts) and passes to FeaturePage template",
+        "Returns 404 for unknown slugs via notFound()",
+        "Each feature config file exports typed FeaturePageData including seo metadata",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Feature slugs come from lib/features.ts created in PW-02. Feature page data configs are separate per-feature files with richer content."
+    },
+    {
+      "id": "US-003",
+      "title": "Calendar & Scheduling feature page data",
+      "description": "As a moving company owner, I want to understand VanMan's calendar so that I can see if it handles my scheduling needs.",
+      "acceptanceCriteria": [
+        "Feature data config for calendar-scheduling slug in lib/feature-pages/calendar-scheduling.ts",
+        "Highlights: weekly time-grid view, drag-and-drop rescheduling, truck color-coding, real-time multi-user updates, mobile day view",
+        "Benefits: 'See your whole week at a glance', 'Reschedule in seconds', 'Multiple operators, one calendar'",
+        "Detail sections with screenshot placeholders for: calendar with color-coded jobs, drag interaction, mobile day view",
+        "Related features configured: job-management, fleet-management, mobile-app",
+        "SEO title: 'Moving Company Scheduling Software | VanMan'",
+        "SEO description targeting 'moving company scheduling software' keyword",
+        "Page renders correctly at /features/calendar-scheduling",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Screenshots should show realistic demo data from VanMan NZ, not lorem ipsum."
+    },
+    {
+      "id": "US-004",
+      "title": "Job Management feature page data",
+      "description": "As a moving company owner, I want to understand job tracking so that I know VanMan can handle my job lifecycle.",
+      "acceptanceCriteria": [
+        "Feature data config for job-management slug in lib/feature-pages/job-management.ts",
+        "Highlights: full job lifecycle (enquiry \u2192 quote \u2192 confirmed \u2192 in progress \u2192 completed), Google Maps location mapping, cost tracking, activity timeline, job search and filtering, job duplication",
+        "Benefits: 'Track every job from quote to completion', 'See routes and driving times', 'Full audit trail'",
+        "Detail sections with screenshot placeholders for: job detail page, locations tab with map, search results",
+        "Related features configured: calendar-scheduling, customer-communications, invoicing-xero",
+        "SEO title: 'Moving Job Management Software | VanMan'",
+        "SEO description targeting 'moving job management software' keyword",
+        "Page renders correctly at /features/job-management",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Job Management is one of VanMan's core features. Emphasize the full lifecycle view and Google Maps integration as key differentiators."
+    },
+    {
+      "id": "US-005",
+      "title": "Fleet & Truck Management feature page data",
+      "description": "As a moving company owner, I want to understand fleet management so that I can manage my trucks within VanMan.",
+      "acceptanceCriteria": [
+        "Feature data config for fleet-management slug in lib/feature-pages/fleet-management.ts",
+        "Highlights: truck profiles with capacity, color-coded calendar integration, team leader assignment, availability tracking",
+        "Benefits: 'Know which trucks are free', 'Color-code your fleet', 'Track capacity'",
+        "Detail sections with screenshot placeholders for: truck list, truck on calendar, availability dashboard widget",
+        "Related features configured: calendar-scheduling, job-management, dashboard-analytics",
+        "SEO title: 'Moving Company Fleet Management | VanMan'",
+        "SEO description targeting 'moving company fleet management' keyword",
+        "Page renders correctly at /features/fleet-management",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Fleet Management ties closely to the calendar (color-coded trucks). Highlight how it simplifies knowing which trucks are available on any given day."
+    },
+    {
+      "id": "US-006",
+      "title": "Online Booking Requests feature page data",
+      "description": "As a moving company owner, I want to understand the booking system so that I can capture leads from my website.",
+      "acceptanceCriteria": [
+        "Feature data config for online-bookings slug in lib/feature-pages/online-bookings.ts",
+        "Highlights: embeddable multi-step booking form, Google Places address lookup, bot protection (Turnstile), booking-to-job conversion in one click, status tracking pipeline (new \u2192 contacted \u2192 quoted \u2192 confirmed \u2192 declined)",
+        "Benefits: 'Capture enquiries 24/7', 'Convert bookings to jobs in one click', 'Never lose a lead'",
+        "Detail sections with screenshot placeholders for: public booking form steps, operator booking management page, conversion flow",
+        "Related features configured: job-management, customer-communications, dashboard-analytics",
+        "SEO title: 'Online Booking Form for Moving Companies | VanMan'",
+        "SEO description targeting 'online booking form moving companies' keyword",
+        "Page renders correctly at /features/online-bookings",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Online Bookings is a key lead capture tool. Emphasize the embeddable form that works on the customer's own website and the one-click conversion to jobs."
+    },
+    {
+      "id": "US-007",
+      "title": "Customer Communications feature page data",
+      "description": "As a moving company owner, I want to understand the messaging features so that I know I can communicate with customers from VanMan.",
+      "acceptanceCriteria": [
+        "Feature data config for customer-communications slug in lib/feature-pages/customer-communications.ts",
+        "Highlights: SMS and email from within VanMan, customizable templates with variable substitution, delivery tracking, incoming SMS handling, per-job message history",
+        "Benefits: 'Send booking confirmations in seconds', 'Track every message', 'Templates save hours'",
+        "Detail sections with screenshot placeholders for: message template editor, messaging panel on job, delivery status indicators",
+        "Related features configured: job-management, online-bookings, mobile-app",
+        "SEO title: 'SMS & Email for Moving Companies | VanMan'",
+        "SEO description targeting 'SMS email moving companies' keyword",
+        "Page renders correctly at /features/customer-communications",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "Customer Communications differentiates VanMan from spreadsheets. Highlight template variables (customer name, date, address) that save time on repetitive messages."
+    },
+    {
+      "id": "US-008",
+      "title": "Invoicing & Xero Integration feature page data",
+      "description": "As a moving company owner, I want to understand invoicing so that I know VanMan handles my accounting needs.",
+      "acceptanceCriteria": [
+        "Feature data config for invoicing-xero slug in lib/feature-pages/invoicing-xero.ts",
+        "Highlights: one-click invoice generation from job costs, two-way Xero sync, automatic account/item code validation, self-healing error resolution, PDF download and email/SMS delivery",
+        "Benefits: 'Invoice in one click', 'Syncs straight to Xero', 'No more code errors'",
+        "Xero logo/badge placeholder for credibility",
+        "Detail sections with screenshot placeholders for: invoice preview dialog, Xero connection settings, error resolution flow",
+        "Related features configured: job-management, dashboard-analytics, customer-communications",
+        "SEO title: 'Moving Company Invoicing & Xero Integration | VanMan'",
+        "SEO description targeting 'moving company invoicing Xero integration' keyword",
+        "Page renders correctly at /features/invoicing-xero",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "Xero Integration is a major selling point for NZ/AU/UK markets. Emphasize the self-healing error resolution and one-click invoice generation."
+    },
+    {
+      "id": "US-009",
+      "title": "Dashboard & Analytics feature page data",
+      "description": "As a moving company owner, I want to understand the dashboard so that I can see how VanMan helps me monitor my business.",
+      "acceptanceCriteria": [
+        "Feature data config for dashboard-analytics slug in lib/feature-pages/dashboard-analytics.ts",
+        "Highlights: KPI cards with trend indicators, revenue and job volume charts, truck availability widget, booking conversion funnel visualization, quick actions panel",
+        "Benefits: 'Know your numbers at a glance', 'Track revenue trends', 'See booking conversion rates'",
+        "Detail sections with screenshot placeholders for: full dashboard view, charts, KPI cards",
+        "Related features configured: fleet-management, online-bookings, invoicing-xero",
+        "SEO title: 'Moving Company Dashboard & Analytics | VanMan'",
+        "SEO description targeting 'moving company dashboard analytics' keyword",
+        "Page renders correctly at /features/dashboard-analytics",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "Dashboard gives business owners visibility into operations. Focus on the KPI cards and booking conversion funnel as key value propositions."
+    },
+    {
+      "id": "US-010",
+      "title": "Mobile App feature page data (iOS & Android)",
+      "description": "As a moving company owner, I want to understand the mobile app so that I know my entire team can use VanMan in the field.",
+      "acceptanceCriteria": [
+        "Feature data config for mobile-app slug in lib/feature-pages/mobile-app.ts",
+        "Highlights for Drivers: today's assigned jobs, tap-to-call customers, tap-to-navigate via Google Maps, start/finish delivery time tracking with background timer, add delivery notes",
+        "Highlights for Operators: create and edit jobs on the go (3-step wizard: General \u2192 Delivery \u2192 Tally), process payments (cash, POS, credit), send invoices via SMS/email, view full job calendar with filters",
+        "Highlights for Admins: full access to all mobile features plus staff management",
+        "Role-based views \u2014 drivers see simplified interface, operators see full controls",
+        "Works offline \u2014 cached data syncs when reconnected",
+        "Multi-tenant support \u2014 switch between business accounts",
+        "Benefits: 'Your whole team in one app', 'Drivers track time, operators manage jobs \u2014 all from their phone', 'Works even with patchy signal'",
+        "App Store and Google Play badge placeholders",
+        "Detail sections with screenshot placeholders for: driver job list, operator job creation wizard, time tracking screen, Google Maps navigation, tally/invoicing screen",
+        "Related features configured: calendar-scheduling, job-management, team-chat",
+        "SEO title: 'Mobile App for Moving Companies \u2014 iOS & Android | VanMan'",
+        "SEO description targeting 'mobile app moving companies iOS Android' keyword",
+        "Page renders correctly at /features/mobile-app",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 10,
+      "passes": true,
+      "notes": "This page has the most content due to the multi-role nature of the app. Emphasize screenshots from all three roles."
+    },
+    {
+      "id": "US-011",
+      "title": "Team Chat feature page data",
+      "description": "As a moving company owner, I want to understand the team chat feature so that I know my staff can communicate in real-time within VanMan.",
+      "acceptanceCriteria": [
+        "Feature data config for team-chat slug in lib/feature-pages/team-chat.ts",
+        "Highlights: real-time messaging between all staff (drivers, operators, admins), direct messages and group conversations, photo/media sharing (items, access issues, parking), staff contact directory with quick-dial, message history persisted and searchable, push notifications, available on both mobile app and web",
+        "Benefits: 'Keep your team connected on every job', 'Share photos from the field instantly', 'No more missed messages or phone tag'",
+        "Detail sections with screenshot placeholders for: chat list, conversation thread, media sharing, staff directory",
+        "Related features configured: mobile-app, job-management, customer-communications",
+        "SEO title: 'Team Chat for Moving Companies | VanMan'",
+        "SEO description targeting 'team chat moving companies' keyword",
+        "Page renders correctly at /features/team-chat",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 11,
+      "passes": true,
+      "notes": "Team Chat keeps the whole team connected without needing a separate messaging app. Highlight photo sharing from the field as a practical daily use case."
+    }
+  ]
+}

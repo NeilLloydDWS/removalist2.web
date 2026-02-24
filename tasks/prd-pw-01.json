@@ -1,0 +1,142 @@
+{
+  "project": "VanMan Public Website",
+  "branchName": "ralph/pw-01-foundation-design-system",
+  "description": "Project Foundation & Brand Design System - Set up the standalone Next.js marketing site with design tokens, shared layout components (header, footer, sections), and Vercel deployment pipeline",
+  "dependencies": [],
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Next.js project scaffold",
+      "description": "As a developer, I need a working Next.js project in /publicweb so that all subsequent pages have a foundation to build on.",
+      "acceptanceCriteria": [
+        "Next.js 15+ with App Router and TypeScript strict mode initialized in publicweb/",
+        "Tailwind CSS v4 configured with custom theme tokens in tailwind.config.ts",
+        "shadcn/ui installed and configured (consistent with the main app's component library)",
+        "ESLint and Prettier configured with consistent rules",
+        "publicweb/ folder is self-contained with its own package.json, tsconfig.json, next.config.ts",
+        "npm run dev starts the dev server on port 3001 (different from the main app)",
+        "All page content statically generated (SSG) via App Router — site must be fully functional with JavaScript disabled",
+        "Typecheck passes with zero errors"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "No dependencies. This is the foundation PRD — all other PW PRDs depend on this."
+    },
+    {
+      "id": "US-002",
+      "title": "Brand design tokens and theme",
+      "description": "As a designer/developer, I want a defined set of brand tokens so that every page has a consistent, professional look.",
+      "acceptanceCriteria": [
+        "Color palette defined in Tailwind config: primary (brand blue), secondary (accent), neutral grays, success/warning/error semantic colors",
+        "Typography scale defined: heading sizes (h1-h4), body, small, caption using Inter or Geist via next/font",
+        "Spacing scale consistent with Tailwind defaults",
+        "Border radius, shadow, and transition tokens defined in Tailwind config",
+        "Dark mode variant for all color tokens via CSS variables and next-themes",
+        "Dark/light mode toggle persisted in localStorage via next-themes",
+        "Font files self-hosted via next/font (no external Google Fonts requests) for performance and privacy",
+        "A /style-guide dev-only page showing all tokens rendered (colors, type scale, buttons, cards)",
+        "Visual style: clean, modern, professional — inspired by Linear, Vercel, or Stripe marketing sites",
+        "Color palette feels trustworthy and operational — blues with warm accents",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Depends on US-001. Design direction: generous whitespace, large headings, high-contrast text."
+    },
+    {
+      "id": "US-003",
+      "title": "Page wrapper and section layout components",
+      "description": "As a developer, I need reusable page and section components so that all marketing pages have consistent spacing and structure.",
+      "acceptanceCriteria": [
+        "PageWrapper component: sets max-width, horizontal padding, vertical spacing between sections",
+        "Section component: accepts variant prop (default, alternate-bg, dark, gradient) for visual rhythm",
+        "SectionHeader component: eyebrow text, heading, subheading — centered or left-aligned via prop",
+        "Container component: constrains content width (max-w-7xl)",
+        "Grid component: responsive grid with 2/3/4 column options via prop",
+        "All components responsive across mobile/tablet/desktop breakpoints",
+        "All images use Next.js <Image> component with proper sizing and lazy loading",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Depends on US-002 for design tokens. These components are reused by all subsequent PRDs."
+    },
+    {
+      "id": "US-004",
+      "title": "Shared layout — Header with navigation",
+      "description": "As a visitor, I want a clear navigation header so that I can find any page on the site.",
+      "acceptanceCriteria": [
+        "Sticky header with logo (left), nav links (center), and CTA button (right)",
+        "Nav links: Features, Pricing, Blog, Help, Contact",
+        "Start Free Trial primary CTA button in header linking to /signup",
+        "Mobile: hamburger menu with slide-out drawer containing all nav links and CTA",
+        "Active link highlighting based on current route",
+        "Header becomes slightly opaque/blurred on scroll (glassmorphism effect via backdrop-blur)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Depends on US-002 and US-003. Nav links point to pages built in PRDs PW-02 through PW-07."
+    },
+    {
+      "id": "US-005",
+      "title": "Shared layout — Footer",
+      "description": "As a visitor, I want a footer with links and company info so that I can navigate to secondary pages and find contact details.",
+      "acceptanceCriteria": [
+        "Multi-column footer layout: Logo+tagline+social links (LinkedIn, Facebook, X), Product links, Resources links, Company links, Legal links",
+        "Product column: Features, Pricing, Changelog",
+        "Resources column: Blog, Help Center, FAQ, API Docs",
+        "Company column: About, Contact, Careers",
+        "Legal column: Terms of Service, Privacy Policy, Cookie Policy",
+        "Bottom bar with copyright notice and region selector placeholder (NZ/AU/UK/US flags)",
+        "Responsive: stacks to 2-column on tablet, single column on mobile",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Depends on US-002 and US-003. Region selector fully implemented in PW-08."
+    },
+    {
+      "id": "US-006",
+      "title": "Root layout with header, footer, and theme provider",
+      "description": "As a developer, I need the root layout to include the header, footer, and theme provider so that all pages share the same shell.",
+      "acceptanceCriteria": [
+        "Root layout (app/layout.tsx) wraps all pages with ThemeProvider (next-themes), header, and footer",
+        "Dark/light mode toggle button accessible from the header",
+        "Metadata defaults set: site title 'VanMan — Moving Company Software', description, OG image placeholder",
+        "All pages render within the shared header/footer shell",
+        "Site fully functional with JavaScript disabled (SSG/SSR for all content pages)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Depends on US-004 and US-005. This wires up the shared layout for all pages across all PRDs."
+    },
+    {
+      "id": "US-007",
+      "title": "Vercel deployment pipeline",
+      "description": "As a developer, I want the public website to deploy automatically so that changes are live without manual steps.",
+      "acceptanceCriteria": [
+        "vercel.json or Vercel project configured for the /publicweb directory (monorepo root directory override)",
+        "Production deploys on push to main branch",
+        "Preview deploys on pull requests",
+        "Environment variables placeholder documented in .env.example",
+        "Custom domain support ready (domain TBD — vanman.app or similar)",
+        "Build succeeds with no errors or warnings",
+        "Lighthouse performance score target: 95+, accessibility score target: 90+",
+        "Time to First Byte (TTFB) target: under 200ms",
+        "Largest Contentful Paint (LCP) target: under 2.5s",
+        "Build time target: under 60 seconds",
+        "Typecheck passes"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "Depends on US-006. This should be the final story — validates the full build works end-to-end."
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "project": "VanMan Public Website",
+  "branchName": "ralph/pw-02-homepage-marketing",
+  "description": "Homepage & Marketing Pages - Build the high-converting landing page, About page, and Feature Overview page with hero, social proof, feature grid, and CTAs",
+  "dependencies": [
+    "ralph/pw-01-foundation-design-system"
+  ],
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Features data config",
+      "description": "As a developer, I need a shared features configuration file so that feature data is a single source of truth across the homepage grid, feature overview page, and feature detail pages.",
+      "acceptanceCriteria": [
+        "Create lib/features.ts exporting an array of feature objects",
+        "Each feature has: slug, name, tagline, description, icon (Lucide icon name), href (/features/[slug])",
+        "Features include: calendar-scheduling, job-management, fleet-management, online-bookings, customer-communications, invoicing-xero, dashboard-analytics, mobile-app, team-chat",
+        "Export typed Feature interface",
+        "Feature data reused by homepage grid (this PRD) and feature detail pages (PW-03)",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "This config is shared across PW-02 (homepage grid, feature overview) and PW-03 (feature detail pages)."
+    },
+    {
+      "id": "US-002",
+      "title": "Homepage hero section",
+      "description": "As a visitor, I want to immediately understand what VanMan does so that I can decide if it's relevant to my moving business.",
+      "acceptanceCriteria": [
+        "Homepage at / with hero section above the fold",
+        "Headline: clear value proposition (e.g. 'Run your moving company from one place')",
+        "Subheadline: one sentence elaborating the benefit",
+        "Primary CTA: 'Start Free Trial' button linking to /signup",
+        "Secondary CTA: 'See How It Works' that smooth-scrolls to the how-it-works section",
+        "Hero visual: placeholder product screenshot area using Next.js Image component with eager loading (above the fold)",
+        "Hero optimized for above-the-fold on desktop and mobile",
+        "Hero renders meaningfully without JavaScript (SSR fallback)",
+        "Page statically generated (SSG) for maximum performance",
+        "Any scroll animations must respect prefers-reduced-motion media query",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "All CTA buttons link to /signup (implemented in PW-04). Homepage encompasses US-002 through US-006 as sections on the same page."
+    },
+    {
+      "id": "US-003",
+      "title": "Social proof section",
+      "description": "As a visitor, I want to see that other moving companies trust VanMan so that I feel confident signing up.",
+      "acceptanceCriteria": [
+        "'Trusted by moving companies across NZ, Australia, UK & US' banner text",
+        "Customer logos row with placeholder logo images (6 slots)",
+        "Stats bar with placeholder numbers: 'X,000+ jobs managed', 'Y companies', 'Z countries'",
+        "2-3 customer testimonial cards with name, company, photo placeholder, and quote",
+        "Testimonials stored as static data in a lib/testimonials.ts config file with typed Testimonial interface",
+        "All below-the-fold images lazy-loaded via Next.js Image component",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Testimonials data is static JSON \u2014 no database dependency. Stats are placeholder values to be replaced with real numbers later."
+    },
+    {
+      "id": "US-004",
+      "title": "Feature highlights grid",
+      "description": "As a visitor, I want a quick overview of VanMan's features so that I understand the breadth of the platform.",
+      "acceptanceCriteria": [
+        "Section heading: 'Everything you need to run your moving business'",
+        "Responsive grid of feature cards: 3-col desktop, 2-col tablet, 1-col mobile",
+        "Cards rendered from the shared lib/features.ts config (US-001)",
+        "Each card shows: Lucide icon, title, 1-2 sentence description, 'Learn more \u2192' link to /features/[slug]",
+        "All 9 features displayed: calendar-scheduling, job-management, fleet-management, online-bookings, customer-communications, invoicing-xero, dashboard-analytics, mobile-app, team-chat",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Depends on US-001. 'Learn more' links go to feature detail pages built in PW-03."
+    },
+    {
+      "id": "US-005",
+      "title": "How it works section",
+      "description": "As a visitor, I want to understand the workflow so that I can see how VanMan fits into my daily operations.",
+      "acceptanceCriteria": [
+        "Section with id='how-it-works' (scroll target from hero secondary CTA)",
+        "4-step visual flow: 1. Receive bookings, 2. Schedule & dispatch, 3. Track & communicate, 4. Invoice & get paid",
+        "Each step: number badge, Lucide icon or illustration placeholder, title, short description",
+        "Visual connector between steps (timeline line or arrows)",
+        "Responsive: horizontal flow on desktop, vertical stack on mobile",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "This section is the scroll target from the hero secondary CTA ('See How It Works'). Consider using Framer Motion for subtle step-by-step reveal animation."
+    },
+    {
+      "id": "US-006",
+      "title": "Homepage CTA section",
+      "description": "As a visitor who has scrolled through the page, I want a clear call to action so that I can sign up.",
+      "acceptanceCriteria": [
+        "Full-width CTA section near bottom of homepage",
+        "Heading: 'Ready to simplify your moving business?'",
+        "'Start Free Trial' primary button linking to /signup",
+        "'Talk to Sales' secondary link to /contact",
+        "Subtext: 'No credit card required. Free for 14 days.'",
+        "Section uses gradient or dark variant background for visual emphasis",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "CTA links to /signup (PW-04) and /contact (PW-07)."
+    },
+    {
+      "id": "US-007",
+      "title": "About page",
+      "description": "As a visitor who wants to learn more about the company, I want an About page so that I can understand who's behind VanMan.",
+      "acceptanceCriteria": [
+        "Page at /about",
+        "Company story section: origin story \u2014 built by a real removalist company (VanMan NZ)",
+        "Mission statement: 'We're building the tools we wished we had when running our own moving company'",
+        "'Built by movers, for movers' messaging for authenticity and domain expertise",
+        "Team section with placeholder cards (photo, name, role)",
+        "CTA at bottom to start free trial linking to /signup",
+        "Page statically generated (SSG)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "About page establishes trust and credibility. Team section uses placeholder data initially \u2014 real team info to be provided. Content tone: authentic, approachable, not corporate."
+    },
+    {
+      "id": "US-008",
+      "title": "Feature overview page",
+      "description": "As a visitor who wants a comprehensive view, I want a single page listing all features so that I can evaluate VanMan's full capability.",
+      "acceptanceCriteria": [
+        "Page at /features",
+        "Feature categories with anchor links: Scheduling & Calendar, Job Management, Fleet Management, Booking & Lead Capture, Communications, Invoicing & Accounting, Analytics & Reporting, Mobile App, Team Chat",
+        "Each category: heading, 3-4 bullet points describing capabilities, screenshot/illustration placeholder, 'Learn more \u2192' link to /features/[slug] detail page",
+        "Sticky sidebar or top nav on desktop for jumping between category sections",
+        "Page statically generated (SSG)",
+        "Data driven from the shared lib/features.ts config (US-001)",
+        "All images use Next.js Image component with lazy loading below the fold",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "This page links to individual feature pages built in PW-03. Sticky sidebar aids navigation for the long-scroll page."
+    }
+  ]
+}

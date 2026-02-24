@@ -1,0 +1,216 @@
+{
+  "project": "VanMan Public Website",
+  "branchName": "ralph/pw-08-seo-localization-analytics",
+  "description": "SEO, Localization & Analytics - Implement global SEO metadata, structured data, multi-region localization (NZ/AU/UK/US), analytics tracking, conversion funnel, A/B testing foundation, and performance monitoring",
+  "dependencies": ["ralph/pw-01-foundation-design-system", "ralph/pw-07-contact-legal"],
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Global SEO metadata helper",
+      "description": "As a developer, I need a centralized SEO metadata helper so that every page can easily generate correct meta tags.",
+      "acceptanceCriteria": [
+        "Create lib/seo.ts exporting a generateSEO function that returns a Next.js Metadata object",
+        "Function accepts: title (string), description (string), image (optional string URL), url (string), type ('website' | 'article')",
+        "Generates: page title with suffix ' | VanMan — Moving Company Software', meta description (max 160 chars), canonical URL",
+        "Generates Open Graph tags: og:title, og:description, og:image, og:url, og:site_name='VanMan', og:type",
+        "Generates Twitter Card tags: twitter:card=summary_large_image, twitter:title, twitter:description, twitter:image",
+        "Default OG image (public/og-default.png — create a branded placeholder) used when no specific image provided",
+        "Export types for all function parameters",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "This utility is used by all pages across all PRDs. Should be the first thing built in this PRD."
+    },
+    {
+      "id": "US-002",
+      "title": "Structured data JSON-LD component",
+      "description": "As a developer, I need a reusable JSON-LD component so that structured data can be added to any page.",
+      "acceptanceCriteria": [
+        "Create components/json-ld.tsx: a JsonLd component accepting a typed schema object and rendering <script type='application/ld+json'>",
+        "Type definitions for: Organization, SoftwareApplication, Product, Article, FAQPage, HowTo, Offer, BreadcrumbList",
+        "Schema objects properly serialized with JSON.stringify (no XSS — escape </script> in content)",
+        "Add Organization schema to the root layout: name 'VanMan', url, logo, social profiles (placeholder URLs)",
+        "Add SoftwareApplication schema to the homepage: name 'VanMan', applicationCategory 'BusinessApplication', operatingSystem 'Web, iOS, Android', offers",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Individual pages (blog, FAQ, features, pricing) add their own specific structured data using this component."
+    },
+    {
+      "id": "US-003",
+      "title": "Sitemap and robots.txt",
+      "description": "As the marketing team, I want an auto-generated sitemap and robots.txt so that search engines can crawl the site efficiently.",
+      "acceptanceCriteria": [
+        "sitemap.xml generated at build time via app/sitemap.ts (Next.js built-in) or next-sitemap package",
+        "Sitemap includes all: static pages (/, /about, /features, /pricing, /blog, /help, /faq, /contact), feature detail pages (/features/[slug]), blog posts (/blog/[slug]), blog category pages (/blog/category/[slug]), help category pages (/help/[slug]), help articles (/help/[category]/[article]), legal pages (/legal/terms, /legal/privacy, /legal/cookies)",
+        "Each sitemap entry includes lastmod date",
+        "robots.txt configured via app/robots.ts: allow all public pages, disallow /onboarding, /api/, /style-guide",
+        "robots.txt references sitemap URL: Sitemap: https://vanman.app/sitemap.xml (domain placeholder)",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Sitemap is comprehensive — includes pages from all PRDs. Must be regenerated on every build."
+    },
+    {
+      "id": "US-004",
+      "title": "Custom 404 page and heading audit",
+      "description": "As the marketing team, I want a custom 404 page and proper heading hierarchy so that SEO fundamentals are solid.",
+      "acceptanceCriteria": [
+        "Custom 404 page at app/not-found.tsx with friendly, on-brand messaging ('Page not found')",
+        "404 page includes: VanMan branding, search bar (linking to /help), links to popular pages (Home, Features, Pricing, Help, Blog, Contact), 'Go Home' primary button",
+        "404 page uses the shared header/footer layout",
+        "All existing pages verified to have a single h1 per page and logical h2/h3/h4 nesting",
+        "All images on existing pages have descriptive alt text (not empty, not generic)",
+        "Internal linking strategy: feature pages link to related features, blog posts link to relevant feature pages where applicable",
+        "No broken links: validate all internal links at build time or via CI check (e.g. next-link-check or custom script)",
+        "All pages target under 3s LCP (page load speed optimized)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "The heading audit may require updates to pages built in PW-02, PW-03, PW-04 if they have heading issues."
+    },
+    {
+      "id": "US-005",
+      "title": "Localization config and context provider",
+      "description": "As a developer, I need a localization system so that terminology and currency can vary by region.",
+      "acceptanceCriteria": [
+        "Create lib/localization.ts defining: Region type ('nz' | 'au' | 'uk' | 'us'), RegionConfig type with name, flag emoji, currency code, locale string",
+        "Terminology map per region: removalist/removal company/moving company, truck/van-lorry/truck, booking/enquiry/booking, GST/VAT/sales tax, mobile/mobile/cell phone",
+        "Currency config per region: NZD (en-NZ), AUD (en-AU), GBP (en-GB), USD (en-US) with Intl.NumberFormat formatting",
+        "Create RegionProvider React context wrapping the app, exposing: current region, setRegion function",
+        "Export useRegion() hook returning: region, t(key) function for terminology lookups, formatPrice(amount) function for currency formatting",
+        "Testimonials/case studies shown preferentially for the visitor's region when regional content is available (fallback to all testimonials)",
+        "Default region: 'nz'",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "This is content-level localization only — not a full i18n framework. Same components, different text strings for industry terms."
+    },
+    {
+      "id": "US-006",
+      "title": "Region detection middleware and selector UI",
+      "description": "As a visitor from any supported region, I want the website to auto-detect my country and let me change it.",
+      "acceptanceCriteria": [
+        "Next.js middleware (middleware.ts) reads x-vercel-ip-country header on first visit",
+        "Maps country code to region: NZ→nz, AU→au, GB→uk, US→us, all others→nz (default)",
+        "Sets vanman_region cookie with detected region (httpOnly: false so client JS can read it, SameSite: Lax, 12-month expiry)",
+        "Region selector component in footer: flag icons/emojis for NZ, AU, UK, US with country labels",
+        "Clicking a region flag updates the vanman_region cookie and triggers a page reload to apply",
+        "RegionProvider reads region from vanman_region cookie on mount",
+        "Region selector shows current region as highlighted/selected",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "x-vercel-ip-country only available on Vercel. Fallback to default region (nz) when running locally or on other hosts."
+    },
+    {
+      "id": "US-007",
+      "title": "Hreflang tags for regional SEO",
+      "description": "As the marketing team, I want hreflang tags on all pages so that search engines serve the right regional variant.",
+      "acceptanceCriteria": [
+        "All pages include hreflang link tags in <head> for: en-NZ, en-AU, en-GB, en-US",
+        "Each hreflang points to the same base URL (since we use cookie-based region, not URL prefixes)",
+        "x-default hreflang points to the base URL (for visitors not in NZ/AU/UK/US)",
+        "Hreflang tags generated by a shared utility function or added via the root layout metadata",
+        "Typecheck passes"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "Since we're using cookie-based regions (not URL prefixes like /nz/), all hreflang tags point to the same canonical URL."
+    },
+    {
+      "id": "US-008",
+      "title": "Analytics provider setup",
+      "description": "As the marketing team, I want website analytics so that I can understand traffic and behaviour.",
+      "acceptanceCriteria": [
+        "Analytics provider integrated: support for Plausible, Fathom, or GA4 — configurable via NEXT_PUBLIC_ANALYTICS_PROVIDER and NEXT_PUBLIC_ANALYTICS_ID environment variables",
+        "Analytics script loaded via next/script with strategy='afterInteractive'",
+        "Script only loads when analytics cookie consent is given (reads from CookieConsentProvider built in PW-07)",
+        "Page view tracking on all pages (automatic with provider script for Plausible/Fathom/GA4)",
+        "Analytics component added to root layout",
+        "Typecheck passes"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "Depends on PW-07 CookieConsentProvider for conditional loading. Plausible or Fathom recommended over GA4 for GDPR simplicity."
+    },
+    {
+      "id": "US-009",
+      "title": "Analytics event tracking utility",
+      "description": "As a developer, I need a utility for firing custom analytics events so that we can track key interactions consistently.",
+      "acceptanceCriteria": [
+        "Create lib/analytics.ts exporting: trackEvent(category: string, action: string, label?: string, properties?: Record<string, string>)",
+        "Naming convention documented: category_action (e.g. cta_click_start_trial, blog_read_complete, help_feedback_yes)",
+        "Function checks analytics consent before firing — no-op when consent not given",
+        "Function abstracts over the analytics provider (Plausible: plausible(), Fathom: fathom.trackEvent(), GA4: gtag())",
+        "Add event tracking to existing CTA buttons across the site: 'Start Free Trial' fires cta_click_start_trial, 'Request Demo' fires cta_click_request_demo, 'Contact Us' fires cta_click_contact",
+        "Blog post scroll depth tracking: fire blog_scroll_25, blog_scroll_50, blog_scroll_75, blog_scroll_100 events",
+        "Pricing page billing toggle interaction tracking: fire pricing_toggle_annual and pricing_toggle_monthly events",
+        "All analytics data is anonymized — no PII in event properties",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "Events added to CTAs built in PW-02, PW-03, PW-04. May need to update those pages if they exist."
+    },
+    {
+      "id": "US-010",
+      "title": "Conversion funnel tracking",
+      "description": "As the marketing team, I want to track the full conversion funnel so that I can identify drop-off points.",
+      "acceptanceCriteria": [
+        "Funnel events defined in lib/analytics.ts as constants: FUNNEL_LANDING_PAGE_VISIT, FUNNEL_FEATURE_PAGE_VISIT, FUNNEL_PRICING_PAGE_VISIT, FUNNEL_SIGNUP_PAGE_VISIT, FUNNEL_SIGNUP_FORM_STARTED, FUNNEL_SIGNUP_FORM_COMPLETED, FUNNEL_ONBOARDING_STARTED, FUNNEL_ONBOARDING_COMPLETED",
+        "Events fired at appropriate points: pricing page load event, signup page load event, signup form first field interaction event, signup success event, onboarding step transitions",
+        "UTM parameters (utm_source, utm_medium, utm_campaign, utm_term, utm_content) captured on first landing page visit",
+        "UTM values stored in vanman_utm cookie (JSON) and preserved through the signup flow",
+        "UTM values attached as properties to signup and onboarding events",
+        "Source/channel attribution tracked: organic, paid, referral, direct — derived from UTM params and document.referrer",
+        "Typecheck passes"
+      ],
+      "priority": 10,
+      "passes": true,
+      "notes": "Funnel events span PW-02 (landing), PW-03 (feature), PW-04 (pricing, signup, onboarding). Implementation may require adding event calls to pages from other PRDs."
+    },
+    {
+      "id": "US-011",
+      "title": "A/B testing foundation",
+      "description": "As the marketing team, I want a basic A/B testing framework so that we can run experiments later.",
+      "acceptanceCriteria": [
+        "Create lib/ab-testing.ts with: Experiment type (id, variants array, weights array), getVariant(experimentId, visitorId) function returning stable variant assignment",
+        "Variant assignment uses deterministic hashing (e.g. hash of visitorId + experimentId modulo weights) for stable assignment",
+        "useExperiment(experimentId) React hook: returns assigned variant string, generates visitorId from cookie if not present",
+        "Variant assignment stored in vanman_ab cookie (JSON map of experimentId → variant)",
+        "Variant assignments included as properties in analytics events automatically",
+        "One placeholder experiment defined: { id: 'homepage_hero_headline', variants: ['control', 'variant_a'], weights: [50, 50] } — not active (feature flag off)",
+        "Googlebot always sees the control variant (check User-Agent in middleware to prevent cloaking)",
+        "Typecheck passes"
+      ],
+      "priority": 11,
+      "passes": true,
+      "notes": "A/B testing is a foundation only — no active experiments launched in this PRD. Vercel Edge Middleware can assign variants before page renders."
+    },
+    {
+      "id": "US-012",
+      "title": "Performance monitoring setup",
+      "description": "As a developer, I want to monitor real-world performance so that we catch regressions before they impact SEO.",
+      "acceptanceCriteria": [
+        "Core Web Vitals reporting via web-vitals library: LCP, FID/INP, CLS metrics collected",
+        "Metrics sent to analytics provider as custom events (e.g. web_vitals_lcp, web_vitals_cls, web_vitals_inp)",
+        "Performance budget documented and enforced: LCP < 2.5s, CLS < 0.1, INP < 200ms — warn in console during development if exceeded",
+        "Vercel Analytics / Speed Insights enabled if deploying on Vercel (via @vercel/analytics package)",
+        "web-vitals reporting only runs in production (not in development)",
+        "Typecheck passes"
+      ],
+      "priority": 12,
+      "passes": true,
+      "notes": "Lighthouse CI integration (running on PRs) is a stretch goal — document as future improvement."
+    }
+  ]
+}

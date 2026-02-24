@@ -1,0 +1,40 @@
+---
+title: "Sending your first SMS"
+description: "Configure SMS messaging and create your first customer communication template."
+category: "getting-started"
+sortOrder: 8
+lastUpdated: "2026-02-15"
+tags: ["sms", "messaging", "templates", "twilio"]
+---
+
+# Sending your first SMS
+
+VanMan's built-in SMS messaging lets you keep customers informed at every stage of their move -- from booking confirmation to day-of arrival updates. Messages are sent through an integrated Twilio connection, and you can create reusable templates with dynamic variables so your team never has to type the same message twice.
+
+## How to set up SMS
+
+<StepByStep>
+  <Step title="Enable your SMS provider">
+    Navigate to <UIPath path="Settings > Communications" /> and open the **SMS** tab. Click **Connect Twilio** and enter your Twilio Account SID, Auth Token, and the phone number you want messages sent from. VanMan will verify the credentials and send a test message to your admin phone number to confirm the connection is live.
+  </Step>
+
+  <Step title="Create a message template">
+    Still on the Communications page, click **Templates** and then **New Template**. Give it a clear name like "Booking Confirmation" or "On Our Way". Write your message body using plain text and insert dynamic variables where needed -- for example:
+
+    *"Hi {{customer_name}}, your move on {{job_date}} at {{job_time}} from {{pickup_address}} is confirmed. Reply to this number if you have any questions."*
+
+    Click **Save Template** when you're happy with the wording.
+  </Step>
+
+  <Step title="Send a test SMS">
+    Before going live, send a test to yourself. Open any existing job, click **Send SMS**, choose your new template, and preview the message with the job's real data filled in. Change the recipient number to your own mobile if you want to verify delivery. Check that all variables resolve correctly and the message reads naturally.
+  </Step>
+
+  <Step title="Automate or send manually">
+    You can attach templates to workflow triggers so messages send automatically -- for instance, sending a "We're on our way" SMS when a driver marks a job as **In Transit**. Alternatively, operators can send messages manually from any job detail screen whenever a personal touch is needed.
+  </Step>
+</StepByStep>
+
+<Callout variant="tip">
+  Available template variables include **{{customer_name}}**, **{{job_date}}**, **{{job_time}}**, **{{pickup_address}}**, **{{delivery_address}}**, and **{{crew_leader}}**. You can find the full list in <UIPath path="Settings > Communications > Templates" /> by clicking the **Insert Variable** button.
+</Callout>

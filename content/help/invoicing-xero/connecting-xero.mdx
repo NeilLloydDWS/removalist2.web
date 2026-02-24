@@ -1,0 +1,52 @@
+---
+title: "Connecting your Xero account"
+description: "Step-by-step guide to connecting VanMan with Xero for automatic invoice syncing."
+category: "invoicing-xero"
+sortOrder: 1
+lastUpdated: "2026-02-15"
+tags: ["xero", "oauth", "connection", "setup"]
+---
+
+# Connecting your Xero account
+
+VanMan integrates directly with Xero so you can push invoices from completed jobs into your accounting system without re-keying data. The connection uses Xero's secure OAuth 2.0 flow, which means VanMan never sees or stores your Xero password. This guide walks through every step from initial authorisation to verifying your first synced invoice.
+
+<Callout variant="warning">
+  If your Xero login has access to **multiple organisations**, pay close attention during the authorisation step. VanMan connects to one Xero organisation at a time. Choosing the wrong entity means invoices will land in the wrong set of books. You can disconnect and reconnect at any time, but any invoices already synced will remain in the original organisation.
+</Callout>
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- A VanMan account with **Admin** role access.
+- A Xero account with **Advisor** or **Standard** (with invoicing permissions) access or higher.
+- The Xero organisation name you want to connect to.
+
+## How to connect
+
+<StepByStep>
+  <Step title="Start the connection">
+    In VanMan, navigate to <UIPath path="Settings > Integrations > Xero" /> and click **Connect to Xero**. This opens a secure Xero login window where you will authenticate and grant permissions.
+  </Step>
+
+  <Step title="Authenticate and grant permissions">
+    Log in to Xero with your credentials. Xero will display the permissions VanMan is requesting: access to create and read invoices, contacts, and your chart of accounts. Review these scopes and click **Allow Access**. VanMan does not request bank transaction or payroll access.
+  </Step>
+
+  <Step title="Select your Xero organisation">
+    If your account is linked to multiple Xero organisations, a dropdown will appear asking you to choose one. Select the organisation whose books should receive VanMan invoices. If you only have one organisation, this step is automatic and you will be redirected straight back to VanMan.
+  </Step>
+
+  <Step title="Configure default account mappings">
+    Once connected, VanMan displays your Xero chart of accounts. Set a **default revenue account** (commonly 200 - Sales) for invoice line items and a **default tax rate** that matches your GST or VAT obligations. These defaults apply to all new invoices but can be overridden on a per-invoice basis.
+  </Step>
+
+  <Step title="Verify with a test invoice">
+    Open a completed job in VanMan and click **Create Invoice**. Review the line items, then click **Sync to Xero**. Switch to Xero and navigate to <UIPath path="Business > Invoices > Awaiting Approval" />. Confirm the invoice appears with the correct contact, line items, amounts, and tax treatment. If everything matches, your connection is verified and ready for production use.
+  </Step>
+</StepByStep>
+
+<Callout variant="info">
+  VanMan refreshes your Xero access token automatically in the background. The connection stays active indefinitely unless you manually disconnect it or revoke access from within Xero's **Connected Apps** settings.
+</Callout>

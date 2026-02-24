@@ -1,0 +1,189 @@
+{
+  "project": "VanMan Public Website",
+  "branchName": "ralph/pw-06-help-center-faq",
+  "description": "Help Center & FAQ - Build a self-service help center with MDX articles organized by category, full-text search, getting-started guides, and a pre-sale FAQ page",
+  "dependencies": [
+    "ralph/pw-01-foundation-design-system",
+    "ralph/pw-05-blog-content"
+  ],
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Help article MDX infrastructure",
+      "description": "As a developer, I need help article content processing so that articles can be authored as MDX files organized by category.",
+      "acceptanceCriteria": [
+        "Content directory created at content/help/ with subdirectories per category: getting-started, calendar-scheduling, job-management, fleet-trucks, booking-requests, customer-communications, invoicing-xero, mobile-app, team-chat, account-billing",
+        "Frontmatter schema defined and typed: title (string), description (string), category (string slug), sortOrder (number), lastUpdated (string ISO date), tags (string array)",
+        "Utility function getAllHelpArticles(): reads all help articles grouped by category, sorted by sortOrder within each category",
+        "Utility function getHelpArticleBySlug(categorySlug, articleSlug): reads a single help article, returns typed article with MDX content",
+        "Utility function getHelpCategories(): returns category metadata (name, slug, description, icon, article count)",
+        "Shared MDX components from blog (Callout, ImageWithCaption, VideoEmbed) plus help-specific components: StepByStep (numbered steps with content), UIPath (breadcrumb-style path e.g. 'Settings \u2192 Integrations \u2192 Xero'), KeyboardShortcut (renders keyboard shortcut badges e.g. Ctrl+S)",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Depends on PW-05 for shared MDX infrastructure and base components. Help articles extend the same processing pipeline."
+    },
+    {
+      "id": "US-002",
+      "title": "Sample help articles \u2014 Getting Started",
+      "description": "As a developer, I need sample help articles so that the help center pages can be developed and tested with real content.",
+      "acceptanceCriteria": [
+        "Create content/help/getting-started/setting-up-your-account.mdx: full frontmatter, ~300 words of step-by-step content covering company details, timezone, GST setup",
+        "Create content/help/getting-started/adding-your-trucks.mdx: full frontmatter, ~300 words covering truck creation with colors and capacity",
+        "Both articles use custom MDX components: at least one Callout and one StepByStep component",
+        "Create content/help/invoicing-xero/connecting-xero.mdx: sample article in a different category, ~300 words covering OAuth setup",
+        "All articles have realistic, helpful content \u2014 not lorem ipsum",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "These are the minimum articles needed for development. The full getting-started series (8 articles per MD) can be expanded later."
+    },
+    {
+      "id": "US-003",
+      "title": "Getting started guide series content",
+      "description": "As a new customer, I want step-by-step getting started guides so that I can set up VanMan for my business.",
+      "acceptanceCriteria": [
+        "8 getting-started articles created in content/help/getting-started/ with sequential sortOrder:",
+        "1. setting-up-your-account.mdx \u2014 company details, timezone, GST/tax number",
+        "2. adding-your-trucks.mdx \u2014 creating trucks with colors, capacity, team leaders",
+        "3. creating-your-first-job.mdx \u2014 walkthrough of job creation flow",
+        "4. setting-up-your-booking-form.mdx \u2014 embedding the public booking form on your website",
+        "5. connecting-xero.mdx \u2014 OAuth setup, account/item code sync",
+        "6. inviting-your-team.mdx \u2014 adding operators and drivers, role explanations",
+        "7. setting-up-the-mobile-app.mdx \u2014 downloading the app, logging in, role-based views overview",
+        "8. sending-your-first-sms.mdx \u2014 configuring Twilio, creating message templates",
+        "Each guide: numbered steps with screenshots/placeholders, callout boxes for tips and warnings",
+        "Each guide: 300-500 words of realistic, helpful content",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "These guides complement the onboarding wizard from PW-04. They provide more detail for users who want deeper guidance."
+    },
+    {
+      "id": "US-004",
+      "title": "Help center landing page",
+      "description": "As a visitor or customer, I want a help center homepage so that I can quickly find the help I need.",
+      "acceptanceCriteria": [
+        "Page at /help",
+        "Search bar prominently positioned at top with placeholder text 'Search help articles...'",
+        "Category grid below search: one card per category with Lucide icon, title, article count, brief description",
+        "10 categories displayed: Getting Started, Calendar & Scheduling, Job Management, Fleet & Trucks, Booking Requests, Customer Communications, Invoicing & Xero, Mobile App, Team Chat, Account & Billing",
+        "'Popular articles' section showing top 5 articles (hardcoded initially, can be analytics-driven later)",
+        "'Contact Support' link at bottom of page linking to /contact",
+        "Page statically generated",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Help center landing page serves both pre-sale prospects evaluating VanMan and existing customers. Search bar is the primary interaction \u2014 make it prominent and fast."
+    },
+    {
+      "id": "US-005",
+      "title": "Help category page",
+      "description": "As a visitor, I want to browse articles within a category so that I can find the specific help article I need.",
+      "acceptanceCriteria": [
+        "Page at /help/[category-slug] \u2014 statically generated per category via generateStaticParams",
+        "Category heading with description text",
+        "List of articles within the category ordered by sortOrder",
+        "Each article shows: title, 1-line description, estimated read time",
+        "Breadcrumb: Help > [Category Name]",
+        "Sidebar navigation on desktop showing all 10 categories with current one highlighted",
+        "Mobile: sidebar collapsed into a dropdown/hamburger",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Sidebar navigation provides wayfinding across all help categories. Sort articles by sortOrder (not alphabetical) so the most important articles appear first within each category."
+    },
+    {
+      "id": "US-006",
+      "title": "Individual help article page",
+      "description": "As a visitor, I want to read a help article so that I can learn how to use a specific feature.",
+      "acceptanceCriteria": [
+        "Page at /help/[category-slug]/[article-slug] \u2014 statically generated via generateStaticParams",
+        "Article header: title (h1), last updated date formatted nicely",
+        "Article body rendered from MDX with rich formatting (headings, lists, images, callouts, step-by-step instructions)",
+        "Table of contents sidebar auto-generated from h2/h3 headings (sticky on desktop, collapsed dropdown on mobile)",
+        "Category sidebar navigation also visible on desktop (showing all categories with current category highlighted) alongside the article TOC",
+        "Active heading highlighted in TOC as user scrolls",
+        "Breadcrumb: Help > [Category Name] > [Article Title]",
+        "generateMetadata returns SEO metadata per article: title, description (from frontmatter description), canonical URL",
+        "JSON-LD HowTo structured data for step-by-step getting-started guides",
+        "'Related articles' section: 3 articles from the same category",
+        "'Still need help? Contact support' link at bottom linking to /contact",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Individual article pages are the workhorse of the help center. Category sidebar navigation should also be visible (not just TOC) so users can easily browse to other categories without going back."
+    },
+    {
+      "id": "US-007",
+      "title": "Help article feedback widget",
+      "description": "As a visitor, I want to indicate if an article was helpful so that the team knows which articles need improvement.",
+      "acceptanceCriteria": [
+        "'Was this helpful?' widget at the bottom of each help article with thumbs-up (Yes) and thumbs-down (No) buttons",
+        "On click: shows 'Thanks for your feedback!' confirmation message with smooth transition",
+        "Feedback tracked as a client-side analytics event: trackEvent('help', 'feedback', { article: slug, helpful: boolean })",
+        "Buttons disabled after feedback given (prevents duplicate submissions via local state)",
+        "Widget styled consistently with the help article layout",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "Analytics event tracking integrates with PW-08 analytics system. No-op if analytics not yet implemented."
+    },
+    {
+      "id": "US-008",
+      "title": "Help center search",
+      "description": "As a visitor, I want to search across all help articles so that I can find answers quickly.",
+      "acceptanceCriteria": [
+        "Search index JSON generated at build time from article titles, descriptions, headings, and body text",
+        "Client-side search using Fuse.js or FlexSearch loaded on the help center pages",
+        "Instant search results as user types (debounced at ~300ms) in the search bar",
+        "Results show: article title, category name, excerpt with highlighted matching text",
+        "'No results found' state with text 'No articles match your search.' and suggestion to contact support",
+        "Search works from both the help landing page and a search bar in the header on all /help/* pages",
+        "Search index loaded lazily (not blocking initial page load)",
+        "Search queries tracked as analytics events: trackEvent('help', 'search', { query: searchTerm }) to identify content gaps",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "Search index can be reused for blog search as well. Help articles must be included in the site sitemap (handled by PW-08)."
+    },
+    {
+      "id": "US-009",
+      "title": "FAQ page",
+      "description": "As a prospective customer, I want a FAQ page so that I can get quick answers to common questions before signing up.",
+      "acceptanceCriteria": [
+        "Page at /faq",
+        "FAQ organized into 6 sections with heading and accordion UI:",
+        "General (3 items): What is VanMan?, Who is VanMan for?, What countries do you support?",
+        "Pricing & Billing (4 items): How much does it cost?, Is there a free trial?, Can I cancel anytime?, What payment methods do you accept?",
+        "Features (4 items): Does VanMan have a mobile app?, Can I send SMS to customers?, Does it integrate with Xero?, Can my drivers use it?",
+        "Setup & Migration (3 items): How long does setup take?, Can I import data from my old system?, Do you offer migration help?",
+        "Security & Privacy (4 items): Where is my data stored?, Is it secure?, Is my data backed up?, Do you comply with NZ Privacy Act?",
+        "Support (3 items): How do I get help?, What are your support hours?, Do you offer training?",
+        "Each section expandable/collapsible accordion (shadcn/ui Accordion component)",
+        "Anchor links for each section heading (shareable direct links via URL hash, e.g. /faq#pricing)",
+        "CTA at bottom: 'Still have questions? Contact us' link to /contact + 'Start Free Trial' button to /signup",
+        "FAQPage JSON-LD structured data for Google rich results (all Q&A pairs)",
+        "Page statically generated",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "FAQ answers should be written in a friendly, clear tone. Link to relevant help articles and feature pages where appropriate."
+    }
+  ]
+}

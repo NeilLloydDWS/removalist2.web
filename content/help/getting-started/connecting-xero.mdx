@@ -1,0 +1,40 @@
+---
+title: "Connecting Xero"
+description: "Link your Xero account to VanMan for one-click invoicing and automatic sync."
+category: "getting-started"
+sortOrder: 5
+lastUpdated: "2026-02-15"
+tags: ["xero", "integration", "invoicing", "sync"]
+---
+
+# Connecting Xero
+
+Integrating VanMan with Xero lets you generate invoices directly from completed jobs and keep your accounting data in sync without manual data entry. Once connected, every invoice you create in VanMan is automatically pushed to Xero as a draft or approved invoice, depending on your preference.
+
+<Callout variant="warning">
+  You must have **Xero administrator access** to authorise the connection. If you are a Standard or Invoice Only user in Xero, ask your Xero admin to either upgrade your role or complete this step on your behalf.
+</Callout>
+
+## How to connect
+
+<StepByStep>
+  <Step title="Open the Xero integration page">
+    Navigate to <UIPath path="Settings > Integrations > Xero" /> in VanMan. Click the **Connect to Xero** button to begin the OAuth authorisation flow. You will be redirected to the Xero login screen in a new browser tab.
+  </Step>
+
+  <Step title="Authorise VanMan and select your organisation">
+    Log in with your Xero credentials and grant VanMan the requested permissions. If your Xero login is linked to multiple organisations, choose the one you want to use for invoicing. VanMan connects to a single Xero organisation at a time, so pick the entity that matches the jobs you manage.
+  </Step>
+
+  <Step title="Map your account codes">
+    After authorisation, VanMan will pull in your Xero chart of accounts. Assign a default **revenue account code** (e.g. 200 - Sales) for invoice line items and a default **tax rate** that matches your region. You can override these on individual invoices later, but setting sensible defaults here saves time on every job.
+  </Step>
+
+  <Step title="Send a test invoice">
+    Head to any completed job and click **Create Invoice**. VanMan will generate a draft invoice and push it to Xero. Open Xero and confirm the invoice appears under **Awaiting Approval** with the correct line items, amounts, and tax. If everything looks right, your integration is live and ready for daily use.
+  </Step>
+</StepByStep>
+
+<Callout variant="tip">
+  If you ever need to disconnect or switch Xero organisations, return to <UIPath path="Settings > Integrations > Xero" /> and click **Disconnect**. You can reconnect at any time without losing historical invoice data in VanMan.
+</Callout>

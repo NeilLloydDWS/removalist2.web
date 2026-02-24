@@ -1,0 +1,169 @@
+{
+  "project": "VanMan Public Website",
+  "branchName": "ralph/pw-07-contact-legal",
+  "description": "Contact & Legal Pages - Build the contact page with form submission, demo request flow, Terms of Service, Privacy Policy, Cookie Policy, and cookie consent banner",
+  "dependencies": ["ralph/pw-01-foundation-design-system"],
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Contact page UI",
+      "description": "As a visitor, I want a contact page so that I can send a message to VanMan.",
+      "acceptanceCriteria": [
+        "Page at /contact",
+        "Contact form with fields: name (required), email (required, validated), company name (optional), country/region selector (NZ, AU, UK, US, Other), enquiry type dropdown (General Question, Sales Enquiry, Partnership, Support, Other), message textarea (required)",
+        "Form validated with Zod on client side with inline error messages",
+        "Company contact info displayed alongside form: email address, phone number, physical address (NZ-based for trust), business hours",
+        "Desktop layout: form on left, contact details on right. Mobile: stacked with contact details below form",
+        "Submit button shows loading state during submission",
+        "Page statically generated",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Contact details are placeholder values — real details to be provided by the business."
+    },
+    {
+      "id": "US-002",
+      "title": "Contact form server action with Turnstile and SendGrid",
+      "description": "As the system, I need to process contact form submissions securely and send notification emails.",
+      "acceptanceCriteria": [
+        "Cloudflare Turnstile widget integrated into the contact form (invisible or managed mode)",
+        "Server action validates Turnstile token server-side via Cloudflare API before processing",
+        "Rate limiting: max 3 submissions per email per hour (using in-memory Map with TTL, or Upstash Redis for production)",
+        "On valid submission: sends notification email to configured recipient via SendGrid API (SENDGRID_API_KEY env var)",
+        "Email includes all form fields formatted clearly: name, email, company, region, enquiry type, message",
+        "On valid submission: also stores form submission data in database table (contact_submissions) for CRM/follow-up tracking",
+        "On success: form shows confirmation message 'Thanks! We\\'ll get back to you within 1 business day.' and resets",
+        "On rate limit: displays 'Too many submissions. Please try again later.'",
+        "On error: displays generic error message 'Something went wrong. Please try again or email us directly.'",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Environment variables needed: TURNSTILE_SECRET_KEY, SENDGRID_API_KEY, CONTACT_FORM_RECIPIENT_EMAIL. Document in .env.example."
+    },
+    {
+      "id": "US-003",
+      "title": "Demo request form",
+      "description": "As a prospective customer, I want to request a personalised demo so that I can see VanMan in action for my specific business.",
+      "acceptanceCriteria": [
+        "Demo request accessible via /contact?type=demo or as a dedicated section on the contact page with tab/toggle between 'Contact Us' and 'Request a Demo'",
+        "Form fields: name (required), email (required), company name (required), number of trucks (optional — helps prepare the demo), country/region (required), preferred date/time (optional date picker), 'Tell us about your business' textarea (optional)",
+        "On submit: sends structured notification email to sales team via SendGrid with 'Demo Request' subject line",
+        "On submit: sends confirmation email to the requester ('We\\'ll be in touch to schedule your demo')",
+        "Turnstile bot protection and rate limiting (same infrastructure as contact form)",
+        "Success message: 'Demo request received! We\\'ll contact you within 1 business day to schedule.'",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "'Request a Demo' CTAs on pricing page (PW-04) and feature pages (PW-03) should link here."
+    },
+    {
+      "id": "US-004",
+      "title": "Legal page layout component",
+      "description": "As a developer, I need a reusable legal page layout so that all legal pages have consistent structure.",
+      "acceptanceCriteria": [
+        "LegalPage component accepting MDX content with: title, lastUpdated date, MDX body",
+        "Table of contents auto-generated from h2 headings in the MDX content, sticky sidebar on desktop, collapsed on mobile",
+        "Clean legal typography: comfortable reading width (max-w-prose), numbered sections, generous spacing (leading-relaxed)",
+        "Legal pages stored as MDX files in content/legal/ directory",
+        "Dynamic route at app/legal/[slug]/page.tsx with generateStaticParams for all legal page slugs",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Legal pages rendered from MDX for easy updating by non-developers via Git. Legal page links must be accessible from the global footer (footer built in PW-01 already includes Legal column). Legal pages must be included in the site sitemap (handled by PW-08)."
+    },
+    {
+      "id": "US-005",
+      "title": "Terms of Service page",
+      "description": "As a visitor or customer, I want to read the Terms of Service so that I understand the legal agreement for using VanMan.",
+      "acceptanceCriteria": [
+        "Page at /legal/terms rendered from content/legal/terms.mdx",
+        "Terms content covering all sections: 1. Service description and eligibility, 2. Account creation and responsibilities, 3. Acceptable use policy, 4. Intellectual property rights, 5. Payment terms (subscription, billing cycle, refunds), 6. Free trial terms (14 days, full access, no credit card), 7. Data ownership (customer owns their data), 8. Service availability, 9. Limitation of liability, 10. Termination and account deletion, 11. Governing law (New Zealand, with provisions for international users), 12. Dispute resolution, 13. Changes to terms (30-day notice policy)",
+        "Last updated date displayed prominently at top",
+        "Placeholder markers ([LEGAL REVIEW NEEDED]) where actual legal review is required",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Content is placeholder/draft — must be reviewed by a lawyer before going live. Clearly mark sections needing legal review."
+    },
+    {
+      "id": "US-006",
+      "title": "Privacy Policy page",
+      "description": "As a visitor or customer, I want to read the Privacy Policy so that I understand how VanMan handles my data.",
+      "acceptanceCriteria": [
+        "Page at /legal/privacy rendered from content/legal/privacy.mdx",
+        "Privacy Policy covering: 1. Information collected (personal data, usage data, cookies), 2. How information is used, 3. Data sharing and third parties (Clerk, Supabase, Stripe, Twilio, SendGrid, Xero, Google Maps, Sentry, Vercel), 4. Data storage and security (encryption at rest and in transit, tenant isolation), 5. Data retention and deletion policy, 6. User rights (access, correction, deletion, data portability), 7. Cross-border data transfers, 8. Children's privacy (not intended for under 16), 9. Cookie policy reference (link to /legal/cookies), 10. Regional compliance: NZ Privacy Act 2020, Australian Privacy Principles, UK GDPR, US state privacy laws (CCPA)",
+        "Contact information for privacy enquiries: privacy@vanman.app (placeholder)",
+        "Last updated date displayed at top",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Must be reviewed by a lawyer. List of third parties should be kept up to date as integrations change."
+    },
+    {
+      "id": "US-007",
+      "title": "Cookie Policy page",
+      "description": "As a visitor, I want to understand what cookies VanMan uses so that I can make informed consent decisions.",
+      "acceptanceCriteria": [
+        "Page at /legal/cookies rendered from content/legal/cookies.mdx",
+        "Cookie Policy covering: 1. What cookies are (brief plain-language explanation), 2. Categories of cookies: Essential (authentication, security, session), Functional (preferences, theme, region), Analytics (page views, conversion tracking), Marketing (ad tracking — if applicable), 3. Table listing each cookie: name, purpose, provider, expiry duration, 4. How to manage/disable cookies via browser settings, 5. Third-party cookies (analytics provider, Clerk, Stripe)",
+        "Last updated date displayed at top",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "Cookie table should be kept in sync with actual cookies used by the site."
+    },
+    {
+      "id": "US-008",
+      "title": "Cookie consent banner",
+      "description": "As a visitor, I want to control which cookies are used so that my privacy preferences are respected.",
+      "acceptanceCriteria": [
+        "Cookie consent banner appears on first visit at the bottom of the screen (fixed position, dark background)",
+        "Banner shows brief explanation text: 'We use cookies to improve your experience.' with link to Cookie Policy (/legal/cookies)",
+        "Three action buttons: 'Accept All' (primary), 'Reject Non-Essential' (secondary), 'Manage Preferences' (text link)",
+        "'Manage Preferences' opens a modal dialog with category toggles: Essential (always on, disabled toggle), Functional (toggle), Analytics (toggle), Marketing (toggle)",
+        "Each category in modal has a brief description of what it covers",
+        "Consent choice stored in vanman_cookie_consent cookie as JSON: { essential: true, functional: boolean, analytics: boolean, marketing: boolean }",
+        "Cookie expires after 12 months",
+        "Banner does not re-appear after a choice is made (reads cookie on load)",
+        "Compliant with UK GDPR (opt-in required for non-essential cookies)",
+        "Accessible: keyboard navigable, proper ARIA labels, focus trap in modal",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "Must be in the root layout so it appears on all pages. Respects prefers-reduced-motion for animations."
+    },
+    {
+      "id": "US-009",
+      "title": "Conditional script loading based on cookie consent",
+      "description": "As the system, I need to only load analytics and marketing scripts after the visitor has given consent.",
+      "acceptanceCriteria": [
+        "Create a CookieConsentProvider React context that reads vanman_cookie_consent cookie on mount",
+        "Export useCookieConsent() hook returning consent state per category: { essential: boolean, functional: boolean, analytics: boolean, marketing: boolean }",
+        "Analytics scripts (via next/script strategy='afterInteractive') only rendered when analytics consent is true",
+        "Marketing scripts only rendered when marketing consent is true",
+        "Essential and functional scripts load regardless of consent state",
+        "When consent changes (user updates preferences): re-evaluate which scripts should load",
+        "Provider added to root layout wrapping the entire app",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "This provider is consumed by PW-08 analytics setup to conditionally load tracking scripts."
+    }
+  ]
+}

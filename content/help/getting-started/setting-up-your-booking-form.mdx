@@ -1,0 +1,36 @@
+---
+title: "Setting up your booking form"
+description: "Embed the VanMan online booking form on your website to capture enquiries."
+category: "getting-started"
+sortOrder: 4
+lastUpdated: "2026-02-15"
+tags: ["bookings", "embed", "website", "leads"]
+---
+
+# Setting up your booking form
+
+The VanMan booking form lets customers submit moving enquiries directly from your website. Each submission creates a new job in your VanMan dashboard with a pending status, so you can review the details, provide a quote, and confirm the booking.
+
+<StepByStep>
+  <Step title="Enable the booking form">
+    Navigate to <UIPath path="Settings > Booking Form" /> and toggle the **Enable booking form** switch to on. Once enabled, VanMan generates a unique booking form URL and embed code linked to your account. Any submissions through this form are automatically routed to your job queue.
+  </Step>
+
+  <Step title="Customise the form fields">
+    Review the available fields and decide which ones to display on your form. By default, the form collects the customer's name, phone number, email, pickup address, delivery address, and preferred moving date. You can toggle optional fields such as **estimated volume**, **number of bedrooms**, **access details** (stairs, lift, long carry), and a **special instructions** text area. Enabling the right fields upfront means you capture enough information to provide an accurate quote without overwhelming the customer.
+  </Step>
+
+  <Step title="Copy the embed code">
+    Click the **Copy embed code** button to copy the HTML snippet to your clipboard. The snippet contains an iframe that loads the form directly on your website. Paste this code into any page on your site where you want the booking form to appear, typically a "Get a Quote" or "Book Now" page. The form is fully responsive and adjusts to fit the width of its container.
+
+    <Callout variant="info">
+      The booking form is protected by Cloudflare Turnstile, a privacy-friendly bot protection service. This runs automatically in the background and does not require your customers to solve a CAPTCHA. It prevents spam submissions while keeping the booking experience smooth and frictionless.
+    </Callout>
+  </Step>
+
+  <Step title="Test the form on your website">
+    After adding the embed code to your site, submit a test enquiry to verify everything is working. Check that the submission appears in your VanMan dashboard under <UIPath path="Jobs > Pending" /> with all the details filled in correctly. Confirm that the notification email is sent to your account email address so you know when new enquiries come in.
+  </Step>
+</StepByStep>
+
+Your booking form is now live. Customers can submit enquiries at any time, and each one will appear in your pending jobs list ready for you to follow up with a quote or confirmation.

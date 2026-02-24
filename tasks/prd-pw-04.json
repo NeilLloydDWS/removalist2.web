@@ -1,0 +1,279 @@
+{
+  "project": "VanMan Public Website",
+  "branchName": "ralph/pw-04-pricing-signup-onboarding",
+  "description": "Pricing, Signup & Self-Service Onboarding - Build the pricing page, Clerk-based signup flow, Stripe billing integration, and 6-step onboarding wizard",
+  "dependencies": [
+    "ralph/pw-01-foundation-design-system"
+  ],
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Pricing page with plan card",
+      "description": "As a visitor, I want to see VanMan's pricing so that I can evaluate the cost for my business.",
+      "acceptanceCriteria": [
+        "Page at /pricing",
+        "Single plan card displayed prominently (no confusing tier comparison \u2014 single flat plan)",
+        "Plan card shows: plan name (e.g. 'VanMan Pro'), monthly price placeholder, 'per month' label",
+        "Monthly/Annual toggle switch with annual discount messaging (e.g. 'Save 20% with annual billing')",
+        "Price displayed in visitor's regional currency (NZD, AUD, GBP, USD) using Intl.NumberFormat \u2014 currency config stored in a pricing config file",
+        "Feature inclusion checklist with checkmarks: unlimited jobs, unlimited contacts, unlimited users, all features included, Xero integration, iOS & Android mobile app (drivers, operators, admins), team chat (real-time staff messaging), email & SMS customer communications",
+        "Regional currency auto-detected via geo-detection (PW-08 region middleware) or region selector, falling back to NZD",
+        "'Start Free Trial' CTA button linking to /signup",
+        "'14-day free trial. No credit card required.' text prominently displayed below CTA",
+        "Page statically generated (SSG)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Price amounts TBD (open question). Regional currency display connected to PW-08 localization, but basic implementation here."
+    },
+    {
+      "id": "US-002",
+      "title": "Pricing FAQ accordion",
+      "description": "As a visitor, I want answers to common pricing questions so that I can make a confident decision.",
+      "acceptanceCriteria": [
+        "FAQ accordion section below the pricing card on /pricing page",
+        "8 FAQ items: 'What happens after the free trial?', 'Can I cancel anytime?', 'Do I need a credit card to start?', 'Is there a setup fee?', 'What payment methods do you accept?', 'Do you offer discounts for annual billing?', 'Can I change my plan later?', 'What\\'s included in the free trial?'",
+        "Each item expands/collapses on click using shadcn/ui Accordion component",
+        "Only one item open at a time (single accordion mode)",
+        "Answers written with clear, friendly, confidence-building tone",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "FAQ answers should directly address objections and build confidence. Tone: friendly, reassuring, transparent about pricing and terms."
+    },
+    {
+      "id": "US-003",
+      "title": "Signup page UI",
+      "description": "As a visitor, I want to create an account so that I can start my free trial.",
+      "acceptanceCriteria": [
+        "Page at /signup",
+        "Signup form with fields: full name (required), email (required, validated), password (required, with visual strength indicator), company name (required), country/region selector (NZ, AU, UK, US, Other)",
+        "'Or sign up with Google' OAuth button",
+        "Terms of Service and Privacy Policy checkbox with links to /legal/terms and /legal/privacy",
+        "'Already have an account? Log in' link to /login",
+        "Form validation with Zod: required fields, valid email format, password minimum 8 characters with strength rules",
+        "Submit button shows loading state during form submission",
+        "Error handling: displays inline error messages (e.g. 'Email already exists')",
+        "On successful signup: redirects to /onboarding",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Links to /legal/terms and /legal/privacy (built in PW-07). Design: minimal fields to reduce friction."
+    },
+    {
+      "id": "US-004",
+      "title": "Signup backend \u2014 Clerk user and org creation",
+      "description": "As a new user, I want my account to be created when I submit the signup form so that I can access VanMan.",
+      "acceptanceCriteria": [
+        "Server action or API route handles signup form submission (server-side, not client-side)",
+        "Creates Clerk user with name, email, password using Clerk SDK",
+        "Creates Clerk organization (tenant) with company name",
+        "Adds user as admin of the new organization",
+        "Stores country/region in Clerk user metadata",
+        "On success: redirects to /onboarding",
+        "On error: returns structured error message to form (e.g. email already exists, password too weak)",
+        "Atomic operation: both Clerk user and org creation must succeed or both should roll back on failure",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Google OAuth creates same Clerk user/org structure. Atomic guarantee is critical to avoid orphaned users without orgs."
+    },
+    {
+      "id": "US-005",
+      "title": "Stripe free trial activation",
+      "description": "As a new user, I want my free trial to start automatically so that I can use VanMan immediately without payment.",
+      "acceptanceCriteria": [
+        "After Clerk user/org creation: Stripe customer created via Stripe Node.js SDK server-side",
+        "Stripe subscription created in 'trialing' state with 14-day trial period (no payment method required)",
+        "Stripe customer ID and subscription ID stored in Clerk organization metadata",
+        "Trial end date calculated and stored for display in account settings",
+        "No feature restrictions during trial \u2014 full access to everything",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Stripe calls happen server-side only. Price ID must be configured via environment variable."
+    },
+    {
+      "id": "US-006",
+      "title": "Onboarding wizard shell and layout",
+      "description": "As a developer, I need the onboarding wizard multi-step layout so that individual steps can be built on top of it.",
+      "acceptanceCriteria": [
+        "Page at /onboarding with multi-step wizard layout",
+        "Progress indicator showing 6 steps with labels: Company, Trucks, Team, Xero, Mobile App, Done",
+        "Current step highlighted, completed steps show checkmark",
+        "Next/Back navigation buttons at bottom of each step",
+        "Skip button available on each step (except completion step)",
+        "Wizard state persisted (if user closes browser mid-wizard, they resume where they left off) \u2014 use URL search params or database",
+        "Friendly tone: heading says 'Let\\'s get you set up' with encouraging subtext per step",
+        "Progress bar clickable to navigate back to previous completed steps",
+        "Single-column layout on mobile",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Onboarding data writes to the main app's database (Supabase) via API or server actions. Wizard state could be stored in Clerk user metadata or URL params."
+    },
+    {
+      "id": "US-007",
+      "title": "Onboarding step 1 \u2014 Company setup",
+      "description": "As a new user, I want to set up my company details so that VanMan is configured for my business.",
+      "acceptanceCriteria": [
+        "Step 1 form fields: company name (pre-filled from signup), phone number, email, physical address (text input \u2014 Google Places autocomplete can be added later), timezone (auto-detected via Intl.DateTimeFormat().resolvedOptions().timeZone, editable dropdown), GST/tax number (optional), logo upload (optional, with preview)",
+        "Form validated with Zod schema",
+        "On Next: saves company data via server action to database",
+        "Skip option skips to step 2 without saving",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "Company name pre-filled from signup to reduce friction. Timezone auto-detected to save the user from looking it up. Address field is text-only initially; Google Places autocomplete can be added later."
+    },
+    {
+      "id": "US-008",
+      "title": "Onboarding step 2 \u2014 First truck",
+      "description": "As a new user, I want to add my first truck so that I can start scheduling jobs.",
+      "acceptanceCriteria": [
+        "Step 2 form fields: truck name (e.g. 'Van 1', 'Big Truck'), color picker (for calendar color-coding), capacity in cubic meters (optional), registration plate (optional)",
+        "'Add another truck' button to add multiple trucks inline (repeating form section)",
+        "On Next: saves truck(s) data via server action to database",
+        "Skip option skips to step 3 without saving",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "Color picker is important because truck colors appear throughout the calendar. Default to a set of distinct, visually appealing colors. Registration plate is optional for businesses that don't track it."
+    },
+    {
+      "id": "US-009",
+      "title": "Onboarding step 3 \u2014 Invite team",
+      "description": "As a new user, I want to invite my team so that my operators and drivers can access VanMan.",
+      "acceptanceCriteria": [
+        "Step 3 form: email input with role selector dropdown (Admin, Operator, Driver)",
+        "'Add another' button to invite multiple people (repeating form row)",
+        "On Next: sends Clerk invitation emails for each entry via server action",
+        "Shows success confirmation for each invitation sent",
+        "Skip option skips to step 4 without sending invitations",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "Role selector determines what the invited person sees in VanMan. Drivers get a simplified mobile view, Operators get full controls, Admins get everything. Explain roles briefly in the UI."
+    },
+    {
+      "id": "US-010",
+      "title": "Onboarding step 4 \u2014 Connect Xero",
+      "description": "As a new user, I want the option to connect Xero during setup so that invoicing works from the start.",
+      "acceptanceCriteria": [
+        "Step 4 shows 'Connect Xero' button and brief explanation of what connecting Xero enables (one-click invoicing, automatic sync, etc.)",
+        "'I\\'ll do this later' skip option displayed prominently \u2014 this step is clearly optional",
+        "Connect Xero button initiates OAuth flow (placeholder link to Xero OAuth \u2014 actual integration handled by main app)",
+        "If connected: shows success confirmation with Xero org name",
+        "If not connected: no error, just moves to next step",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 10,
+      "passes": true,
+      "notes": "Xero OAuth integration is a complex flow \u2014 for the public website this may just link to the main app's Xero connection page."
+    },
+    {
+      "id": "US-011",
+      "title": "Onboarding step 5 \u2014 Download mobile app",
+      "description": "As a new user, I want to download the mobile app during onboarding so that my drivers and field staff can get started.",
+      "acceptanceCriteria": [
+        "Step 5 shows App Store and Google Play download badge placeholders with links",
+        "QR code placeholder that would open the app store listing on the user's phone",
+        "Brief overview text: 'Your drivers see their assigned jobs, track delivery times, chat with the team, and navigate to addresses \u2014 all from their phone'",
+        "'Send download link to my team' button placeholder (would send SMS/email with app links to invited team members)",
+        "Skip option available",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 11,
+      "passes": true,
+      "notes": "Mobile app download is promoted here because getting drivers on the app early is critical for adoption. QR code makes it easy to scan from desktop during setup."
+    },
+    {
+      "id": "US-012",
+      "title": "Onboarding step 6 \u2014 Completion",
+      "description": "As a new user, I want to finish onboarding and reach the app so that I can start using VanMan.",
+      "acceptanceCriteria": [
+        "Step 6 shows summary of what was configured: company name, trucks added count, team members invited count, Xero connection status, app download status",
+        "'Go to Dashboard' primary CTA button linking to the main app's /dashboard",
+        "Quick links: 'Create your first job', 'Explore settings', 'Read getting started guide' (links to /help/getting-started from PW-06)",
+        "Confetti or celebratory animation (subtle, using CSS keyframes or a lightweight library like canvas-confetti)",
+        "Marks onboarding as complete in Clerk user metadata via server action (won't show wizard again)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 12,
+      "passes": true,
+      "notes": "'Getting started guide' link points to help center (PW-06). 'Go to Dashboard' exits the public website to the main app."
+    },
+    {
+      "id": "US-013",
+      "title": "Stripe webhook handler",
+      "description": "As the system, I need to handle Stripe webhook events so that subscription state stays in sync.",
+      "acceptanceCriteria": [
+        "API route at /api/webhooks/stripe (POST only)",
+        "Webhook signature verification using Stripe SDK constructEvent()",
+        "Handles event: customer.subscription.updated \u2014 updates subscription status in Clerk org metadata",
+        "Handles event: customer.subscription.deleted \u2014 updates account state to 'cancelled'",
+        "Handles event: invoice.payment_failed \u2014 sets 'payment_failed' flag in metadata",
+        "On trial expiry without payment method: account moves to 'expired' state with grace period",
+        "Returns 200 for handled events, 400 for signature failure",
+        "Typecheck passes"
+      ],
+      "priority": 13,
+      "passes": true,
+      "notes": "Stripe webhook signing secret must be configured via STRIPE_WEBHOOK_SECRET environment variable."
+    },
+    {
+      "id": "US-014",
+      "title": "Stripe Customer Portal integration",
+      "description": "As a customer, I want to manage my subscription so that I can add a payment method, view invoices, and cancel if needed.",
+      "acceptanceCriteria": [
+        "'Manage Billing' link accessible from the main app's account settings page",
+        "Link opens Stripe Customer Portal (hosted by Stripe) in a new tab or redirect",
+        "Customer Portal configured via Stripe dashboard with VanMan branding",
+        "Portal allows: update payment method, view invoices, cancel subscription, switch billing period (monthly/annual)",
+        "API route /api/billing/portal creates a Stripe portal session and returns the URL",
+        "On trial expiry without payment method: account shows 'expired' state with messaging prompting to add a payment method",
+        "Typecheck passes"
+      ],
+      "priority": 14,
+      "passes": true,
+      "notes": "The 'Manage Billing' link lives in the main app, but the API route and Stripe portal configuration may be set up in the public website project. Configure portal via Stripe Dashboard."
+    },
+    {
+      "id": "US-015",
+      "title": "Login page",
+      "description": "As a returning customer, I want to log in so that I can access the main VanMan app.",
+      "acceptanceCriteria": [
+        "Page at /login",
+        "Clerk SignIn component or custom login form with email/password and Google OAuth button",
+        "'Don\\'t have an account? Sign up' link to /signup",
+        "'Forgot password?' link to Clerk's password reset flow",
+        "On successful login: redirects to the main app dashboard",
+        "Authenticated users visiting /login are automatically redirected to dashboard",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 15,
+      "passes": true,
+      "notes": "This page provides the login entry point on the public website. Actual authentication managed by Clerk."
+    }
+  ]
+}

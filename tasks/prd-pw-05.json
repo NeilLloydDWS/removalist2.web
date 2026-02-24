@@ -1,0 +1,184 @@
+{
+  "project": "VanMan Public Website",
+  "branchName": "ralph/pw-05-blog-content",
+  "description": "Blog & Content Management - Build an MDX-powered blog with listing page, category filtering, individual post pages, SEO optimization, and RSS feed",
+  "dependencies": [
+    "ralph/pw-01-foundation-design-system"
+  ],
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "MDX content processing setup",
+      "description": "As a developer, I need MDX processing configured so that blog posts and help articles can be authored as .mdx files.",
+      "acceptanceCriteria": [
+        "Install and configure @next/mdx or contentlayer/velite for MDX processing",
+        "Content directory created at content/blog/ for blog MDX files",
+        "Frontmatter schema defined and typed via TypeScript interface: title (string), date (string ISO), author (string), category (string), excerpt (string), featuredImage (string path), tags (string array), featured (boolean, optional \u2014 marks post as pinned/featured on listing page)",
+        "Utility function getAllBlogPosts(): reads all blog posts, parses frontmatter, returns typed array sorted by date (newest first)",
+        "Utility function getBlogPostBySlug(slug): reads a single blog post by slug, returns typed post with content",
+        "Read time calculated from word count (~200 words per minute), returned as part of post metadata",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "MDX infrastructure is shared with PW-06 (help center articles). Set up the processing pipeline once, use it for both blog and help content."
+    },
+    {
+      "id": "US-002",
+      "title": "Custom MDX components",
+      "description": "As a content author, I want custom components available in MDX so that blog posts can include callouts, captioned images, and CTAs.",
+      "acceptanceCriteria": [
+        "Callout component with variants: info (blue), tip (green), warning (yellow), important (red) \u2014 each with distinct icon and background color",
+        "ImageWithCaption component: Next.js Image with caption text below, responsive sizing, lazy loading for below-fold images",
+        "VideoEmbed component: responsive iframe wrapper for YouTube/Vimeo with 16:9 aspect ratio",
+        "CTABanner component: inline call-to-action with heading, text, and button linking to /signup",
+        "All components exported as mdx-components.tsx for MDX rendering",
+        "Components work in both light and dark mode",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "These MDX components are shared with PW-06 (help center). Additional help-specific components (StepByStep, UIPath) added in PW-06."
+    },
+    {
+      "id": "US-003",
+      "title": "Sample blog posts",
+      "description": "As a developer, I need at least two sample blog posts so that the blog pages can be developed and tested with real content.",
+      "acceptanceCriteria": [
+        "Create content/blog/getting-started-with-vanman.mdx with full frontmatter, ~500 words of sample content in 'Product Updates' category",
+        "Post uses at least one custom MDX component (Callout and CTABanner)",
+        "Create content/blog/5-tips-for-moving-companies.mdx as a second sample post in 'Business Tips' category with ~500 words",
+        "Featured images: create placeholder images in public/blog/images/ (can be solid-color placeholders with text)",
+        "Both posts have realistic frontmatter (title, date, author, category, excerpt, featuredImage, tags)",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Sample content should be realistic and relevant to the moving industry \u2014 not lorem ipsum."
+    },
+    {
+      "id": "US-004",
+      "title": "Blog listing page",
+      "description": "As a visitor, I want to browse blog posts so that I can find articles relevant to my moving business.",
+      "acceptanceCriteria": [
+        "Page at /blog",
+        "Grid of blog post cards: 2-col desktop, 1-col mobile",
+        "Each card shows: featured image thumbnail (16:9 aspect ratio), title, publication date, category tag (colored badge), 1-2 line excerpt, read time estimate",
+        "Posts ordered by publication date (newest first)",
+        "Featured/pinned post at top rendered as a larger hero-style card (post with featured: true in frontmatter, or most recent if none marked)",
+        "Pagination: 10 posts per page with Next/Previous page links (SSG pages for /blog, /blog/page/2, etc.)",
+        "Page statically generated",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Blog listing is the main entry point for content marketing. Featured post at top gives editorial control over what visitors see first."
+    },
+    {
+      "id": "US-005",
+      "title": "Blog category filtering",
+      "description": "As a visitor, I want to filter blog posts by category so that I can find content on a specific topic.",
+      "acceptanceCriteria": [
+        "Category filter bar at top of blog listing: All, Business Tips, Industry News, Product Updates, Guides & How-tos, Customer Stories",
+        "Clicking a category filters the post list to show only posts in that category",
+        "URL updates to /blog/category/[slug] for shareability and SEO (statically generated per category)",
+        "Active category visually highlighted in the filter bar",
+        "Category pages show post count in heading (e.g. 'Business Tips (12 articles)')",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Category pages are SSG for SEO. Categories should match the content strategy: Business Tips for organic search, Product Updates for existing users, Customer Stories for social proof."
+    },
+    {
+      "id": "US-006",
+      "title": "Blog post page \u2014 layout and content rendering",
+      "description": "As a visitor, I want to read a full blog post with proper formatting.",
+      "acceptanceCriteria": [
+        "Page at /blog/[slug] \u2014 statically generated from MDX files",
+        "Post header: title (h1), publication date formatted nicely, author name, read time estimate, category tag linked to category filter page",
+        "Featured image rendered full-width or hero below header using Next.js Image with eager loading",
+        "Article body rendered from MDX with rich formatting: headings (h2-h4), ordered/unordered lists, images, blockquotes, tables, code blocks with syntax highlighting",
+        "Comfortable reading width (max-w-prose ~65ch), generous line height (leading-relaxed)",
+        "Author bio card at bottom with name and short bio text",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Reading experience is critical for time-on-site and engagement. max-w-prose (~65ch) is optimal for readability. Featured image should be eager-loaded; inline images lazy-loaded."
+    },
+    {
+      "id": "US-007",
+      "title": "Blog post page \u2014 TOC, sharing, and related posts",
+      "description": "As a visitor, I want a table of contents, share buttons, and related posts so that I can navigate and discover more content.",
+      "acceptanceCriteria": [
+        "Table of contents sidebar: auto-generated from h2/h3 headings in the MDX content, sticky on desktop, collapsed dropdown on mobile",
+        "Active heading highlighted in TOC as user scrolls (intersection observer)",
+        "Share buttons: copy link (with copied confirmation), X/Twitter share, LinkedIn share, Facebook share",
+        "CTA banner after the post body: 'Try VanMan free for 14 days' with signup button linking to /signup",
+        "Related posts section: 3 post cards from the same category (or matching tags if insufficient)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "TOC with active highlighting improves UX on long posts. Share buttons drive organic referral traffic. Related posts reduce bounce rate by guiding visitors to more content."
+    },
+    {
+      "id": "US-008",
+      "title": "Blog SEO metadata and structured data",
+      "description": "As the marketing team, I want each blog post to have proper SEO metadata so that posts rank well.",
+      "acceptanceCriteria": [
+        "generateMetadata on blog post pages returns: title (with '| VanMan Blog' suffix), description (from excerpt), canonical URL",
+        "Open Graph tags: og:title, og:description, og:image (featured image), og:type=article, og:article:published_time, og:article:author",
+        "Twitter Card tags: twitter:card=summary_large_image, twitter:title, twitter:description, twitter:image",
+        "JSON-LD Article structured data: headline, datePublished, dateModified, author (Person schema), image, publisher (Organization schema)",
+        "Blog listing page also has proper meta tags",
+        "Typecheck passes"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "Uses the SEO helper from PW-08 if available, otherwise implements locally."
+    },
+    {
+      "id": "US-009",
+      "title": "RSS feed and sitemap inclusion",
+      "description": "As a subscriber, I want an RSS feed so that I can follow VanMan's blog in my feed reader.",
+      "acceptanceCriteria": [
+        "RSS feed generated at /blog/rss.xml via a route handler (app/blog/rss.xml/route.ts)",
+        "Feed includes for each post: title, description (excerpt), link (full URL), publication date, author name",
+        "Feed metadata: channel title 'VanMan Blog', description, link to /blog",
+        "RSS autodiscovery link tag added to <head> of all blog pages: <link rel='alternate' type='application/rss+xml'>",
+        "Feed validates as valid RSS 2.0 XML",
+        "All blog posts included in the site sitemap with lastmod dates",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "Sitemap integration shared with PW-08."
+    },
+    {
+      "id": "US-010",
+      "title": "Blog search",
+      "description": "As a visitor, I want to search blog posts so that I can quickly find articles on a specific topic.",
+      "acceptanceCriteria": [
+        "Search bar on the blog listing page (/blog)",
+        "Client-side search across post titles, excerpts, and tags using a pre-built search index",
+        "Search index generated at build time as a static JSON file",
+        "Instant results as user types (debounced at ~300ms)",
+        "Results show: post title, category, excerpt with highlighted matching text",
+        "No results state with friendly message",
+        "New posts automatically included in search index on next build/deploy (no manual step beyond merging the MDX file)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 10,
+      "passes": true,
+      "notes": "Search index can be shared with PW-06 help center search (same library \u2014 Fuse.js or FlexSearch)."
+    }
+  ]
+}
