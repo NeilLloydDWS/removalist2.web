@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "@/components/logo";
+import { LogoVertical } from "@/components/logo";
 import { Container } from "@/components/container";
 import { RegionSelector } from "@/components/region-selector";
 
@@ -76,7 +76,7 @@ export function Footer() {
         <div className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-5 lg:gap-12">
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Logo />
+            <LogoVertical />
             <p className="mt-3 text-sm text-muted-foreground">
               Run your moving company from one place.
             </p>
