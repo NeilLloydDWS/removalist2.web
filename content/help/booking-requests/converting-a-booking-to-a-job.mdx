@@ -1,0 +1,34 @@
+---
+title: "Converting a booking to a job"
+description: "Turn a confirmed booking request into a scheduled job with one click."
+category: "booking-requests"
+sortOrder: 4
+lastUpdated: "2026-03-01"
+tags: ["booking", "convert", "job", "confirm"]
+---
+
+# Converting a booking to a job
+
+Once a customer has confirmed their booking, you can convert the enquiry into a scheduled job with a single click. All customer details and move information are carried over automatically so you do not need to re-enter anything.
+
+<StepByStep>
+  <Step title="Confirm the enquiry">
+    Open the booking from <UIPath path="Bookings" /> and set the status to **Confirmed** if you have not already done so.
+  </Step>
+
+  <Step title="Convert to a job">
+    Click the **Convert to job** button. VanMan creates a new job and copies across the customer name, phone number, email, pickup address, delivery address, preferred date, and any notes from the booking form.
+  </Step>
+
+  <Step title="Assign a truck and finalise">
+    The new job opens in the job editor. Select a **truck** from the dropdown, confirm the **date** and **start time**, and set the estimated **duration**. Click **Save job** to add it to the calendar.
+  </Step>
+</StepByStep>
+
+<Callout variant="info">
+  Converting a booking does not delete the original enquiry. The booking record is linked to the new job so you can always trace back to the original request.
+</Callout>
+
+<Callout variant="tip">
+  If the customer provided a preferred date on the form, check the calendar for truck availability on that date before converting. This way you can assign the truck during conversion without needing to edit the job afterwards.
+</Callout>

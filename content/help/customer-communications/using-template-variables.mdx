@@ -1,0 +1,38 @@
+---
+title: "Using template variables"
+description: "Use smart variables in message templates to auto-fill customer names, dates, addresses, and more."
+category: "customer-communications"
+sortOrder: 4
+lastUpdated: "2026-03-01"
+tags: ["templates", "variables", "smart", "auto-fill"]
+---
+
+# Using template variables
+
+Template variables are placeholders in your message templates that VanMan replaces with actual job data when the message is sent. This means you write the template once and it personalises itself for every customer.
+
+## Available variables
+
+| Variable | Replaced with |
+|----------|--------------|
+| `{customer_name}` | The customer's full name from the job |
+| `{move_date}` | The scheduled job date |
+| `{pickup_address}` | The pickup address on the job |
+| `{delivery_address}` | The delivery address on the job |
+| `{driver_name}` | The name of the assigned driver or team leader |
+
+<Callout variant="info">
+  Variables are case-sensitive and must be wrapped in curly braces exactly as shown. If a variable cannot be resolved — for example, if no driver has been assigned — the placeholder is left blank in the sent message.
+</Callout>
+
+## Example template
+
+A day-before reminder template might look like:
+
+> Hi {customer_name}, just a reminder that your move is scheduled for {move_date}. Our crew will arrive at {pickup_address} in the morning. If anything has changed, reply to this message or call us.
+
+When sent from a job, VanMan fills in the customer's name, the date, and the pickup address automatically.
+
+<Callout variant="tip">
+  Preview your template before saving to check that the variable names are correct. Any unrecognised variables will appear as-is in the preview, making typos easy to spot.
+</Callout>

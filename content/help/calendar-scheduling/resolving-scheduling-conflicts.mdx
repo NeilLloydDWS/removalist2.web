@@ -1,0 +1,40 @@
+---
+title: "Resolving scheduling conflicts"
+description: "How VanMan detects and helps you resolve double-bookings and scheduling conflicts."
+category: "calendar-scheduling"
+sortOrder: 6
+lastUpdated: "2026-03-01"
+tags: ["calendar", "conflicts", "double booking", "scheduling"]
+---
+
+# Resolving scheduling conflicts
+
+VanMan automatically detects when two jobs overlap on the same truck and warns you before the conflict is saved. This prevents double-bookings and ensures your crew is never assigned to two places at once.
+
+## How conflict detection works
+
+When you create or reschedule a job, VanMan checks whether the assigned truck already has a booking that overlaps with the selected time. If a conflict is found, the truck is flagged in the **Truck** dropdown and a warning message is displayed.
+
+<Callout variant="warning">
+  Conflict detection is based on the job's start time and estimated duration. If a job does not have a duration set, VanMan cannot accurately detect overlaps. Always enter an estimated duration when creating jobs to get the most accurate conflict warnings.
+</Callout>
+
+## Resolving a conflict
+
+<StepByStep>
+  <Step title="Review the warning">
+    When a conflict is detected, VanMan displays a warning showing which job already occupies the time slot. Read the details to understand the overlap.
+  </Step>
+
+  <Step title="Choose an alternative">
+    You can resolve the conflict by selecting a different truck that is available at that time, changing the job date or start time to avoid the overlap, or adjusting the duration of one of the conflicting jobs.
+  </Step>
+
+  <Step title="Save the updated job">
+    Once the conflict is resolved, click **Save job**. The warning disappears and the job is placed on the calendar without any overlap.
+  </Step>
+</StepByStep>
+
+<Callout variant="tip">
+  Check the weekly view before scheduling a new job to visually identify which trucks have available time slots. This helps you avoid conflicts before they occur.
+</Callout>

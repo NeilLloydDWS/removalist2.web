@@ -1,0 +1,135 @@
+{
+  "project": "VanMan Help Center",
+  "branchName": "ralph/help-center-articles",
+  "description": "Write 46 MDX help articles across the 8 empty categories in the Help Center, matching the tone and component usage of the existing Getting Started articles.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Write Calendar & Scheduling help articles",
+      "description": "As a user, I want help articles about the calendar so I can learn to schedule jobs, drag-and-drop reschedule, and read the weekly view.",
+      "acceptanceCriteria": [
+        "Create 6 MDX files in content/help/calendar-scheduling/: navigating-the-weekly-view.mdx, scheduling-a-job.mdx, drag-and-drop-rescheduling.mdx, understanding-truck-colour-lanes.mdx, switching-between-views.mdx, resolving-scheduling-conflicts.mdx",
+        "Each file has YAML frontmatter with title, description, category: 'calendar-scheduling', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
+        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
+        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
+        "Cover: weekly time-grid layout with truck lanes, scheduling via New Job button, drag-and-drop to move jobs between days/trucks, colour-coded truck lanes, day/week/month view switcher, conflict detection when double-booking a truck",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "All 6 articles created and typecheck passes."
+    },
+    {
+      "id": "US-002",
+      "title": "Write Job Management help articles",
+      "description": "As a user, I want help articles about jobs so I can learn to create, edit, track, and complete jobs throughout their lifecycle.",
+      "acceptanceCriteria": [
+        "Create 6 MDX files in content/help/job-management/: understanding-job-statuses.mdx, editing-a-job.mdx, adding-stops-to-a-job.mdx, adding-notes-and-photos.mdx, job-history-and-audit-trail.mdx, searching-and-filtering-jobs.mdx",
+        "Each file has YAML frontmatter with title, description, category: 'job-management', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
+        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
+        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
+        "Cover: job lifecycle (Enquiry → Quote → Confirmed → In Progress → Completed → Invoiced), editing customer/address/schedule details, adding multiple pickup/delivery stops via Add Stop, attaching notes and photos to a job, viewing the activity log with timestamps, filtering jobs by customer name/address/status/date/truck",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "All 6 articles created and typecheck passes."
+    },
+    {
+      "id": "US-003",
+      "title": "Write Fleet & Trucks help articles",
+      "description": "As a user, I want help articles about fleet management so I can manage trucks, colours, capacity, and team leaders.",
+      "acceptanceCriteria": [
+        "Create 5 MDX files in content/help/fleet-trucks/: adding-and-editing-trucks.mdx, choosing-truck-colours.mdx, setting-truck-capacity.mdx, assigning-a-default-team-leader.mdx, deactivating-a-truck.mdx",
+        "Each file has YAML frontmatter with title, description, category: 'fleet-trucks', sortOrder (1–5), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
+        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths — reference Settings > Trucks for navigation",
+        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
+        "Cover: adding a truck via Settings > Trucks with name/registration/capacity/colour, picking from 8 preset colours or custom hex via colour picker, setting capacity in cubic metres (20m³ standard, 40m³+ large), assigning a default team leader per truck, deactivating a truck without losing historical job records",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "All 5 articles created and typecheck passes."
+    },
+    {
+      "id": "US-004",
+      "title": "Write Booking Requests help articles",
+      "description": "As a user, I want help articles about online bookings so I can set up my form, manage enquiries, and convert them to jobs.",
+      "acceptanceCriteria": [
+        "Create 6 MDX files in content/help/booking-requests/: setting-up-your-booking-form.mdx, embedding-the-form-on-your-website.mdx, managing-incoming-enquiries.mdx, converting-a-booking-to-a-job.mdx, customising-booking-form-fields.mdx, understanding-the-booking-pipeline.mdx",
+        "Each file has YAML frontmatter with title, description, category: 'booking-requests', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
+        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
+        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
+        "Cover: enabling the multi-step booking form with address autocomplete and Turnstile spam protection, embedding the form widget on an external website, reviewing and responding to new enquiries with email notifications, one-click conversion from confirmed booking to scheduled job with all data carried over, adding/removing custom fields on the form, the pipeline stages New → Contacted → Quoted → Confirmed → Declined",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "All 6 articles created and typecheck passes."
+    },
+    {
+      "id": "US-005",
+      "title": "Write Customer Communications help articles",
+      "description": "As a user, I want help articles about SMS and email so I can send messages, use templates, and track delivery.",
+      "acceptanceCriteria": [
+        "Create 6 MDX files in content/help/customer-communications/: sending-an-sms-from-a-job.mdx, sending-an-email-from-a-job.mdx, creating-message-templates.mdx, using-template-variables.mdx, understanding-delivery-statuses.mdx, managing-incoming-sms-replies.mdx",
+        "Each file has YAML frontmatter with title, description, category: 'customer-communications', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
+        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
+        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
+        "Cover: sending SMS from the job detail page, sending email from the job detail page with HTML editor, creating reusable templates in the template editor, using smart variables (customer name, move date, pickup address, delivery address, driver name) that auto-populate, delivery status tracking (queued/sent/delivered/failed/bounced/opened), two-way SMS where customer replies appear in job conversation",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "All 6 articles created and typecheck passes."
+    },
+    {
+      "id": "US-006",
+      "title": "Write Mobile App help articles",
+      "description": "As a user, I want help articles about the mobile app so drivers, operators, and admins know how to use it on iOS and Android.",
+      "acceptanceCriteria": [
+        "Create 6 MDX files in content/help/mobile-app/: downloading-and-signing-in.mdx, driver-day-view.mdx, tracking-time-on-a-job.mdx, creating-a-job-from-mobile.mdx, processing-payments-on-mobile.mdx, sending-invoices-from-mobile.mdx",
+        "Each file has YAML frontmatter with title, description, category: 'mobile-app', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
+        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
+        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
+        "Cover: downloading from App Store/Play Store and signing in, driver day view showing today's jobs with one-tap call/navigate, background timer for tracking time on-site, operator 3-step job creation wizard (General → Delivery → Tally), processing cash/POS/credit card payments on-site, generating and sending invoices via SMS or email from mobile",
+        "Typecheck passes"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "All 6 articles created and typecheck passes."
+    },
+    {
+      "id": "US-007",
+      "title": "Write Team Chat help articles",
+      "description": "As a user, I want help articles about team chat so I can message my crew and stay coordinated.",
+      "acceptanceCriteria": [
+        "Create 5 MDX files in content/help/team-chat/: starting-a-new-conversation.mdx, sending-and-receiving-messages.mdx, read-status-and-unread-counts.mdx, push-notifications-for-messages.mdx, using-chat-on-mobile.mdx",
+        "Each file has YAML frontmatter with title, description, category: 'team-chat', sortOrder (1–5), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
+        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
+        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
+        "Cover: creating a new direct conversation from the staff directory, sending text messages with the message input (2000 char limit), unread count badges and lastReadAt tracking that marks conversations read when opened, push notifications sent to iOS/Android with sender name and preview (skipped if recently read), using the chat list and conversation screens on the mobile app with offline support",
+        "Typecheck passes"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "All 5 articles created and typecheck passes."
+    },
+    {
+      "id": "US-008",
+      "title": "Write Account & Billing help articles",
+      "description": "As a user, I want help articles about billing and account settings so I can manage my subscription, invite team members, and update roles.",
+      "acceptanceCriteria": [
+        "Create 6 MDX files in content/help/account-billing/: managing-your-subscription.mdx, updating-your-payment-method.mdx, understanding-your-free-trial.mdx, inviting-team-members.mdx, managing-user-roles.mdx, cancelling-your-subscription.mdx",
+        "Each file has YAML frontmatter with title, description, category: 'account-billing', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
+        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths — reference Settings > Billing for portal access",
+        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
+        "Cover: accessing the Stripe billing portal via Settings > Billing to view invoices and manage plan, updating credit card or payment method through the portal, 14-day free trial with no credit card required that pauses if no payment method added, inviting team members by email with role assignment during onboarding or from Settings, three roles (Admin = full access, Operator = jobs/calendar/invoicing, Driver = assigned jobs/time tracking/navigation), cancelling anytime with no lock-in from the billing portal",
+        "Typecheck passes"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "All 6 articles created and typecheck passes."
+    }
+  ]
+}

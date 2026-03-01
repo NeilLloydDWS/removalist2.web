@@ -1,0 +1,35 @@
+---
+title: "Understanding delivery statuses"
+description: "Track the delivery status of SMS and email messages sent to customers from VanMan."
+category: "customer-communications"
+sortOrder: 5
+lastUpdated: "2026-03-01"
+tags: ["delivery", "status", "sms", "email", "tracking"]
+---
+
+# Understanding delivery statuses
+
+Every message you send from VanMan — whether SMS or email — is tracked with a delivery status so you know whether the customer received it.
+
+## Status types
+
+Messages progress through these statuses:
+
+- **Queued** — The message has been submitted and is waiting to be sent.
+- **Sent** — The message has left VanMan's servers and is in transit.
+- **Delivered** — The message has been successfully delivered to the customer's phone or email inbox.
+- **Opened** — The customer has opened the email. This status is only available for email messages.
+- **Failed** — The message could not be delivered. This can happen if the phone number is invalid or the email address does not exist.
+- **Bounced** — The email was rejected by the recipient's mail server, typically due to an invalid or full mailbox.
+
+<Callout variant="info">
+  Delivery statuses update automatically as the message progresses. You do not need to refresh the page — the status badge on the message updates in real time.
+</Callout>
+
+## Viewing message statuses
+
+Open the job and scroll to the **Messages** section. Each message shows a status badge next to the timestamp. Click on a message to see the full delivery timeline including when it was sent, delivered, and opened.
+
+<Callout variant="tip">
+  If a message shows as **Failed**, check the customer's phone number or email address for typos. Correct the details on the job and resend the message.
+</Callout>

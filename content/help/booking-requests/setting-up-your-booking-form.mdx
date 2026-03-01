@@ -1,0 +1,34 @@
+---
+title: "Setting up your online booking form"
+description: "Enable and configure the online booking form so customers can submit enquiries from your website."
+category: "booking-requests"
+sortOrder: 1
+lastUpdated: "2026-03-01"
+tags: ["booking", "form", "setup", "online", "enquiries"]
+---
+
+# Setting up your online booking form
+
+VanMan includes a multi-step online booking form that customers can use to submit moving enquiries directly from your website. The form collects move details, addresses, dates, and customer contact information, and sends them to your VanMan dashboard as new enquiries.
+
+<StepByStep>
+  <Step title="Enable the booking form">
+    Navigate to <UIPath path="Settings > Booking Form" /> and toggle the form to **Active**. This makes the form available for embedding on your website or sharing as a direct link.
+  </Step>
+
+  <Step title="Configure form fields">
+    Review the default fields and enable or disable any optional fields you want customers to fill in. The form always collects the customer's name, email, phone number, and move addresses. Optional fields can include move date preferences, inventory details, and additional notes.
+  </Step>
+
+  <Step title="Set up notifications">
+    Ensure your notification email address is correct so you receive an alert each time a new enquiry is submitted. VanMan sends an email notification immediately when a booking request arrives.
+  </Step>
+
+  <Step title="Test the form">
+    Click **Preview** to open the booking form in a new tab. Submit a test enquiry to verify that it appears in your <UIPath path="Bookings" /> dashboard and that you receive the email notification.
+  </Step>
+</StepByStep>
+
+<Callout variant="info">
+  The booking form includes Cloudflare Turnstile protection to prevent spam submissions. Legitimate customers complete the form as normal while automated bots are blocked.
+</Callout>

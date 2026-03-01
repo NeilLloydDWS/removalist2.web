@@ -1,0 +1,38 @@
+---
+title: "Creating and editing message templates"
+description: "Build reusable SMS and email templates with smart variables for common customer messages."
+category: "customer-communications"
+sortOrder: 3
+lastUpdated: "2026-03-01"
+tags: ["templates", "message", "sms", "email", "create"]
+---
+
+# Creating and editing message templates
+
+Message templates let you save common messages so you can send them with a click instead of retyping the same text for every job. Templates support smart variables that automatically fill in job-specific details.
+
+<StepByStep>
+  <Step title="Open the template editor">
+    Navigate to <UIPath path="Settings > Templates" /> and click **New template**. Choose whether the template is for **SMS** or **Email**.
+  </Step>
+
+  <Step title="Write the template content">
+    Enter the message body. Use smart variables by typing the variable name in curly braces — for example, `{customer_name}` or `{move_date}`. These are replaced with the actual values when you send the message from a job.
+  </Step>
+
+  <Step title="Name the template">
+    Give the template a descriptive name such as "Booking confirmation" or "Day-before reminder". This name is shown in the template picker when you are composing a message from a job.
+  </Step>
+
+  <Step title="Save the template">
+    Click **Save**. The template is now available to all operators when sending messages from any job.
+  </Step>
+</StepByStep>
+
+<Callout variant="tip">
+  Create templates for each stage of the job lifecycle — booking confirmation, day-before reminder, on-the-way notification, and post-move follow-up. This ensures consistent, professional communication with every customer.
+</Callout>
+
+## Editing a template
+
+Navigate to <UIPath path="Settings > Templates" />, click the template you want to update, make your changes, and click **Save**. Edits apply to future messages only — previously sent messages are not affected.

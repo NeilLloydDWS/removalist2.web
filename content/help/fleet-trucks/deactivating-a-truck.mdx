@@ -1,0 +1,34 @@
+---
+title: "Deactivating a truck"
+description: "Remove a truck from active scheduling without losing its historical job records."
+category: "fleet-trucks"
+sortOrder: 5
+lastUpdated: "2026-03-01"
+tags: ["trucks", "deactivate", "remove", "fleet"]
+---
+
+# Deactivating a truck
+
+When a truck is sold, off the road, or no longer part of your fleet, you can deactivate it in VanMan. Deactivating a truck removes it from the calendar and the truck assignment dropdown while preserving all historical job records.
+
+<StepByStep>
+  <Step title="Open truck settings">
+    Navigate to <UIPath path="Settings > Trucks" /> and find the truck you want to deactivate.
+  </Step>
+
+  <Step title="Deactivate the truck">
+    Click the truck to open its details, then click **Deactivate**. Confirm the action when prompted.
+  </Step>
+
+  <Step title="Verify the change">
+    The truck is removed from the calendar and no longer appears in the truck dropdown when creating new jobs. Existing completed jobs that were assigned to this truck retain their records and remain searchable.
+  </Step>
+</StepByStep>
+
+<Callout variant="warning">
+  Before deactivating a truck, check that it has no upcoming jobs assigned. Any future jobs still assigned to the truck should be reassigned to a different vehicle first.
+</Callout>
+
+<Callout variant="info">
+  Deactivating a truck is not permanent. If the vehicle returns to service, you can reactivate it from <UIPath path="Settings > Trucks" /> and it will reappear on the calendar and in the assignment dropdown.
+</Callout>
