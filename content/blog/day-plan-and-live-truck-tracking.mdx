@@ -1,0 +1,72 @@
+---
+title: "Day Plan & Live Tracking: See Your Entire Operation in Real Time"
+date: "2026-02-28"
+author: "Neill Lloyd"
+category: "Product Updates"
+excerpt: "The new Day Plan dashboard combines a calendar timeline with Google Maps — showing every job, every truck route, and every crew location on one screen."
+featuredImage: "/blog/images/day-plan-tracking.svg"
+tags: ["day-plan", "live-tracking", "fleet", "operations", "product-updates"]
+featured: false
+---
+
+When you're running a busy moving day with multiple trucks on the road, the questions come fast. Where's truck 3? Is the afternoon job going to be late? Did the crew finish the morning pickup yet? How far apart are the two trucks?
+
+Until now, answering those questions meant calling drivers, checking the calendar, and mentally piecing together where everyone was. VanMan's new Day Plan dashboard puts all of that on one screen.
+
+## Calendar and map, side by side
+
+The Day Plan splits your screen in two. On the left, a calendar timeline shows every job for the selected day, grouped by truck and shown as time blocks. On the right, a Google Map shows every job location — pickups, deliveries, and additional stops — with markers and driving routes.
+
+The calendar tells you **when** things are happening. The map tells you **where**. Together, they give you the full operational picture without clicking through multiple pages.
+
+## Colour-coded routes
+
+Each truck's route is drawn on the map as a coloured line connecting its job locations in order. The colours match your truck colours from the fleet settings, so you can instantly tell which route belongs to which truck.
+
+Hover over a map marker and an info window shows the job details — customer name, address, time, and status. It's the same information your drivers see on their phones, but from a bird's-eye view.
+
+## Cross-highlighting
+
+This is the feature the operations managers love. Click a job on the calendar and the corresponding marker pulses on the map. Click a marker on the map and the matching job highlights on the calendar. It works both ways, making it easy to answer "where exactly is that 2pm job?" without searching.
+
+<Callout variant="tip">
+Use the Day Plan during morning briefings. Walk through each truck's route on the map while reviewing the timeline. Your team will head out with a clearer picture of the day ahead.
+</Callout>
+
+## Live truck tracking
+
+When drivers have the VanMan mobile app running, their real-time GPS position appears on the Day Plan map as a moving marker. You can see:
+
+- **Current position** — exactly where the truck is right now
+- **Heading** — which direction it's moving
+- **Speed** — how fast it's travelling
+
+Positions update automatically as drivers move. There's no need to refresh the page or call anyone to ask "where are you?"
+
+## How tracking works
+
+The VanMan mobile app sends GPS coordinates to the server in the background while drivers are on shift. The web dashboard receives these updates in real time via Supabase subscriptions. Location history is stored, so you can review a truck's route after the day is done.
+
+Tracking is automatic — drivers don't need to press a button or check in manually. As long as the app is running, their position is shared.
+
+<Callout variant="info">
+Live tracking requires the VanMan mobile app to be installed and running on the driver's device. Location permissions must be granted. Battery impact is minimal — the app uses efficient background location updates.
+</Callout>
+
+## When to use the Day Plan
+
+The Day Plan is most useful on busy days when you're coordinating multiple trucks. Use it to:
+
+- **Monitor progress** — see which jobs are in progress and which are done
+- **Spot delays** — if a truck hasn't moved in a while, something might be wrong
+- **Redirect resources** — see which truck is closest to an urgent job
+- **Answer customer calls** — "Your crew is about 15 minutes away" is a much better answer than "Let me check and call you back"
+
+---
+
+The Day Plan brings your calendar and your map together on one screen. Combined with live truck tracking, it gives you real-time visibility over your entire operation — without leaving your desk.
+
+<CTABanner
+  heading="See your whole operation in real time"
+  text="The Day Plan dashboard and live truck tracking are included in every VanMan plan."
+/>

@@ -1,0 +1,44 @@
+---
+title: "Adding conditions and delays"
+description: "Use condition nodes for branching logic and delay nodes for timed actions in workflows."
+category: "workflow-automation"
+sortOrder: 3
+lastUpdated: "2026-03-06"
+tags: ["workflow", "conditions", "delays", "logic"]
+---
+
+# Adding conditions and delays
+
+Conditions and delays make your workflows smarter by adding branching logic and timed pauses.
+
+## Condition nodes
+
+A condition node evaluates a rule and branches the workflow into two paths — one if the condition is true, and another if it is false.
+
+For example, you could add a condition after a "Job status changed" trigger that checks whether the new status is "Completed." If true, the workflow sends a thank-you SMS. If false, it does nothing.
+
+<StepByStep>
+  <Step title="Add a condition node">
+    Drag a **Condition** node from the palette onto the canvas. Connect it to the previous node.
+  </Step>
+
+  <Step title="Configure the rule">
+    Click the condition node to set the rule. Choose the field to evaluate (e.g. job status, truck name, booking source) and the comparison (equals, contains, is not empty).
+  </Step>
+
+  <Step title="Connect both paths">
+    Draw a line from the **True** output to the next action. Optionally, draw a line from the **False** output to a different action or leave it unconnected to do nothing.
+  </Step>
+</StepByStep>
+
+## Delay nodes
+
+A delay node pauses the workflow for a specified duration before continuing. This is useful for sending follow-up messages after a waiting period.
+
+For example, you might send a review request email 2 hours after a job is completed — not immediately.
+
+Drag a **Delay** node onto the canvas, connect it between the trigger and action, and set the duration (minutes, hours, or days).
+
+<Callout variant="tip">
+  Combine conditions and delays for powerful workflows. For example: when a job is completed, wait 2 hours, then check if a review has been received — if not, send a reminder.
+</Callout>

@@ -1,0 +1,122 @@
+{
+  "project": "VanMan Blog",
+  "branchName": "ralph/blog-posts-batch-2",
+  "description": "Add 5 SEO-driven blog posts targeting moving company owners in AU/NZ. Practical, actionable tone with light VanMan mentions. Posts span Guides & How-tos and Business Tips categories.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create 'How to Price Moving Jobs' blog post",
+      "description": "As a content creator, I want to publish an SEO-optimised guide on pricing moving jobs so that removalists searching for quoting advice discover VanMan.",
+      "acceptanceCriteria": [
+        "Create file at content/blog/how-to-price-moving-jobs.mdx",
+        "Frontmatter: title 'How to Price Moving Jobs: A Complete Guide for Removalists', date '2026-02-20', author 'Neill Lloyd', category 'Guides & How-tos', excerpt about pricing strategy for removalists, featuredImage '/blog/images/pricing-guide.svg', tags ['pricing', 'quoting', 'guide', 'removalist'], featured false",
+        "Read existing posts in content/blog/ first and match tone, structure, and depth (800-1200 words)",
+        "Content covers: hourly vs fixed-rate pricing models, accounting for stairs/access difficulty/travel time, seasonal pricing adjustments (AU/NZ peak Dec-Feb), binding vs non-binding estimates, common underquoting mistakes, worked example of pricing a 3-bedroom house move",
+        "Use ## headings for major sections so they populate the table of contents",
+        "Include 1-2 <Callout variant='tip'> or <Callout variant='info'> blocks referencing VanMan's quoting and job costing features",
+        "End with <CTABanner> component with relevant heading and text",
+        "Written in Australian English (organise, labour, colour, etc.)",
+        "Create SVG featured image at public/blog/images/pricing-guide.svg matching style of existing SVGs in public/blog/images/",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Blog post and SVG created. All acceptance criteria met. Typecheck and build pass."
+    },
+    {
+      "id": "US-002",
+      "title": "Create 'How to Start a Removalist Business' blog post",
+      "description": "As a content creator, I want to publish a comprehensive startup guide so that aspiring removalist business owners find VanMan early in their journey.",
+      "acceptanceCriteria": [
+        "Create file at content/blog/how-to-start-a-removalist-business.mdx",
+        "Frontmatter: title 'How to Start a Removalist Business in Australia', date '2026-02-18', author 'Neill Lloyd', category 'Guides & How-tos', excerpt about step-by-step guide for starting a removalist business, featuredImage '/blog/images/start-business.svg', tags ['startup', 'removalist', 'guide', 'australia'], featured false",
+        "Read existing posts in content/blog/ first and match tone, structure, and depth (800-1200 words)",
+        "Content covers: ABN registration, insurance requirements (public liability, goods in transit, workers comp), licensing by state, purchasing or leasing trucks, building a team, setting pricing, getting first customers, choosing the right software",
+        "Use ## headings for major sections so they populate the table of contents",
+        "Include 1-2 <Callout variant='tip'> or <Callout variant='info'> blocks referencing VanMan as the natural software choice for new operators",
+        "End with <CTABanner> component with relevant heading and text",
+        "Written in Australian English (organise, labour, colour, etc.)",
+        "Create SVG featured image at public/blog/images/start-business.svg matching style of existing SVGs in public/blog/images/",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Blog post and SVG created. All acceptance criteria met. Typecheck and build pass."
+    },
+    {
+      "id": "US-003",
+      "title": "Create 'Local SEO for Removalists' blog post",
+      "description": "As a content creator, I want to publish a practical local SEO guide so that removalist owners searching for marketing help discover VanMan.",
+      "acceptanceCriteria": [
+        "Create file at content/blog/local-seo-for-removalists.mdx",
+        "Frontmatter: title 'Local SEO for Removalists: How to Get Found on Google in Your Area', date '2026-02-15', author 'Neill Lloyd', category 'Business Tips', excerpt about getting found locally on Google as a removalist, featuredImage '/blog/images/local-seo.svg', tags ['seo', 'marketing', 'google', 'local-search'], featured false",
+        "Read existing posts in content/blog/ first and match tone, structure, and depth (800-1200 words)",
+        "Content covers: Google Business Profile setup and optimisation, getting and responding to reviews, location-specific landing pages, building local citations (Yellow Pages, Oneflare, Hipages, TrueLocal), mobile site speed, Google Maps local pack",
+        "Use ## headings for major sections so they populate the table of contents",
+        "Include 1-2 <Callout variant='tip'> or <Callout variant='info'> blocks referencing VanMan's online booking and professional online presence features",
+        "End with <CTABanner> component with relevant heading and text",
+        "Written in Australian English (organise, labour, colour, etc.)",
+        "Create SVG featured image at public/blog/images/local-seo.svg matching style of existing SVGs in public/blog/images/",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Blog post and SVG created. All acceptance criteria met. Typecheck and build pass."
+    },
+    {
+      "id": "US-004",
+      "title": "Create 'Hiring and Keeping Good Movers' blog post",
+      "description": "As a content creator, I want to publish a crew management guide so that removalist owners struggling with staffing find VanMan.",
+      "acceptanceCriteria": [
+        "Create file at content/blog/hiring-and-keeping-good-movers.mdx",
+        "Frontmatter: title 'Hiring and Keeping Good Movers: A Removalist's Guide to Crew Management', date '2026-02-12', author 'Neill Lloyd', category 'Business Tips', excerpt about finding and retaining reliable moving crew, featuredImage '/blog/images/crew-management.svg', tags ['hiring', 'crew', 'retention', 'team-management'], featured false",
+        "Read existing posts in content/blog/ first and match tone, structure, and depth (800-1200 words)",
+        "Content covers: where to find reliable crew (job boards, word of mouth, trade schools), what to look for in interviews, structured training programs (lifting techniques, truck loading, customer communication), retention strategies (career paths, recognition, fair scheduling), the real cost of turnover, mentorship and buddy system approach",
+        "Use ## headings for major sections so they populate the table of contents",
+        "Include 1-2 <Callout variant='tip'> or <Callout variant='info'> blocks referencing VanMan's team management and driver app features",
+        "End with <CTABanner> component with relevant heading and text",
+        "Written in Australian English (organise, labour, colour, etc.)",
+        "Create SVG featured image at public/blog/images/crew-management.svg matching style of existing SVGs in public/blog/images/",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Blog post and SVG created. All acceptance criteria met. Typecheck and build pass."
+    },
+    {
+      "id": "US-005",
+      "title": "Create 'Moving Company Marketing on a Budget' blog post",
+      "description": "As a content creator, I want to publish a budget marketing guide so that removalist owners looking for affordable growth strategies discover VanMan.",
+      "acceptanceCriteria": [
+        "Create file at content/blog/moving-company-marketing-on-a-budget.mdx",
+        "Frontmatter: title 'Moving Company Marketing on a Budget: 7 Strategies That Actually Work', date '2026-02-08', author 'Neill Lloyd', category 'Business Tips', excerpt about affordable marketing strategies for removalist businesses, featuredImage '/blog/images/marketing-budget.svg', tags ['marketing', 'leads', 'growth', 'budget'], featured false",
+        "Read existing posts in content/blog/ first and match tone, structure, and depth (800-1200 words)",
+        "Content covers: Google Business Profile optimisation (free), asking for reviews systematically, Facebook marketing, referral programs with real estate agents and property managers, vehicle signage and branding, Oneflare/Hipages/Airtasker profiles, basic Google Ads setup with approximate costs and expected ROI per channel",
+        "Use ## headings for major sections so they populate the table of contents",
+        "Include 1-2 <Callout variant='tip'> or <Callout variant='info'> blocks referencing VanMan's customer communication and online booking features",
+        "End with <CTABanner> component with relevant heading and text",
+        "Written in Australian English (organise, labour, colour, etc.)",
+        "Create SVG featured image at public/blog/images/marketing-budget.svg matching style of existing SVGs in public/blog/images/",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Blog post and SVG created. All acceptance criteria met. Typecheck and build pass."
+    },
+    {
+      "id": "US-006",
+      "title": "Verify all 7 blog posts render correctly",
+      "description": "As a developer, I want to verify all 7 blog posts (2 existing + 5 new) render correctly on the blog listing page and individually.",
+      "acceptanceCriteria": [
+        "Run the build and confirm no TypeScript or build errors",
+        "All 7 posts appear on /blog sorted by date (newest first)",
+        "Category filter works for 'Guides & How-tos' and 'Business Tips' categories",
+        "RSS feed at /blog/rss.xml includes all 7 posts",
+        "Typecheck passes"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Build passes with no errors. All 7 blog posts render at /blog/[slug]. Category pages for business-tips and guides-how-tos generated. RSS feed generated. Typecheck clean."
+    }
+  ]
+}

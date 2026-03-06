@@ -26,6 +26,12 @@ export const invoicingXero: FeaturePageData = {
       description:
         "VanMan validates account codes and item codes against your Xero chart of accounts before syncing. Self-healing error resolution fixes common issues automatically.",
     },
+    {
+      icon: "Calculator",
+      title: "Detailed job costing",
+      description:
+        "Track materials, labour, and other costs against every job. Build a material catalog with pricing, add items to jobs, and generate accurate quotes — all feeding directly into your invoices.",
+    },
   ],
   detailSections: [
     {
@@ -45,6 +51,12 @@ export const invoicingXero: FeaturePageData = {
       description:
         "If a sync fails — wrong account code, missing contact, duplicate invoice — VanMan identifies the issue and suggests a fix. Most errors resolve automatically on retry.",
       imagePlaceholder: "Error resolution flow with suggested fixes",
+    },
+    {
+      title: "Materials catalog and job costing",
+      description:
+        "Build a catalog of materials with categories and pricing. When creating a job, add materials from your catalog for accurate cost tracking. Generate customer-facing quotes from the materials and costs on a job, then convert to an invoice when the work is done.",
+      imagePlaceholder: "Material catalog and job costing interface",
     },
   ],
   integrationCallout: {

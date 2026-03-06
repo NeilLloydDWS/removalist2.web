@@ -1,0 +1,36 @@
+---
+title: "Creating your first workflow"
+description: "Build your first automated workflow in VanMan using the visual drag-and-drop editor."
+category: "workflow-automation"
+sortOrder: 1
+lastUpdated: "2026-03-06"
+tags: ["workflow", "automation", "setup", "getting-started"]
+---
+
+# Creating your first workflow
+
+Workflows automate repetitive tasks by running a series of actions when something happens in VanMan. Here is how to create your first one.
+
+<StepByStep>
+  <Step title="Open the workflow editor">
+    Navigate to <UIPath path="Settings > Workflows" /> and click **New Workflow**. Give your workflow a name — something descriptive like "Booking confirmation SMS" — and click **Create**.
+  </Step>
+
+  <Step title="Add a trigger">
+    The editor opens with an empty canvas. Drag a **Trigger** node from the palette on the left onto the canvas. Click the trigger to configure it — for example, select "Booking status changed" and set the condition to "when status becomes Confirmed."
+  </Step>
+
+  <Step title="Add an action">
+    Drag an **Action** node onto the canvas and connect it to the trigger by drawing a line between them. Click the action to configure it — for example, select "Send SMS" and choose a message template.
+  </Step>
+
+  <Step title="Save and activate">
+    Click **Save** to store your workflow. Toggle the **Active** switch to turn it on. From now on, every time a booking is confirmed, VanMan will automatically send the SMS.
+
+    <Callout variant="tip">
+      Use the **Dry Run** button to test your workflow with sample data before activating it. This lets you verify it works without sending real messages.
+    </Callout>
+  </Step>
+</StepByStep>
+
+You can edit, deactivate, or delete workflows at any time from <UIPath path="Settings > Workflows" />.

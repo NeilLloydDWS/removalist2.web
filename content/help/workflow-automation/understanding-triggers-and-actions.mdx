@@ -1,0 +1,43 @@
+---
+title: "Understanding triggers and actions"
+description: "Learn about the trigger events and action types available in VanMan's workflow builder."
+category: "workflow-automation"
+sortOrder: 2
+lastUpdated: "2026-03-06"
+tags: ["workflow", "triggers", "actions", "automation"]
+---
+
+# Understanding triggers and actions
+
+Every workflow starts with a trigger and performs one or more actions. Here is what is available.
+
+## Trigger types
+
+A trigger defines what starts the workflow. VanMan supports these trigger events:
+
+- **Job created** — fires when a new job is added
+- **Job status changed** — fires when a job's status changes (e.g. to Confirmed, In Progress, Completed)
+- **Job truck changed** — fires when a job is reassigned to a different truck
+- **Job schedule changed** — fires when a job's date or time is updated
+- **Booking created** — fires when a new online booking comes in
+- **Booking status changed** — fires when a booking moves through the pipeline
+- **Message sent** — fires when an SMS or email is sent from a job
+- **Invoice created** — fires when an invoice is generated
+
+Each trigger can be filtered — for example, "Job status changed" can be set to only fire when the status becomes "Completed."
+
+## Action types
+
+An action defines what happens when the workflow runs:
+
+- **Send SMS** — send a text message using a template
+- **Send email** — send an email using a template
+- **Change status** — update a job or booking status
+- **Create Xero invoice** — generate and sync an invoice to Xero
+- **Call webhook** — send data to an external URL
+
+<Callout variant="info">
+  You can chain multiple actions in a single workflow. For example: when a job is completed, send a thank-you SMS, create an invoice, and call a webhook to update your CRM.
+</Callout>
+
+Actions use your existing message templates and Xero configuration, so there is no extra setup required.

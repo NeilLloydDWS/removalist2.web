@@ -1,135 +1,373 @@
 {
-  "project": "VanMan Help Center",
-  "branchName": "ralph/help-center-articles",
-  "description": "Write 46 MDX help articles across the 8 empty categories in the Help Center, matching the tone and component usage of the existing Getting Started articles.",
+  "project": "VanMan Website",
+  "branchName": "ralph/new-features-website-update",
+  "description": "Update the VanMan marketing website with 7 new app features: Workflow Automation, Email Integration (Gmail + Outlook), Day Plan, Calendar Events, Live Truck Tracking, Materials & Costing. Includes new feature pages, blog posts, and help center articles.",
   "userStories": [
     {
       "id": "US-001",
-      "title": "Write Calendar & Scheduling help articles",
-      "description": "As a user, I want help articles about the calendar so I can learn to schedule jobs, drag-and-drop reschedule, and read the weekly view.",
+      "title": "Add 3 new features to the features list",
+      "description": "As a website visitor, I want to see Workflow Automation, Email Integration, and Day Plan listed on the features page.",
       "acceptanceCriteria": [
-        "Create 6 MDX files in content/help/calendar-scheduling/: navigating-the-weekly-view.mdx, scheduling-a-job.mdx, drag-and-drop-rescheduling.mdx, understanding-truck-colour-lanes.mdx, switching-between-views.mdx, resolving-scheduling-conflicts.mdx",
-        "Each file has YAML frontmatter with title, description, category: 'calendar-scheduling', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
-        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
-        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
-        "Cover: weekly time-grid layout with truck lanes, scheduling via New Job button, drag-and-drop to move jobs between days/trucks, colour-coded truck lanes, day/week/month view switcher, conflict detection when double-booking a truck",
+        "Read src/lib/features.ts to understand the existing Feature interface and entries",
+        "Add 'workflow-automation' entry: name 'Workflow Automation', tagline 'Automate your business rules', icon 'Zap', href '/features/workflow-automation', 4 bullets covering visual workflow builder, trigger-based automation, conditional logic with approvals, pre-built templates",
+        "Add 'email-integration' entry: name 'Email Integration', tagline 'Your inbox meets your jobs', icon 'Mail', href '/features/email-integration', 4 bullets covering Gmail and Outlook support, automatic email-to-job matching, reply from VanMan, attachment capture",
+        "Add 'day-plan' entry: name 'Day Plan', tagline 'Your daily operations at a glance', icon 'MapPin', href '/features/day-plan', 4 bullets covering calendar+map view, colour-coded truck routes, cross-highlighting, real-time updates",
         "Typecheck passes"
       ],
       "priority": 1,
       "passes": true,
-      "notes": "All 6 articles created and typecheck passes."
+      "notes": "Added 3 new entries to src/lib/features.ts with correct icons and bullets. Also updated existing entries for calendar-scheduling, fleet-management, and invoicing-xero with new bullet points."
     },
     {
       "id": "US-002",
-      "title": "Write Job Management help articles",
-      "description": "As a user, I want help articles about jobs so I can learn to create, edit, track, and complete jobs throughout their lifecycle.",
+      "title": "Create Workflow Automation feature page data",
+      "description": "As a website visitor, I want a dedicated /features/workflow-automation page so I can learn about VanMan's workflow automation.",
       "acceptanceCriteria": [
-        "Create 6 MDX files in content/help/job-management/: understanding-job-statuses.mdx, editing-a-job.mdx, adding-stops-to-a-job.mdx, adding-notes-and-photos.mdx, job-history-and-audit-trail.mdx, searching-and-filtering-jobs.mdx",
-        "Each file has YAML frontmatter with title, description, category: 'job-management', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
-        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
-        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
-        "Cover: job lifecycle (Enquiry → Quote → Confirmed → In Progress → Completed → Invoiced), editing customer/address/schedule details, adding multiple pickup/delivery stops via Add Stop, attaching notes and photos to a job, viewing the activity log with timestamps, filtering jobs by customer name/address/status/date/truck",
+        "Read src/lib/feature-pages/types.ts for the FeaturePageData interface",
+        "Read an existing feature page file (e.g. src/lib/feature-pages/customer-communications.ts) for style reference",
+        "Create src/lib/feature-pages/workflow-automation.ts following FeaturePageData interface exactly",
+        "Title 'Workflow Automation', tagline 'Automate your business rules'",
+        "3 benefits: visual drag-and-drop workflow builder, trigger-based automation (job created, status changed, booking received), built-in templates for common workflows",
+        "3 detail sections: the visual editor with trigger/condition/action/delay/approval nodes, action types (send SMS, send email, change status, create Xero invoice, call webhook), execution logs and dry-run testing",
+        "Integration callout referencing job-management, customer-communications, invoicing-xero",
+        "Related features: job-management, customer-communications, invoicing-xero",
+        "SEO title 'Workflow Automation for Moving Companies | VanMan'",
+        "Register in src/lib/feature-pages/index.ts with import and record entry",
         "Typecheck passes"
       ],
       "priority": 2,
       "passes": true,
-      "notes": "All 6 articles created and typecheck passes."
+      "notes": "Created src/lib/feature-pages/workflow-automation.ts with 3 benefits, 3 detail sections, integration callout, and SEO metadata. Registered in index.ts."
     },
     {
       "id": "US-003",
-      "title": "Write Fleet & Trucks help articles",
-      "description": "As a user, I want help articles about fleet management so I can manage trucks, colours, capacity, and team leaders.",
+      "title": "Create Email Integration feature page data",
+      "description": "As a website visitor, I want a dedicated /features/email-integration page for Gmail and Outlook integration.",
       "acceptanceCriteria": [
-        "Create 5 MDX files in content/help/fleet-trucks/: adding-and-editing-trucks.mdx, choosing-truck-colours.mdx, setting-truck-capacity.mdx, assigning-a-default-team-leader.mdx, deactivating-a-truck.mdx",
-        "Each file has YAML frontmatter with title, description, category: 'fleet-trucks', sortOrder (1–5), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
-        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths — reference Settings > Trucks for navigation",
-        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
-        "Cover: adding a truck via Settings > Trucks with name/registration/capacity/colour, picking from 8 preset colours or custom hex via colour picker, setting capacity in cubic metres (20m³ standard, 40m³+ large), assigning a default team leader per truck, deactivating a truck without losing historical job records",
+        "Read src/lib/feature-pages/types.ts and an existing feature page for reference",
+        "Create src/lib/feature-pages/email-integration.ts following FeaturePageData interface exactly",
+        "Title 'Email Integration', tagline 'Your inbox meets your jobs'",
+        "3 benefits: automatic job matching (emails with job numbers captured against jobs), reply from VanMan (respond without leaving the app), works with Gmail and Outlook/Microsoft 365",
+        "3 detail sections: one-click OAuth connect for Gmail or Outlook, real-time email capture via webhooks (Gmail Pub/Sub and Microsoft Graph), email threading with attachment storage",
+        "Integration callout referencing job-management, customer-communications",
+        "Related features: job-management, customer-communications, workflow-automation",
+        "SEO title 'Gmail & Outlook Integration for Moving Companies | VanMan'",
+        "Register in src/lib/feature-pages/index.ts with import and record entry",
         "Typecheck passes"
       ],
       "priority": 3,
       "passes": true,
-      "notes": "All 5 articles created and typecheck passes."
+      "notes": "Created src/lib/feature-pages/email-integration.ts with Gmail+Outlook coverage, 3 benefits, 3 detail sections. Registered in index.ts."
     },
     {
       "id": "US-004",
-      "title": "Write Booking Requests help articles",
-      "description": "As a user, I want help articles about online bookings so I can set up my form, manage enquiries, and convert them to jobs.",
+      "title": "Create Day Plan feature page data",
+      "description": "As a website visitor, I want a dedicated /features/day-plan page for the daily operations dashboard.",
       "acceptanceCriteria": [
-        "Create 6 MDX files in content/help/booking-requests/: setting-up-your-booking-form.mdx, embedding-the-form-on-your-website.mdx, managing-incoming-enquiries.mdx, converting-a-booking-to-a-job.mdx, customising-booking-form-fields.mdx, understanding-the-booking-pipeline.mdx",
-        "Each file has YAML frontmatter with title, description, category: 'booking-requests', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
-        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
-        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
-        "Cover: enabling the multi-step booking form with address autocomplete and Turnstile spam protection, embedding the form widget on an external website, reviewing and responding to new enquiries with email notifications, one-click conversion from confirmed booking to scheduled job with all data carried over, adding/removing custom fields on the form, the pipeline stages New → Contacted → Quoted → Confirmed → Declined",
+        "Read src/lib/feature-pages/types.ts and an existing feature page for reference",
+        "Create src/lib/feature-pages/day-plan.ts following FeaturePageData interface exactly",
+        "Title 'Day Plan', tagline 'Your daily operations at a glance'",
+        "3 benefits: calendar+map in one view, route visualisation with Google Maps, real-time updates with live truck positions",
+        "3 detail sections: split-screen layout with time-block calendar and Google Maps, truck route polylines with colour-coded markers and InfoWindow popups, cross-highlighting where clicking a job highlights it on both calendar and map",
+        "Integration callout referencing calendar-scheduling, fleet-management, mobile-app",
+        "Related features: calendar-scheduling, fleet-management, mobile-app",
+        "SEO title 'Daily Operations Dashboard for Moving Companies | VanMan'",
+        "Register in src/lib/feature-pages/index.ts with import and record entry",
         "Typecheck passes"
       ],
       "priority": 4,
       "passes": true,
-      "notes": "All 6 articles created and typecheck passes."
+      "notes": "Created src/lib/feature-pages/day-plan.ts with split-screen layout, route visualisation, and cross-highlighting sections. Registered in index.ts."
     },
     {
       "id": "US-005",
-      "title": "Write Customer Communications help articles",
-      "description": "As a user, I want help articles about SMS and email so I can send messages, use templates, and track delivery.",
+      "title": "Update Calendar & Scheduling page with Calendar Events",
+      "description": "As a website visitor, I want the Calendar & Scheduling page to mention custom calendar events.",
       "acceptanceCriteria": [
-        "Create 6 MDX files in content/help/customer-communications/: sending-an-sms-from-a-job.mdx, sending-an-email-from-a-job.mdx, creating-message-templates.mdx, using-template-variables.mdx, understanding-delivery-statuses.mdx, managing-incoming-sms-replies.mdx",
-        "Each file has YAML frontmatter with title, description, category: 'customer-communications', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
-        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
-        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
-        "Cover: sending SMS from the job detail page, sending email from the job detail page with HTML editor, creating reusable templates in the template editor, using smart variables (customer name, move date, pickup address, delivery address, driver name) that auto-populate, delivery status tracking (queued/sent/delivered/failed/bounced/opened), two-way SMS where customer replies appear in job conversation",
+        "Read src/lib/feature-pages/calendar-scheduling.ts for current content",
+        "Add a 4th detail section covering calendar events: create custom events (meetings, training, vehicle servicing) alongside jobs, all-day and timed event support, colour-coded display, contact assignment to events",
+        "Read src/lib/features.ts and update the calendar-scheduling bullets to include 'Custom events for meetings, training, and reminders' (replace or add a 5th bullet)",
         "Typecheck passes"
       ],
       "priority": 5,
       "passes": true,
-      "notes": "All 6 articles created and typecheck passes."
+      "notes": "Added 4th detail section to calendar-scheduling.ts covering custom events. Updated features.ts bullet to include 'Custom events for meetings, training, and reminders'."
     },
     {
       "id": "US-006",
-      "title": "Write Mobile App help articles",
-      "description": "As a user, I want help articles about the mobile app so drivers, operators, and admins know how to use it on iOS and Android.",
+      "title": "Update Fleet Management page with Live Truck Tracking",
+      "description": "As a website visitor, I want the Fleet Management page to mention live GPS tracking.",
       "acceptanceCriteria": [
-        "Create 6 MDX files in content/help/mobile-app/: downloading-and-signing-in.mdx, driver-day-view.mdx, tracking-time-on-a-job.mdx, creating-a-job-from-mobile.mdx, processing-payments-on-mobile.mdx, sending-invoices-from-mobile.mdx",
-        "Each file has YAML frontmatter with title, description, category: 'mobile-app', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
-        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
-        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
-        "Cover: downloading from App Store/Play Store and signing in, driver day view showing today's jobs with one-tap call/navigate, background timer for tracking time on-site, operator 3-step job creation wizard (General → Delivery → Tally), processing cash/POS/credit card payments on-site, generating and sending invoices via SMS or email from mobile",
+        "Read src/lib/feature-pages/fleet-management.ts for current content",
+        "Add a 4th benefit: icon 'MapPin', title 'Track trucks in real time', description about seeing live truck positions on a map from the office",
+        "Add a 4th detail section covering live tracking: real-time GPS tracking via the mobile app, live map view showing all truck positions with heading and speed, location history",
+        "Read src/lib/features.ts and update fleet-management bullets to mention live tracking (replace 'Maintenance schedules and service reminders' or add 5th bullet)",
         "Typecheck passes"
       ],
       "priority": 6,
       "passes": true,
-      "notes": "All 6 articles created and typecheck passes."
+      "notes": "Added 4th benefit (MapPin icon) and 4th detail section about live GPS tracking to fleet-management.ts. Updated features.ts bullet to include 'Real-time GPS tracking on a live map'."
     },
     {
       "id": "US-007",
-      "title": "Write Team Chat help articles",
-      "description": "As a user, I want help articles about team chat so I can message my crew and stay coordinated.",
+      "title": "Update Invoicing & Xero page with Materials & Costing",
+      "description": "As a website visitor, I want the Invoicing & Xero page to mention materials and job costing.",
       "acceptanceCriteria": [
-        "Create 5 MDX files in content/help/team-chat/: starting-a-new-conversation.mdx, sending-and-receiving-messages.mdx, read-status-and-unread-counts.mdx, push-notifications-for-messages.mdx, using-chat-on-mobile.mdx",
-        "Each file has YAML frontmatter with title, description, category: 'team-chat', sortOrder (1–5), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
-        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths",
-        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
-        "Cover: creating a new direct conversation from the staff directory, sending text messages with the message input (2000 char limit), unread count badges and lastReadAt tracking that marks conversations read when opened, push notifications sent to iOS/Android with sender name and preview (skipped if recently read), using the chat list and conversation screens on the mobile app with offline support",
+        "Read src/lib/feature-pages/invoicing-xero.ts for current content",
+        "Add a 4th benefit: icon 'Calculator', title 'Detailed job costing', description about tracking materials, labour, and costs per job",
+        "Add a 4th detail section covering materials and costing: material catalog with categories and pricing, add materials to jobs for accurate costing, quote generation from materials, cost-to-invoice workflow",
+        "Read src/lib/features.ts and update invoicing-xero bullets to mention job costing/materials (replace or add 5th bullet)",
         "Typecheck passes"
       ],
       "priority": 7,
       "passes": true,
-      "notes": "All 5 articles created and typecheck passes."
+      "notes": "Added 4th benefit (Calculator icon) and 4th detail section about materials catalog and job costing to invoicing-xero.ts. Updated features.ts bullet."
     },
     {
       "id": "US-008",
-      "title": "Write Account & Billing help articles",
-      "description": "As a user, I want help articles about billing and account settings so I can manage my subscription, invite team members, and update roles.",
+      "title": "Verify all feature pages render correctly",
+      "description": "As a developer, I want to verify all 12 feature pages build and render without errors.",
       "acceptanceCriteria": [
-        "Create 6 MDX files in content/help/account-billing/: managing-your-subscription.mdx, updating-your-payment-method.mdx, understanding-your-free-trial.mdx, inviting-team-members.mdx, managing-user-roles.mdx, cancelling-your-subscription.mdx",
-        "Each file has YAML frontmatter with title, description, category: 'account-billing', sortOrder (1–6), lastUpdated: '2026-03-01', and tags (3–5 keywords)",
-        "Articles use <StepByStep>/<Step> for procedural guides, <Callout> for tips/info/warnings, and <UIPath> for menu paths — reference Settings > Billing for portal access",
-        "Read existing articles in content/help/getting-started/ first and match tone, depth (200–400 words), active voice, second-person style",
-        "Cover: accessing the Stripe billing portal via Settings > Billing to view invoices and manage plan, updating credit card or payment method through the portal, 14-day free trial with no credit card required that pauses if no payment method added, inviting team members by email with role assignment during onboarding or from Settings, three roles (Admin = full access, Operator = jobs/calendar/invoicing, Driver = assigned jobs/time tracking/navigation), cancelling anytime with no lock-in from the billing portal",
+        "Run npx tsc --noEmit and confirm no TypeScript errors",
+        "Run npx next build and confirm all 12 feature pages generate (9 existing + 3 new)",
+        "Verify new pages listed in build output: /features/workflow-automation, /features/email-integration, /features/day-plan",
         "Typecheck passes"
       ],
       "priority": 8,
       "passes": true,
-      "notes": "All 6 articles created and typecheck passes."
+      "notes": "Typecheck and build passed. Build output shows 12 feature pages (3 shown + 9 more paths)."
+    },
+    {
+      "id": "US-009",
+      "title": "Create 'What's New in VanMan' overview blog post",
+      "description": "As a content creator, I want to publish a product update post announcing all 7 new features.",
+      "acceptanceCriteria": [
+        "Read existing blog posts in content/blog/ to match tone, structure, and depth (800-1200 words)",
+        "Create content/blog/whats-new-in-vanman-march-2026.mdx",
+        "Frontmatter: title 'What's New in VanMan: 7 Features to Run Your Moving Company Smarter', date '2026-03-06', author 'Neill Lloyd', category 'Product Updates', excerpt summarising the 7 new features, featuredImage '/blog/images/whats-new-march.svg', tags ['product-updates', 'new-features', 'vanman', '2026'], featured true",
+        "Content covers all 7 features with a ## heading for each: Workflow Automation, Gmail & Outlook Email Integration, Day Plan, Calendar Events, Live Truck Tracking, Materials & Costing — 2-3 sentences each",
+        "Include 1-2 <Callout> blocks",
+        "End with <CTABanner> component",
+        "Written in Australian English",
+        "Create SVG at public/blog/images/whats-new-march.svg (1200x675, coloured background with white text, matching existing SVG style)",
+        "Update content/blog/getting-started-with-vanman.mdx to set featured: false",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "Created blog post and SVG. Updated getting-started-with-vanman.mdx to featured: false. Post covers all 7 features with Callout blocks and CTABanner."
+    },
+    {
+      "id": "US-010",
+      "title": "Create Workflow Automation deep-dive blog post",
+      "description": "As a content creator, I want a deep-dive post on workflow automation for SEO and customer education.",
+      "acceptanceCriteria": [
+        "Read existing blog posts in content/blog/ to match tone and depth (800-1200 words)",
+        "Create content/blog/automate-your-moving-business-with-workflows.mdx",
+        "Frontmatter: title 'Automate Your Moving Business: A Guide to VanMan's Workflow Builder', date '2026-03-04', author 'Neill Lloyd', category 'Product Updates', excerpt about automating repetitive tasks, featuredImage '/blog/images/workflow-automation.svg', tags ['automation', 'workflows', 'productivity', 'product-updates'], featured false",
+        "Content covers: what workflow automation is and why it matters, the visual drag-and-drop builder, trigger types (job created, status changed, booking received), action types (send SMS, email, change status, create Xero invoice, webhook), conditions and delays, human approval workflows, pre-built templates, real examples (auto-send confirmation SMS, auto-create invoice)",
+        "Include 1-2 <Callout> blocks, end with <CTABanner>",
+        "Written in Australian English",
+        "Create SVG at public/blog/images/workflow-automation.svg matching existing style",
+        "Typecheck passes"
+      ],
+      "priority": 10,
+      "passes": true,
+      "notes": "Created deep-dive blog post and SVG covering visual builder, triggers, actions, conditions, delays, approvals, templates, and real examples."
+    },
+    {
+      "id": "US-011",
+      "title": "Create Email Integration deep-dive blog post",
+      "description": "As a content creator, I want a deep-dive post on Gmail and Outlook integration.",
+      "acceptanceCriteria": [
+        "Read existing blog posts in content/blog/ to match tone and depth (800-1200 words)",
+        "Create content/blog/gmail-outlook-integration-for-moving-companies.mdx",
+        "Frontmatter: title 'Gmail & Outlook Integration: Every Email Linked to the Right Job', date '2026-03-02', author 'Neill Lloyd', category 'Product Updates', excerpt about connecting email to automatically capture against jobs, featuredImage '/blog/images/email-integration.svg', tags ['email', 'gmail', 'outlook', 'integrations', 'product-updates'], featured false",
+        "Content covers: the problem (emails scattered, context lost), how it works (connect with one click, VanMan watches for job numbers), automatic job matching, email threading, replying from VanMan, attachment capture, real-time webhooks",
+        "Include 1-2 <Callout> blocks, end with <CTABanner>",
+        "Written in Australian English",
+        "Create SVG at public/blog/images/email-integration.svg matching existing style",
+        "Typecheck passes"
+      ],
+      "priority": 11,
+      "passes": true,
+      "notes": "Created deep-dive blog post and SVG covering Gmail+Outlook integration, job matching, threading, replying from VanMan, and attachment capture."
+    },
+    {
+      "id": "US-012",
+      "title": "Create Day Plan & Live Tracking deep-dive blog post",
+      "description": "As a content creator, I want a deep-dive post on the Day Plan dashboard and live truck tracking.",
+      "acceptanceCriteria": [
+        "Read existing blog posts in content/blog/ to match tone and depth (800-1200 words)",
+        "Create content/blog/day-plan-and-live-truck-tracking.mdx",
+        "Frontmatter: title 'Day Plan & Live Tracking: See Your Entire Operation in Real Time', date '2026-02-28', author 'Neill Lloyd', category 'Product Updates', excerpt about the Day Plan dashboard, featuredImage '/blog/images/day-plan-tracking.svg', tags ['day-plan', 'live-tracking', 'fleet', 'operations', 'product-updates'], featured false",
+        "Content covers: the Day Plan dashboard (calendar timeline + Google Maps), colour-coded truck routes and markers, cross-highlighting, live GPS tracking via mobile app, InfoWindow popups, how it helps operations managers",
+        "Include 1-2 <Callout> blocks, end with <CTABanner>",
+        "Written in Australian English",
+        "Create SVG at public/blog/images/day-plan-tracking.svg matching existing style",
+        "Typecheck passes"
+      ],
+      "priority": 12,
+      "passes": true,
+      "notes": "Created deep-dive blog post and SVG covering Day Plan dashboard, route visualisation, cross-highlighting, and live GPS tracking."
+    },
+    {
+      "id": "US-013",
+      "title": "Verify all blog posts render correctly",
+      "description": "As a developer, I want to verify all 11 blog posts build and render without errors.",
+      "acceptanceCriteria": [
+        "Run npx tsc --noEmit and confirm no errors",
+        "Run npx next build and confirm all 11 blog post pages generate",
+        "The 'What's New' post shows as featured on /blog (large card at top)",
+        "The old 'Getting Started' post no longer shows as featured",
+        "All new posts appear on /blog sorted by date (newest first)",
+        "Typecheck passes"
+      ],
+      "priority": 13,
+      "passes": true,
+      "notes": "Typecheck and build passed. All 11 blog posts generated successfully. What's New post is featured (featured: true), Getting Started set to featured: false."
+    },
+    {
+      "id": "US-014",
+      "title": "Add Integrations and Workflow Automation help categories",
+      "description": "As a developer, I need to register 2 new help categories so articles can be created under them.",
+      "acceptanceCriteria": [
+        "Read src/lib/help.ts to understand the categoryMeta structure",
+        "Add 'integrations' entry to categoryMeta: name 'Integrations', description 'Connect Gmail, Outlook, and Xero to VanMan.', icon 'Plug'",
+        "Add 'workflow-automation' entry to categoryMeta: name 'Workflow Automation', description 'Build automated workflows to save time on repetitive tasks.', icon 'Zap'",
+        "Create empty directories content/help/integrations/ and content/help/workflow-automation/ (add a placeholder file if needed for git)",
+        "Typecheck passes"
+      ],
+      "priority": 14,
+      "passes": true,
+      "notes": "Added integrations (Plug icon) and workflow-automation (Zap icon) to categoryMeta in src/lib/help.ts. Directories created with articles."
+    },
+    {
+      "id": "US-015",
+      "title": "Write Gmail integration help articles",
+      "description": "As a user, I want help articles about connecting Gmail so I can set up email capture.",
+      "acceptanceCriteria": [
+        "Read existing help articles (e.g. content/help/getting-started/) to match tone, depth (200-400 words), active voice, second-person style",
+        "Create 3 MDX files in content/help/integrations/: connecting-gmail.mdx (sortOrder 1), how-email-job-matching-works.mdx (sortOrder 2), replying-to-emails-from-vanman.mdx (sortOrder 3)",
+        "Each file has frontmatter: title, description, category 'integrations', sortOrder, lastUpdated '2026-03-06', tags (3-5 keywords)",
+        "Use <StepByStep>/<Step> for procedural content, <Callout> for tips/warnings, <UIPath> for menu paths",
+        "Cover: connecting Gmail via Settings > Integrations with one-click OAuth, how VanMan matches emails to jobs by scanning for job numbers in subjects, replying to emails from the Messages tab using the reply drawer",
+        "Typecheck passes"
+      ],
+      "priority": 15,
+      "passes": true,
+      "notes": "Created 3 Gmail help articles: connecting-gmail.mdx, how-email-job-matching-works.mdx, replying-to-emails-from-vanman.mdx with StepByStep, Callout, and UIPath components."
+    },
+    {
+      "id": "US-016",
+      "title": "Write Outlook integration help articles",
+      "description": "As a user, I want help articles about connecting Outlook and choosing between Gmail vs Outlook.",
+      "acceptanceCriteria": [
+        "Read existing help articles to match tone and depth (200-400 words)",
+        "Create 2 MDX files in content/help/integrations/: connecting-outlook.mdx (sortOrder 4), gmail-vs-outlook-which-to-connect.mdx (sortOrder 5)",
+        "Each file has frontmatter: title, description, category 'integrations', sortOrder, lastUpdated '2026-03-06', tags (3-5 keywords)",
+        "Use <StepByStep>/<Step>, <Callout>, <UIPath>",
+        "Cover: connecting Outlook via Settings > Integrations with Microsoft OAuth, comparison article explaining both work the same way — connect whichever your business uses, only one can be active",
+        "Typecheck passes"
+      ],
+      "priority": 16,
+      "passes": true,
+      "notes": "Created 2 Outlook help articles: connecting-outlook.mdx and gmail-vs-outlook-which-to-connect.mdx."
+    },
+    {
+      "id": "US-017",
+      "title": "Write Xero and invoicing help articles",
+      "description": "As a user, I want comprehensive help articles about Xero integration and invoicing.",
+      "acceptanceCriteria": [
+        "Read existing content/help/invoicing-xero/ articles to understand what exists and match tone (200-400 words)",
+        "Create 4 MDX files in content/help/invoicing-xero/: creating-an-invoice-from-a-job.mdx (sortOrder 2), understanding-xero-sync.mdx (sortOrder 3), troubleshooting-xero-errors.mdx (sortOrder 4), viewing-the-xero-audit-log.mdx (sortOrder 5)",
+        "Each file has frontmatter: title, description, category 'invoicing-xero', sortOrder, lastUpdated '2026-03-06', tags (3-5 keywords)",
+        "Use <StepByStep>/<Step>, <Callout>, <UIPath>",
+        "Cover: generating an invoice from a completed job, how two-way Xero sync works, common errors and fixes (auth expired, account code mismatch), viewing the audit log at Settings > Integrations > Xero",
+        "Typecheck passes"
+      ],
+      "priority": 17,
+      "passes": true,
+      "notes": "Created 4 Xero help articles: creating-an-invoice-from-a-job.mdx, understanding-xero-sync.mdx, troubleshooting-xero-errors.mdx, viewing-the-xero-audit-log.mdx."
+    },
+    {
+      "id": "US-018",
+      "title": "Write workflow automation help articles",
+      "description": "As a user, I want help articles about building and managing workflows.",
+      "acceptanceCriteria": [
+        "Read existing help articles to match tone and depth (200-400 words)",
+        "Create 5 MDX files in content/help/workflow-automation/: creating-your-first-workflow.mdx (sortOrder 1), understanding-triggers-and-actions.mdx (sortOrder 2), adding-conditions-and-delays.mdx (sortOrder 3), using-workflow-templates.mdx (sortOrder 4), viewing-workflow-execution-logs.mdx (sortOrder 5)",
+        "Each file has frontmatter: title, description, category 'workflow-automation', sortOrder, lastUpdated '2026-03-06', tags (3-5 keywords)",
+        "Use <StepByStep>/<Step>, <Callout>, <UIPath>",
+        "Cover: creating a workflow via Settings > Workflows with the visual editor, trigger types and action types, condition nodes for branching and delay nodes for timed actions, pre-built templates, execution history and step-by-step logs",
+        "Typecheck passes"
+      ],
+      "priority": 18,
+      "passes": true,
+      "notes": "Created 5 workflow automation help articles covering creation, triggers/actions, conditions/delays, templates, and execution logs."
+    },
+    {
+      "id": "US-019",
+      "title": "Write calendar events help articles",
+      "description": "As a user, I want help articles about creating calendar events alongside jobs.",
+      "acceptanceCriteria": [
+        "Read existing content/help/calendar-scheduling/ articles to match tone (200-400 words)",
+        "Create 2 MDX files in content/help/calendar-scheduling/: creating-a-calendar-event.mdx (sortOrder 7), managing-all-day-events.mdx (sortOrder 8)",
+        "Each file has frontmatter: title, description, category 'calendar-scheduling', sortOrder, lastUpdated '2026-03-06', tags (3-5 keywords)",
+        "Use <StepByStep>/<Step>, <Callout>, <UIPath>",
+        "Cover: creating timed or all-day events via the event dialog, choosing a colour and assigning a truck, adding contacts, how all-day events display as a collapsible banner",
+        "Typecheck passes"
+      ],
+      "priority": 19,
+      "passes": true,
+      "notes": "Created 2 calendar events help articles: creating-a-calendar-event.mdx and managing-all-day-events.mdx."
+    },
+    {
+      "id": "US-020",
+      "title": "Write live truck tracking help articles",
+      "description": "As a user, I want help articles about viewing live truck locations.",
+      "acceptanceCriteria": [
+        "Read existing content/help/fleet-trucks/ articles to match tone (200-400 words)",
+        "Create 2 MDX files in content/help/fleet-trucks/: viewing-live-truck-locations.mdx (sortOrder 6), how-truck-tracking-works.mdx (sortOrder 7)",
+        "Each file has frontmatter: title, description, category 'fleet-trucks', sortOrder, lastUpdated '2026-03-06', tags (3-5 keywords)",
+        "Use <StepByStep>/<Step>, <Callout>, <UIPath>",
+        "Cover: viewing the live truck map at Trucks > Live Map with real-time markers, how tracking works (mobile app sends GPS in background, updates appear on web dashboard)",
+        "Typecheck passes"
+      ],
+      "priority": 20,
+      "passes": true,
+      "notes": "Created 2 live truck tracking help articles: viewing-live-truck-locations.mdx and how-truck-tracking-works.mdx."
+    },
+    {
+      "id": "US-021",
+      "title": "Write materials and costing help articles",
+      "description": "As a user, I want help articles about materials catalog and job costing.",
+      "acceptanceCriteria": [
+        "Read existing content/help/invoicing-xero/ articles to match tone (200-400 words)",
+        "Create 3 MDX files in content/help/invoicing-xero/: setting-up-your-material-catalog.mdx (sortOrder 6), adding-materials-to-a-job.mdx (sortOrder 7), generating-a-quote-from-materials.mdx (sortOrder 8)",
+        "Each file has frontmatter: title, description, category 'invoicing-xero', sortOrder, lastUpdated '2026-03-06', tags (3-5 keywords)",
+        "Use <StepByStep>/<Step>, <Callout>, <UIPath>",
+        "Cover: creating material categories and materials with pricing at Settings > Materials, assigning materials to a job from the costing tab, generating a customer-facing quote from materials and costs",
+        "Typecheck passes"
+      ],
+      "priority": 21,
+      "passes": true,
+      "notes": "Created 3 materials/costing help articles: setting-up-your-material-catalog.mdx, adding-materials-to-a-job.mdx, generating-a-quote-from-materials.mdx."
+    },
+    {
+      "id": "US-022",
+      "title": "Verify all help articles render correctly",
+      "description": "As a developer, I want to verify all help categories and articles build without errors.",
+      "acceptanceCriteria": [
+        "Run npx tsc --noEmit and confirm no errors",
+        "Run npx next build and confirm all help pages generate",
+        "12 help categories appear in build output (10 existing + integrations + workflow-automation)",
+        "All new article pages generate at their expected URLs",
+        "Typecheck passes"
+      ],
+      "priority": 22,
+      "passes": true,
+      "notes": "Typecheck and build passed. Build output shows 12 help categories (3 shown + 9 more) and 76+ help articles (3 shown + 73 more). All new articles render at expected URLs."
     }
   ]
 }

@@ -1,0 +1,40 @@
+---
+title: "Connecting Gmail"
+description: "Link your Gmail account to VanMan so emails mentioning job numbers are automatically captured."
+category: "integrations"
+sortOrder: 1
+lastUpdated: "2026-03-06"
+tags: ["gmail", "email", "integration", "setup"]
+---
+
+# Connecting Gmail
+
+Connect your Gmail account to VanMan and every email that mentions a job number will be automatically captured against the right job. Your team can see the full email thread and attachments without leaving VanMan.
+
+<StepByStep>
+  <Step title="Open integration settings">
+    Navigate to <UIPath path="Settings > Integrations" />. You will see cards for each available integration. Find the **Gmail** card.
+  </Step>
+
+  <Step title="Start the connection">
+    Click the **Connect** button on the Gmail card. VanMan will redirect you to Google's sign-in page where you can choose which Google account to connect.
+  </Step>
+
+  <Step title="Authorise VanMan">
+    Google will ask you to grant VanMan permission to read and send emails on your behalf. Review the permissions and click **Allow**. VanMan needs these permissions to capture incoming emails and let you reply from within the app.
+
+    <Callout variant="info">
+      VanMan only reads emails that contain job numbers. It does not read or store your personal emails. Your credentials are encrypted with AES-256.
+    </Callout>
+  </Step>
+
+  <Step title="Confirm the connection">
+    You will be redirected back to VanMan. The Gmail card will now show your connected email address and a green status indicator. VanMan immediately begins watching for emails that mention job numbers.
+  </Step>
+</StepByStep>
+
+To disconnect Gmail at any time, click the **Disconnect** button on the Gmail card. This revokes VanMan's access to your inbox. Previously captured emails remain on their jobs.
+
+<Callout variant="tip">
+  Use the **Test Connection** button to verify everything is working. VanMan will check that your token is valid and the email watch is active.
+</Callout>

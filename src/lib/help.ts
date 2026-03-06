@@ -88,6 +88,16 @@ const categoryMeta: Record<string, { name: string; description: string; icon: st
     description: "Manage your subscription, billing, and account settings.",
     icon: "CreditCard",
   },
+  "integrations": {
+    name: "Integrations",
+    description: "Connect Gmail, Outlook, and Xero to VanMan.",
+    icon: "Plug",
+  },
+  "workflow-automation": {
+    name: "Workflow Automation",
+    description: "Build automated workflows to save time on repetitive tasks.",
+    icon: "Zap",
+  },
 };
 
 function calculateReadTime(content: string): number {

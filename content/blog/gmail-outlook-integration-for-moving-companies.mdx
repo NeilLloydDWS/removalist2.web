@@ -1,0 +1,69 @@
+---
+title: "Gmail & Outlook Integration: Every Email Linked to the Right Job"
+date: "2026-03-02"
+author: "Neill Lloyd"
+category: "Product Updates"
+excerpt: "Connect your Gmail or Outlook account and VanMan automatically captures every email that mentions a job number — linked to the right job, with attachments."
+featuredImage: "/blog/images/email-integration.svg"
+tags: ["email", "gmail", "outlook", "integrations", "product-updates"]
+featured: false
+---
+
+If you've ever spent ten minutes searching your inbox for "that email about the Smith move," you know the problem. Customer emails about jobs end up scattered across inboxes, buried in threads, and disconnected from the job they're about. Important details get lost. Attachments go missing. Your team doesn't have the full picture.
+
+VanMan's new email integration fixes this. Connect your Gmail or Microsoft 365 account and every email that mentions a job number is automatically captured against that job — visible to your whole team.
+
+## How it works
+
+The setup takes about 30 seconds:
+
+1. Go to **Settings → Integrations**
+2. Click **Connect** next to Gmail or Outlook
+3. Authorise VanMan to read your inbox
+
+That's it. From that point, VanMan watches your inbox for emails that contain a job number in the subject line. When it finds one, it captures the email — including attachments — and links it to the matching job.
+
+Your team can see the full email thread on the job's Messages tab, right alongside SMS and in-app messages. Everything about that job's communication is in one place.
+
+## Automatic job matching
+
+VanMan scans every incoming and outgoing email for job numbers. If an email subject contains "Job #1234" or "RE: VM-1234 — Smith Move," VanMan matches it to the right job automatically.
+
+This works for both emails you send and emails you receive. Customer replies, supplier quotes, internal discussions — if the job number is in the subject, it gets captured.
+
+<Callout variant="tip">
+Include the job number in your email subject lines when emailing customers. VanMan's message templates do this automatically, so replies are always captured.
+</Callout>
+
+## Reply from inside VanMan
+
+See an email on a job that needs a response? Click reply and compose your message directly in VanMan. The reply is sent from your connected email account (so the customer sees it coming from your real address) and threaded into the existing conversation.
+
+No switching between VanMan and your inbox. No copying context. Your team sees the reply on the job immediately.
+
+## Attachments captured automatically
+
+When an email has attachments — photos, quotes, floor plans, insurance documents — VanMan downloads and stores them against the job. They're available to your entire team from the job detail page. No more "can you forward me that attachment?"
+
+## Gmail or Outlook — your choice
+
+VanMan supports both Google (Gmail) and Microsoft (Outlook / Microsoft 365). Connect whichever your business uses. The setup process is almost identical for both — a one-click OAuth flow that doesn't require any IT knowledge.
+
+Your email credentials are encrypted with AES-256 and stored securely. VanMan never has access to your email password.
+
+<Callout variant="info">
+You can connect one email provider per account. If you switch from Gmail to Outlook (or vice versa), disconnect the current provider first and connect the new one.
+</Callout>
+
+## Real-time — not batched
+
+VanMan doesn't poll your inbox every few minutes. It uses webhooks — Gmail Pub/Sub and Microsoft Graph change notifications — to capture emails the moment they arrive. There's no delay between receiving an email and seeing it on the job.
+
+---
+
+Email integration means your team always has the full picture. Every conversation, every attachment, every reply — all on the job, regardless of whether it came in by SMS, email, or in-app message.
+
+<CTABanner
+  heading="Connect your inbox in 30 seconds"
+  text="Link Gmail or Outlook to VanMan and every job-related email is captured automatically."
+/>

@@ -11,6 +11,9 @@ import {
   BarChart3,
   Smartphone,
   MessagesSquare,
+  Zap,
+  Mail,
+  MapPin,
   type LucideIcon,
 } from "lucide-react";
 import { features } from "@/lib/features";
@@ -26,6 +29,9 @@ const iconMap: Record<string, LucideIcon> = {
   BarChart3,
   Smartphone,
   MessagesSquare,
+  Zap,
+  Mail,
+  MapPin,
 };
 
 export function FeaturesSidebar() {

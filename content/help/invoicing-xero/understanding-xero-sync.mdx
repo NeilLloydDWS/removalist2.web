@@ -1,0 +1,40 @@
+---
+title: "Understanding Xero sync"
+description: "How VanMan's two-way Xero sync keeps invoices, contacts, and payments in sync."
+category: "invoicing-xero"
+sortOrder: 3
+lastUpdated: "2026-03-06"
+tags: ["xero", "sync", "invoicing", "accounting"]
+---
+
+# Understanding Xero sync
+
+When Xero is connected, VanMan syncs invoices, contacts, and payment statuses in both directions. This means changes made in either system are reflected in the other.
+
+## What syncs from VanMan to Xero
+
+When you create an invoice in VanMan, it is automatically pushed to Xero as a draft or approved invoice (depending on your settings). The sync includes:
+
+- **Customer contact details** — name, email, phone
+- **Invoice line items** — description, quantity, unit price, tax rate
+- **Account codes** — mapped from your Xero chart of accounts
+- **Invoice number** — VanMan's invoice number is used as the reference
+
+## What syncs from Xero to VanMan
+
+VanMan listens for changes in Xero and updates accordingly:
+
+- **Payment status** — when a customer pays in Xero, the invoice status updates in VanMan
+- **Contact updates** — changes to customer details in Xero are reflected in VanMan
+
+<Callout variant="info">
+  Sync happens automatically and in real time. You do not need to manually trigger a sync. If a sync fails, VanMan will retry automatically.
+</Callout>
+
+## Account code validation
+
+Before syncing an invoice, VanMan validates that the account codes and item codes exist in your Xero chart of accounts. If a code is invalid, the sync will pause and show you the issue so you can fix it before retrying.
+
+<Callout variant="tip">
+  Set your default account codes in <UIPath path="Settings > Integrations > Xero" /> to avoid validation errors on every invoice.
+</Callout>

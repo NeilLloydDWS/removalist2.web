@@ -21,7 +21,7 @@ export const features: Feature[] = [
       "Drag-and-drop job scheduling across days and crews",
       "Colour-coded jobs by status, truck, or team",
       "Daily, weekly, and monthly calendar views",
-      "Automatic conflict detection for double-booked trucks or staff",
+      "Custom events for meetings, training, and reminders",
     ],
   },
   {
@@ -49,7 +49,7 @@ export const features: Feature[] = [
     href: "/features/fleet-management",
     bullets: [
       "Vehicle availability and assignment tracking",
-      "Maintenance schedules and service reminders",
+      "Real-time GPS tracking on a live map",
       "Capacity planning across your fleet",
       "Equipment and asset tracking per vehicle",
     ],
@@ -95,8 +95,8 @@ export const features: Feature[] = [
     bullets: [
       "One-click invoice generation from job data",
       "Xero integration for automatic sync",
+      "Materials catalog and detailed job costing",
       "Track payment status and overdue invoices",
-      "Branded invoice templates with your logo",
     ],
   },
   {
@@ -142,6 +142,51 @@ export const features: Feature[] = [
       "Job-linked chat threads for context",
       "Group channels for teams, trucks, or offices",
       "Push notifications so nothing gets missed",
+    ],
+  },
+  {
+    slug: "workflow-automation",
+    name: "Workflow Automation",
+    tagline: "Automate your business rules",
+    description:
+      "Build visual workflows that trigger automatically when jobs change, bookings come in, or invoices are created — no coding required.",
+    icon: "Zap",
+    href: "/features/workflow-automation",
+    bullets: [
+      "Visual drag-and-drop workflow builder",
+      "Trigger automations from job, booking, and invoice events",
+      "Conditional logic, delays, and human approval steps",
+      "Pre-built templates for common moving company workflows",
+    ],
+  },
+  {
+    slug: "email-integration",
+    name: "Email Integration",
+    tagline: "Your inbox meets your jobs",
+    description:
+      "Connect Gmail or Outlook and VanMan automatically captures emails against the right job — no copying, no forwarding.",
+    icon: "Mail",
+    href: "/features/email-integration",
+    bullets: [
+      "Connect Gmail or Outlook with one click",
+      "Automatic email-to-job matching by job number",
+      "Reply to customer emails from inside VanMan",
+      "Attachment capture and storage against jobs",
+    ],
+  },
+  {
+    slug: "day-plan",
+    name: "Day Plan",
+    tagline: "Your daily operations at a glance",
+    description:
+      "A split-screen daily dashboard combining your calendar timeline with a live Google Map — see every job, every truck, and every route in one view.",
+    icon: "MapPin",
+    href: "/features/day-plan",
+    bullets: [
+      "Calendar timeline and Google Maps in one view",
+      "Colour-coded truck routes and location markers",
+      "Cross-highlighting between calendar and map",
+      "Real-time truck positions and job status updates",
     ],
   },
 ];

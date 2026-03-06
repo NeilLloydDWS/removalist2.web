@@ -1,0 +1,42 @@
+---
+title: "Viewing workflow execution logs"
+description: "Monitor workflow runs and debug issues using the execution log."
+category: "workflow-automation"
+sortOrder: 5
+lastUpdated: "2026-03-06"
+tags: ["workflow", "logs", "debugging", "monitoring"]
+---
+
+# Viewing workflow execution logs
+
+Every time a workflow runs, VanMan records the execution details. The execution log shows what happened, when, and whether each step succeeded.
+
+<StepByStep>
+  <Step title="Open the workflow">
+    Navigate to <UIPath path="Settings > Workflows" /> and click on the workflow you want to inspect.
+  </Step>
+
+  <Step title="View the execution log">
+    Click the **Logs** tab. You will see a list of every time this workflow has fired, with the timestamp, trigger event, and overall status (completed, failed, or in progress).
+  </Step>
+
+  <Step title="Inspect individual runs">
+    Click on any execution to see the step-by-step breakdown. Each node in the workflow shows its status (passed, failed, or skipped), the data it received, and any error messages.
+  </Step>
+</StepByStep>
+
+## Diagnosing failures
+
+If a workflow step fails, the log shows exactly which node failed and why. Common reasons include:
+
+- **Message template not found** — the template referenced in a Send SMS or Send Email action was deleted
+- **Xero sync error** — an invoice action failed due to an invalid account code or expired connection
+- **Webhook timeout** — an external URL did not respond within the timeout period
+
+<Callout variant="tip">
+  Check your workflow logs weekly. They will tell you if any automations are failing silently so you can fix issues before they affect customers.
+</Callout>
+
+<Callout variant="info">
+  Execution logs are retained for 90 days. Failed executions are highlighted in red for easy identification.
+</Callout>

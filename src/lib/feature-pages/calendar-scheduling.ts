@@ -46,6 +46,12 @@ export const calendarScheduling: FeaturePageData = {
         "Drivers see a simplified day view on their phone showing today’s jobs in order. Tap any job for full details, customer contact, and navigation.",
       imagePlaceholder: "Mobile app showing driver’s day view",
     },
+    {
+      title: "Custom events alongside jobs",
+      description:
+        "Add meetings, training sessions, vehicle servicing, and other events to the same calendar as your jobs. Events support all-day and timed formats, colour-coded display, truck assignment, and contact linking — so your calendar shows everything, not just moves.",
+      imagePlaceholder: "Calendar with custom events alongside job blocks",
+    },
   ],
   integrationCallout: {
     title: "Connected to your whole workflow",

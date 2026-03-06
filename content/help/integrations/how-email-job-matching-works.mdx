@@ -1,0 +1,42 @@
+---
+title: "How email job matching works"
+description: "Understand how VanMan matches incoming and outgoing emails to the correct job."
+category: "integrations"
+sortOrder: 2
+lastUpdated: "2026-03-06"
+tags: ["email", "job-matching", "automation", "gmail", "outlook"]
+---
+
+# How email job matching works
+
+When you connect Gmail or Outlook, VanMan automatically scans every incoming and outgoing email for job numbers. When it finds a match, the email is linked to that job and visible to your whole team.
+
+## What VanMan looks for
+
+VanMan searches the email subject line for patterns that match your job numbering format. Common formats include:
+
+- **Job #1234**
+- **VM-1234**
+- **RE: VM-1234 — Smith Move**
+
+If the subject contains a valid job number, VanMan captures the email against that job. This works for both emails you receive and emails you send.
+
+## Where captured emails appear
+
+Matched emails appear on the job's **Messages** tab alongside SMS and in-app messages. You will see the sender, subject, body, timestamp, and any attachments. The full email thread is preserved so your team can follow the conversation.
+
+<Callout variant="tip">
+  Include the job number in your email subject lines when emailing customers. VanMan's message templates do this automatically, so customer replies are always matched.
+</Callout>
+
+## What happens if there is no match
+
+If an email does not contain a recognisable job number, VanMan ignores it. The email stays in your inbox as normal and is not captured in VanMan.
+
+## Attachments
+
+When a matched email has attachments — photos, documents, PDFs — VanMan downloads and stores them against the job. They are available to your entire team from the job detail page.
+
+<Callout variant="info">
+  Email matching works identically for both Gmail and Outlook. The provider you connect does not affect how matching works.
+</Callout>

@@ -1,0 +1,52 @@
+---
+title: "Troubleshooting Xero errors"
+description: "Fix common Xero sync errors including expired tokens, account code mismatches, and duplicate invoices."
+category: "invoicing-xero"
+sortOrder: 4
+lastUpdated: "2026-03-06"
+tags: ["xero", "errors", "troubleshooting", "sync"]
+---
+
+# Troubleshooting Xero errors
+
+Occasionally, a sync between VanMan and Xero may fail. Here are the most common errors and how to resolve them.
+
+## Authentication expired
+
+**Error:** "Xero authentication has expired. Please reconnect."
+
+Your Xero connection token has expired. This can happen if the token has not been refreshed for an extended period.
+
+**Fix:** Navigate to <UIPath path="Settings > Integrations > Xero" /> and click **Reconnect**. Authorise VanMan again through the Xero login screen.
+
+## Invalid account code
+
+**Error:** "Account code '200' does not exist in Xero."
+
+The account code assigned to an invoice line item does not match any code in your Xero chart of accounts.
+
+**Fix:** Update the account code in VanMan to match a valid code from your Xero chart of accounts. You can set default codes in <UIPath path="Settings > Integrations > Xero" />.
+
+<Callout variant="tip">
+  Check your default account codes after connecting Xero for the first time. Setting them correctly upfront prevents this error on every invoice.
+</Callout>
+
+## Duplicate invoice
+
+**Error:** "Invoice number already exists in Xero."
+
+An invoice with the same number already exists in Xero, usually because it was manually created there.
+
+**Fix:** Delete the duplicate invoice in Xero, or change the invoice number in VanMan before retrying the sync.
+
+## Contact mismatch
+
+**Error:** "Contact email does not match an existing Xero contact."
+
+VanMan creates contacts in Xero automatically when syncing invoices. This error occurs if the contact details conflict with an existing Xero contact.
+
+**Fix:** Update the customer's email in VanMan to match the Xero contact, or merge the duplicate contacts in Xero.
+
+<Callout variant="info">
+  Most sync errors resolve automatically on retry. VanMan retries failed syncs with exponential backoff. Check the audit log for details.
+</Callout>

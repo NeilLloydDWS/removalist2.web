@@ -1,0 +1,45 @@
+---
+title: "How truck tracking works"
+description: "Understand how VanMan tracks truck locations using the mobile app."
+category: "fleet-trucks"
+sortOrder: 7
+lastUpdated: "2026-03-06"
+tags: ["tracking", "gps", "mobile", "location"]
+---
+
+# How truck tracking works
+
+VanMan tracks truck locations using GPS data from the mobile app installed on each driver's device. Here is how it works.
+
+## How location is captured
+
+When a driver has the VanMan mobile app running, the app sends GPS coordinates to the server in the background. Each update includes:
+
+- **Latitude and longitude** — the truck's current position
+- **Heading** — which direction the truck is moving
+- **Speed** — how fast the truck is travelling
+- **Accuracy** — how precise the GPS reading is
+
+The app sends updates at regular intervals while the driver is on shift. No manual check-in is required.
+
+## How it appears on the web dashboard
+
+Location updates are delivered to the web dashboard in real time. When you open the live map or Day Plan, you see each truck's latest position on the map. Positions update automatically as new data arrives — there is no need to refresh the page.
+
+<Callout variant="info">
+  Location history is stored so you can review a truck's route after the day is done. This is useful for verifying delivery times and investigating complaints.
+</Callout>
+
+## Battery and data usage
+
+The mobile app uses efficient background location updates to minimise battery drain. Drivers should keep their phone charged during the day, but tracking does not significantly impact battery life compared to normal app usage.
+
+Data usage is minimal — each location update is a few kilobytes.
+
+## Privacy and permissions
+
+Drivers must grant location permissions when they first install the app. Location is only tracked while the app is running. VanMan does not track personal devices outside of work hours.
+
+<Callout variant="tip">
+  Make sure your drivers have location permissions set to "Always Allow" on iOS or "Allow all the time" on Android for the most reliable tracking.
+</Callout>

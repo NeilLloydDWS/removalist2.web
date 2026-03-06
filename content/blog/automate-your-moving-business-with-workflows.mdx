@@ -1,0 +1,69 @@
+---
+title: "Automate Your Moving Business: A Guide to VanMan's Workflow Builder"
+date: "2026-03-04"
+author: "Neill Lloyd"
+category: "Product Updates"
+excerpt: "Stop doing the same tasks manually every day. VanMan's workflow builder lets you automate SMS, emails, invoicing, and status changes with a visual drag-and-drop editor."
+featuredImage: "/blog/images/workflow-automation.svg"
+tags: ["automation", "workflows", "productivity", "product-updates"]
+featured: false
+---
+
+Every moving company has processes that repeat on every job. Confirm the booking with the customer. Send a reminder the day before. Create the invoice when the job is done. Chase payment if it's overdue. These tasks aren't hard — but they take time, and they're easy to forget.
+
+VanMan's new workflow automation feature lets you set these processes up once and have them run automatically from that point forward.
+
+## What is workflow automation?
+
+A workflow is a series of steps that VanMan runs automatically when something happens. You define the trigger (what starts it), the conditions (when it should run), and the actions (what it does). VanMan handles the rest.
+
+For example: "When a job status changes to Confirmed, wait 5 minutes, then send the customer a confirmation SMS using the Booking Confirmed template." That's a workflow. Set it up once and it runs on every confirmed job — no human intervention needed.
+
+## The visual workflow builder
+
+VanMan's workflow builder uses a drag-and-drop canvas. You build workflows by placing nodes and connecting them with edges — like a flowchart.
+
+There are five node types:
+
+- **Trigger** — what starts the workflow (job created, status changed, booking received, invoice created, message sent)
+- **Condition** — branching logic (if the job status is "Confirmed", go left; otherwise, go right)
+- **Action** — what happens (send SMS, send email, change job status, create Xero invoice, call a webhook)
+- **Delay** — wait before continuing (5 minutes, 1 hour, 2 days)
+- **Human Approval** — pause the workflow and wait for someone to approve before continuing
+
+Connect them however you need. Simple workflows might be just a trigger and an action. Complex ones can branch, loop, delay, and require approvals.
+
+## Real examples that save hours
+
+Here are workflows that VanMan customers are already using:
+
+**Booking confirmation:** When a booking status changes to Confirmed → send the customer a confirmation SMS → change the job status to Scheduled.
+
+**Job completion follow-up:** When a job status changes to Completed → wait 2 hours → send a "Thank you" email with a review link → create a Xero invoice.
+
+**New booking notification:** When a booking is created → send an SMS to the operations manager → send an email to the customer confirming receipt.
+
+<Callout variant="info">
+Each workflow has a dry-run mode. Test your workflow with sample data before activating it to make sure it does exactly what you expect.
+</Callout>
+
+## Pre-built templates
+
+Not sure where to start? VanMan includes pre-built workflow templates for the most common removalist scenarios. Pick a template, customise the message content and timing, and activate. You can always edit or clone templates later.
+
+## Monitoring and debugging
+
+Every workflow execution is logged. The execution history shows which workflows fired, when they ran, and the result of every step. If something fails — a message didn't send, a Xero sync errored — you'll see exactly where it broke and why.
+
+<Callout variant="tip">
+Check your workflow logs weekly. They'll tell you if any automations are failing silently, and you can fix issues before they affect customers.
+</Callout>
+
+---
+
+Workflow automation isn't about replacing your team — it's about freeing them from the repetitive tasks that eat into their day. Set up your first workflow in five minutes and let VanMan handle the rest.
+
+<CTABanner
+  heading="Automate the repetitive stuff"
+  text="VanMan's workflow builder is included in every plan. Build your first automation in minutes."
+/>

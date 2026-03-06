@@ -8,6 +8,9 @@ import { invoicingXero } from "./invoicing-xero";
 import { dashboardAnalytics } from "./dashboard-analytics";
 import { mobileApp } from "./mobile-app";
 import { teamChat } from "./team-chat";
+import { workflowAutomation } from "./workflow-automation";
+import { emailIntegration } from "./email-integration";
+import { dayPlan } from "./day-plan";
 
 export const featurePages: Record<string, FeaturePageData> = {
   "calendar-scheduling": calendarScheduling,
@@ -19,4 +22,7 @@ export const featurePages: Record<string, FeaturePageData> = {
   "dashboard-analytics": dashboardAnalytics,
   "mobile-app": mobileApp,
   "team-chat": teamChat,
+  "workflow-automation": workflowAutomation,
+  "email-integration": emailIntegration,
+  "day-plan": dayPlan,
 };

@@ -1,0 +1,40 @@
+---
+title: "Connecting Outlook"
+description: "Link your Microsoft 365 or Outlook account to VanMan for automatic email capture."
+category: "integrations"
+sortOrder: 4
+lastUpdated: "2026-03-06"
+tags: ["outlook", "microsoft", "email", "integration", "setup"]
+---
+
+# Connecting Outlook
+
+Connect your Microsoft 365 or Outlook account to VanMan and emails mentioning job numbers will be automatically captured against the right job — just like the Gmail integration.
+
+<StepByStep>
+  <Step title="Open integration settings">
+    Navigate to <UIPath path="Settings > Integrations" />. Find the **Outlook** card.
+  </Step>
+
+  <Step title="Start the connection">
+    Click the **Connect** button. VanMan will redirect you to Microsoft's sign-in page where you can choose which account to connect.
+  </Step>
+
+  <Step title="Authorise VanMan">
+    Microsoft will ask you to grant VanMan permission to read and send emails. Review the permissions and click **Accept**. VanMan needs these permissions to capture emails and enable replies from within the app.
+
+    <Callout variant="info">
+      VanMan only processes emails that contain job numbers. Your credentials are encrypted with AES-256 and stored securely.
+    </Callout>
+  </Step>
+
+  <Step title="Confirm the connection">
+    You will be redirected back to VanMan. The Outlook card will show your connected email address and a green status indicator. Email capture begins immediately.
+  </Step>
+</StepByStep>
+
+To disconnect Outlook, click the **Disconnect** button on the Outlook card. Previously captured emails remain on their jobs.
+
+<Callout variant="tip">
+  The Outlook integration works identically to Gmail. Emails are matched by job number, attachments are stored, and you can reply from inside VanMan.
+</Callout>

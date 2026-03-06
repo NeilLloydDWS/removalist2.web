@@ -1,0 +1,34 @@
+---
+title: "Viewing the Xero audit log"
+description: "Review the history of all Xero sync activity including successful syncs and errors."
+category: "invoicing-xero"
+sortOrder: 5
+lastUpdated: "2026-03-06"
+tags: ["xero", "audit-log", "history", "sync"]
+---
+
+# Viewing the Xero audit log
+
+The Xero audit log shows a complete history of all sync activity between VanMan and Xero. Use it to verify invoices synced successfully or to diagnose issues.
+
+<StepByStep>
+  <Step title="Open the audit log">
+    Navigate to <UIPath path="Settings > Integrations > Xero" /> and click the **Audit Log** tab or link. The log displays all recent sync events.
+  </Step>
+
+  <Step title="Review sync events">
+    Each entry shows the timestamp, event type (invoice created, contact synced, payment updated), status (success or failed), and the related invoice or contact name. Failed events include an error message.
+  </Step>
+
+  <Step title="Filter by status">
+    Use the status filter to show only failed events if you are troubleshooting. This helps you quickly find sync issues that need attention.
+  </Step>
+</StepByStep>
+
+<Callout variant="info">
+  The audit log retains events for 90 days. If you need to investigate older sync activity, contact support.
+</Callout>
+
+<Callout variant="tip">
+  Check the audit log periodically — especially after connecting Xero for the first time — to make sure invoices are syncing as expected.
+</Callout>

@@ -26,6 +26,12 @@ export const fleetManagement: FeaturePageData = {
       description:
         "Record truck capacity, equipment, and specifications. Match the right truck to the right job every time.",
     },
+    {
+      icon: "MapPin",
+      title: "Track trucks in real time",
+      description:
+        "See live GPS positions for every truck on an interactive map. Know where your fleet is, which direction they're heading, and how fast they're moving — all from the office.",
+    },
   ],
   detailSections: [
     {
@@ -45,6 +51,12 @@ export const fleetManagement: FeaturePageData = {
       description:
         "The dashboard shows which trucks are booked and which are free on any given day. Plan ahead and maximise your fleet utilisation.",
       imagePlaceholder: "Fleet availability dashboard widget",
+    },
+    {
+      title: "Live truck tracking",
+      description:
+        "When drivers have the VanMan mobile app running, their GPS position is sent to the web dashboard in real time. Open the live map to see every truck's current location, heading, and speed. Location history is recorded so you can review routes after the fact.",
+      imagePlaceholder: "Live map with truck position markers",
     },
   ],
   integrationCallout: {

@@ -10,6 +10,9 @@ import {
   BarChart3,
   Smartphone,
   MessagesSquare,
+  Zap,
+  Mail,
+  MapPin,
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
@@ -36,6 +39,9 @@ const iconMap: Record<string, LucideIcon> = {
   BarChart3,
   Smartphone,
   MessagesSquare,
+  Zap,
+  Mail,
+  MapPin,
 };
 
 export default function FeaturesPage() {
